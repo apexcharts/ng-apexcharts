@@ -48,7 +48,9 @@
             "styles": [
               "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/apexcharts/dist/apexcharts.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -157,7 +159,7 @@
       "root": "projects/ng-apexcharts",
       "sourceRoot": "projects/ng-apexcharts/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "apx",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

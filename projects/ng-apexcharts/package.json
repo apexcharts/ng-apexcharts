@@ -1,8 +1,29 @@
 {
   "name": "ng-apexcharts",
   "version": "0.0.1",
+  "description": "an angular implementation of apexcharts",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
-    "@angular/core": "^7.1.0"
+    "@angular/core": "^7.1.0",
+    "apexcharts": "3.2.2"
+  },
+  "keywords": [
+    "angular",
+    "apexcharts",
+    "charts",
+    "statistics",
+    "ui"
+  ],
+  "author": {
+    "name": "Morris Janatzek"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/morrisjdev/ng-apexcharts/issues"
+  },
+  "homepage": "https://github.com/morrisjdev/ng-apexcharts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morrisjdev/ng-apexcharts.git"
   }
 }
