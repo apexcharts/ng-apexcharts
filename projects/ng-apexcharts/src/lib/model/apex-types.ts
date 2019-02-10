@@ -73,7 +73,7 @@ export interface ApexChart {
   };
   brush?: {
     enabled?: boolean;
-    autoScaleYaxis: boolean,
+    autoScaleYaxis?: boolean,
     target?: string;
   };
   id?: string;
@@ -141,7 +141,7 @@ export interface ApexChart {
     animateGradually?: {
       enabled?: boolean;
       delay?: number;
-    }
+    };
     dynamicAnimation?: {
       enabled?: boolean;
       speed?: number;
@@ -233,10 +233,10 @@ export interface AnnotationLabel {
 }
 
 export interface AnnotationStyle {
-  background: string;
-  color: string;
-  fontSize: string;
-  cssClass: string;
+  background?: string;
+  color?: string;
+  fontSize?: string;
+  cssClass?: string;
   padding?: {
     left?: number;
     right?: number;
@@ -367,7 +367,7 @@ export interface ApexPlotOptions {
     donut?: {
       size?: string;
       background?: string;
-      labels: {
+      labels?: {
         show?: boolean;
         name?: {
           show?: boolean;
@@ -399,7 +399,7 @@ export interface ApexPlotOptions {
       offset?: number;
     }
   };
-  radar: {
+  radar?: {
     size?: number;
     offsetX?: number;
     offsetY?: number;
@@ -517,13 +517,13 @@ export interface ApexLegend {
   offsetY?: number;
   textAnchor?: string;
   labels?: {
-    color?: string
+    color?: string;
     useSeriesColors?: boolean;
   };
   markers?: {
     width?: number;
     height?: number;
-    strokeColor?: string
+    strokeColor?: string;
     strokeWidth?: number;
     offsetX?: number;
     offsetY?: number;
@@ -584,7 +584,7 @@ export interface ApexResponsive {
  */
 export interface ApexTooltip {
   enabled?: boolean;
-  shared: true;
+  shared?: true;
   followCursor?: boolean;
   intersect?: boolean;
   inverseOrder?: boolean;
@@ -606,20 +606,20 @@ export interface ApexTooltip {
     formatter?(val: number): string;
   };
   z?: {
-    title?: string
+    title?: string;
     formatter?(val: number): string;
   };
   marker?: {
     show?: boolean
   };
-  items: {
-    display: string
+  items?: {
+    display?: string
   };
-  fixed: {
-    enabled: boolean;
-    position: string; // topRight; topLeft; bottomRight; bottomLeft
-    offsetX: number;
-    offsetY: number
+  fixed?: {
+    enabled?: boolean;
+    position?: string; // topRight; topLeft; bottomRight; bottomLeft
+    offsetX?: number;
+    offsetY?: number
   };
   custom?(options: any): void;
 }
@@ -659,11 +659,11 @@ export interface ApexXAxis {
     formatter?(value: string, timestamp: number): string;
   };
   axisBorder?: {
-    show: boolean;
-    color: string;
-    offsetX: number;
-    offsetY: number;
-    strokeWidth: number;
+    show?: boolean;
+    color?: string;
+    offsetX?: number;
+    offsetY?: number;
+    strokeWidth?: number;
   };
   axisTicks?: {
     show?: boolean;
@@ -729,9 +729,12 @@ export interface ApexXAxis {
  * See https://apexcharts.com/docs/options/yaxis/
  */
 export interface ApexYAxis {
+  show?: boolean;
   seriesName?: string;
   opposite?: boolean;
+  logarithmic?: boolean;
   tickAmount?: number;
+  forceNiceScale?: boolean;
   min?: number;
   max?: number;
   floating?: boolean;
