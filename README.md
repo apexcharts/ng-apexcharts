@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://morrisj.net/storage/icons/ng-apexcharts/icon.svg" width="180" />
+</p>
+
+
 # ng-apexcharts
 
 ng-apexcharts is an implementation of apexcharts for angular.
