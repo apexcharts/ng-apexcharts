@@ -12,13 +12,13 @@ in an angular project.
 
 1. Install using npm:
 
-````
+```` ts
 npm install apexcharts ng-apexcharts --save
 ````
 
 2. Open angular.json and under scripts add:
 
-````
+```` ts
 "scripts": [
   "node_modules/apexcharts/dist/apexcharts.min.js"
 ]
@@ -26,7 +26,7 @@ npm install apexcharts ng-apexcharts --save
 
 3. Add ng-apexcharts-module to imports
 
-````
+```` ts
 imports: [
   BrowserModule,
   FormsModule,
@@ -40,7 +40,7 @@ imports: [
 
 In any component you can use the chart using:
 
-````
+```` html
 <apx-chart></apx-chart>
 ````
 
@@ -49,7 +49,7 @@ In any component you can use the chart using:
 All options of the chart can inserted using the attributes.
 This is a list of all available attributes:
 
-````
+```` ts
 @Input() chart: ApexChart;
 @Input() annotations: ApexAnnotations;
 @Input() colors: string[];
@@ -75,12 +75,12 @@ This is a list of all available attributes:
 ### Use methods
 
 If you want to access the methods of the components use this in your component:
-````
+```` ts
 @ViewChild('chartObj') chart: ChartComponent;
 ````
 
 and change the template to this:
-````
+```` html
 <apx-chart #chartObj></apx-chart>
 ````
 
