@@ -4,7 +4,7 @@
 
 # ng-apexcharts
 
-ng-apexcharts is an implementation of apexcharts for angular.
+ng-apexcharts is an implementation of [apexcharts](https://apexcharts.com/) for angular.
 It comes with one simple component that enables you to use apexcharts
 in an angular project.
 
