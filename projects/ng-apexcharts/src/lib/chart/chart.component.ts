@@ -28,9 +28,9 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() chart: ApexChart;
   @Input() annotations: ApexAnnotations;
   @Input() colors: string[];
-  @Input() dataLabels: ApexDataLabels;
+  @Input() dataLabels: ApexDataLabels = {enabled: false};
   @Input() series: ApexAxisChartSeries | ApexNonAxisChartSeries;
-  @Input() stroke: ApexStroke;
+  @Input() stroke: ApexStroke = {curve: 'straight'};
   @Input() labels: string[];
   @Input() legend: ApexLegend;
   @Input() fill: ApexFill;
@@ -39,11 +39,20 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() responsive: ApexResponsive[];
   @Input() xaxis: ApexXAxis;
   @Input() yaxis: ApexYAxis | ApexYAxis[];
-  @Input() grid: ApexGrid;
+
+  @Input() grid: ApexGrid = {
+    row: {
+      colors: ['#f3f3f3', 'transparent'],
+      opacity: 0.5
+    }
+  };
+
   @Input() states: ApexStates;
   @Input() title: ApexTitleSubtitle;
   @Input() subtitle: ApexTitleSubtitle;
   @Input() theme: ApexTheme;
+
+  @Input() autoUpdateSeries = true;
 
   @ViewChild('chart') private chartElement: ElementRef;
   private chartObj: any;
@@ -56,6 +65,11 @@ export class ChartComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     setTimeout(() => {
+      if (this.autoUpdateSeries && Object.keys(changes).filter(c => c !== 'series').length === 0) {
+        this.updateSeries(this.series, true);
+        return;
+      }
+
       this.createElement();
     }, 0);
   }

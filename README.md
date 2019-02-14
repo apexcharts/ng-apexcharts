@@ -43,8 +43,13 @@ imports: [
 In any component you can use the chart using:
 
 ```` html
-<apx-chart></apx-chart>
+<apx-chart [series]="series" [chart]="chart" [title]="title"></apx-chart>
 ````
+
+You need to provide at least the series and chart attribute to make sure the
+chart can get created.
+
+You can also use any other attribute from the following options.
 
 ### Options
 
@@ -73,18 +78,33 @@ This is a list of all available attributes:
 @Input() theme: ApexTheme;
 ````
 
+#### Auto update series
+
+With the attribute `autoUpdateSeries` you can control if the chart component should
+call the `updateSeries` function automatically if the series attribute is changed.
+Set this attribute to false if you are using and changig the type property in your
+series for a mixed chart. This only has the effect that the whole chart rerenders
+even if only the series changes.
 
 ### Use methods
 
-If you want to access the methods of the components use this in your component:
+For a basic usage of the charts you dont need to use the methods of the chart.
+
+But if you want to toggle a series for example you need to call them. All methods
+are proxied through the component so that you dont need to access the DOM by
+yourself.
+
+Just reference the component as a ViewChild in your Component by using:
 ```` ts
 @ViewChild('chartObj') chart: ChartComponent;
 ````
 
-and change the template to this:
+and chaning the template to this:
 ```` html
 <apx-chart #chartObj></apx-chart>
 ````
+
+Now you're able to call methods from your Component.
 
 ## Author
 

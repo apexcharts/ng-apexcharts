@@ -8,23 +8,27 @@ import {ChartComponent} from 'ng-apexcharts';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  @ViewChild('firstChart') chart: ChartComponent;
-
-  height = 350;
+  @ViewChild('chart') chart: ChartComponent;
 
   form: FormGroup;
 
   constructor() {
     this.form = new FormGroup({
-      series: new FormGroup({
-        name: new FormControl(''),
-        data: new FormArray([
-          new FormControl(10),
-          new FormControl(17),
-          new FormControl(13),
-          new FormControl(5)
-        ])
-      }),
+      title: new FormControl('Basic Chart'),
+      type: new FormControl('line'),
+      height: new FormControl(350),
+      series: new FormArray([
+        new FormGroup({
+          name: new FormControl('Series'),
+          type: new FormControl('line'),
+          data: new FormArray([
+            new FormControl(this.getRandomArbitrary(0, 100)),
+            new FormControl(this.getRandomArbitrary(0, 100)),
+            new FormControl(this.getRandomArbitrary(0, 100)),
+            new FormControl(this.getRandomArbitrary(0, 100))
+          ])
+        })
+      ]),
       xaxis: new FormArray([
         new FormControl('Jan'),
         new FormControl('Feb'),
@@ -35,11 +39,26 @@ export class AppComponent {
   }
 
   addValue() {
-    (<FormArray>this.form.get('series').get('data')).push(new FormControl(10));
+    (<FormArray>this.form.get('series')).controls.forEach((c) => {
+      (<FormArray>c.get('data')).push(new FormControl(this.getRandomArbitrary(0, 100)));
+    });
     (<FormArray>this.form.get('xaxis')).push(new FormControl('Jan'));
   }
 
-  execute() {
-    this.chart.toggleSeries(this.form.value.series.name);
+  addSeries() {
+    (<FormArray>this.form.get('series')).push(new FormGroup({
+      name: new FormControl('Series'),
+      type: new FormControl('line'),
+      data: new FormArray([
+        new FormControl(this.getRandomArbitrary(0, 100)),
+        new FormControl(this.getRandomArbitrary(0, 100)),
+        new FormControl(this.getRandomArbitrary(0, 100)),
+        new FormControl(this.getRandomArbitrary(0, 100))
+      ])
+    }));
+  }
+
+  private getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
   }
 }

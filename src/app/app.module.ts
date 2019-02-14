@@ -5,10 +5,12 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NgApexchartsModule} from 'ng-apexcharts';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SeriesPipe } from './series.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SeriesPipe
   ],
   imports: [
     BrowserModule,
