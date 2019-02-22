@@ -584,7 +584,7 @@ export interface ApexResponsive {
  */
 export interface ApexTooltip {
   enabled?: boolean;
-  shared?: true;
+  shared?: boolean;
   followCursor?: boolean;
   intersect?: boolean;
   inverseOrder?: boolean;
