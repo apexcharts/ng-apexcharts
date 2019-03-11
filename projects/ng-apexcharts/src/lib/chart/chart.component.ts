@@ -65,14 +65,14 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    setTimeout(() => {
+    asapScheduler.schedule(() => {
       if (this.autoUpdateSeries && Object.keys(changes).filter(c => c !== 'series').length === 0) {
         this.updateSeries(this.series, true);
         return;
       }
 
       this.createElement();
-    }, 0);
+    });
   }
 
   private createElement() {
