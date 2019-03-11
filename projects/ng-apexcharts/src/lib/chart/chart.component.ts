@@ -16,6 +16,7 @@ import {
   ApexXAxis,
   ApexYAxis
 } from '../model/apex-types';
+import { asapScheduler } from 'rxjs';
 
 declare var ApexCharts: any;
 
@@ -58,9 +59,9 @@ export class ChartComponent implements OnInit, OnChanges {
   private chartObj: any;
 
   ngOnInit() {
-    setTimeout(() => {
+    asapScheduler.schedule(() => {
       this.createElement();
-    }, 0);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
