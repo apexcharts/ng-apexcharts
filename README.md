@@ -4,8 +4,8 @@
 
 # ng-apexcharts
 
-ng-apexcharts is an implementation of [apexcharts](https://apexcharts.com/) for angular.
-It comes with one simple component that enables you to use apexcharts
+ng-apexcharts is a wrapper for [apexcharts](https://apexcharts.com/) for angular.
+It introduces one simple component that enables you to use apexcharts
 in an angular project.
 
 For a demo checkout: <a href="https://ngapexcharts-demo.stackblitz.io/" target="_blank">Stackblitz example</a>
