@@ -99,7 +99,7 @@ Just reference the component as a ViewChild in your Component by using:
 @ViewChild('chartObj') chart: ChartComponent;
 ````
 
-and chaning the template to this:
+and changing the template to this:
 ```` html
 <apx-chart #chartObj></apx-chart>
 ````
