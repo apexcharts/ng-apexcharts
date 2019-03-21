@@ -589,6 +589,10 @@ export interface ApexTooltip {
   intersect?: boolean;
   inverseOrder?: boolean;
   theme?: string;
+  style?: {
+    fontSize?: string;
+    fontFamily?: string;
+  };
   fillSeriesColor?: boolean;
   onDatasetHover?: {
     highlightDAtaSeries?: boolean;
