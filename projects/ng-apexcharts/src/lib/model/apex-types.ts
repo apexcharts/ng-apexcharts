@@ -844,5 +844,31 @@ export interface ApexTheme {
   };
 }
 
+interface ApexDiscretePoint {
+  seriesIndex?: number;
+  dataPointIndex?: number;
+  fillColor?: string;
+  strokeColor?: string;
+  size?: number;
+}
+
+export interface ApexMarkers {
+  size?: number;
+  colors?: string[];
+  strokeColor?: string;
+  strokeWidth?: number;
+  strokeOpacity?: number;
+  fillOpacity?: number;
+  discrete?: ApexDiscretePoint[];
+  shape?: 'circle' | 'square';
+  radius?: number;
+  offsetX?: number;
+  offsetY?: number;
+  hover?: {
+    size?: number;
+    sizeOffset?: number;
+  };
+}
+
 export type ChartType = 'line' | 'area' | 'bar' | 'histogram' | 'pie' | 'donut' |
   'radialBar' | 'scatter' | 'bubble' | 'heatmap' | 'candlestick' | 'radar';
