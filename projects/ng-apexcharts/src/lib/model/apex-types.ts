@@ -352,22 +352,30 @@ export interface ApexPlotOptions {
     shadeIntensity?: number;
     distributed?: boolean;
     colorScale?: {
-      inverse?: boolean;
       ranges?: {
         from?: number;
         to?: number;
         color?: string;
+        name?: string;
       }[];
+      inverse?: boolean;
       min?: number;
       max?: number;
     }
   };
   pie?: {
     size?: number;
+    customScale?: number;
+    offsetX?: number;
+    offsetY?: number;
+    expandOnClick?: boolean;
+    dataLabels?: {
+      offset?: number;
+    };
     donut?: {
       size?: string;
       background?: string;
-      labels?: {
+      labels: {
         show?: boolean;
         name?: {
           show?: boolean;
@@ -392,12 +400,6 @@ export interface ApexPlotOptions {
         }
       }
     };
-    customScale?: number;
-    offsetX?: number;
-    offsetY?: number;
-    dataLabels?: {
-      offset?: number;
-    }
   };
   radar?: {
     size?: number;
@@ -405,6 +407,7 @@ export interface ApexPlotOptions {
     offsetY?: number;
     polygons?: {
       strokeColor?: string;
+      connectorColors?: string | string[];
       fill?: {
         colors?: string[]
       }
@@ -734,25 +737,31 @@ export interface ApexXAxis {
  */
 export interface ApexYAxis {
   show?: boolean;
+  showAlways?: boolean;
   seriesName?: string;
   opposite?: boolean;
   logarithmic?: boolean;
   tickAmount?: number;
-  forceNiceScale?: boolean;
+  forceNiceScale: false,
   min?: number;
   max?: number;
   floating?: boolean;
   decimalsInFloat?: number;
   labels?: {
     show?: boolean;
+    minWidth?: number;
     maxWidth?: number;
+    offsetX?: number;
+    offsetY?: number;
+    rotate?: number;
+    align?: 'left' | 'center' | 'right';
+    padding?: number,
     style?: {
       color?: string;
       fontSize?: string;
+      fontFamily?: string;
       cssClass?: string;
     };
-    offsetX?: number;
-    offsetY?: number;
     formatter?(val: number): string;
   };
   axisBorder?: {
@@ -763,7 +772,6 @@ export interface ApexYAxis {
   };
   axisTicks?: {
     show?: boolean;
-    borderType?: string;
     color?: string;
     width?: number;
     offsetX?: number;
@@ -777,6 +785,7 @@ export interface ApexYAxis {
     style?: {
       color?: string;
       fontSize?: string;
+      fontFamily?: string;
       cssClass?: string;
     };
   };
@@ -868,6 +877,20 @@ export interface ApexMarkers {
     size?: number;
     sizeOffset?: number;
   };
+}
+
+
+export interface ApexNoData {
+  text?: string,
+  align?: 'left' | 'right' | 'center',
+  verticalAlign?: 'top' | 'middle' | 'bottom',
+  offsetX?: number,
+  offsetY?: number,
+  style?: {
+    color?: string,
+    fontSize?: string,
+    fontFamily?: string
+  }
 }
 
 export type ChartType = 'line' | 'area' | 'bar' | 'histogram' | 'pie' | 'donut' |
