@@ -742,7 +742,7 @@ export interface ApexYAxis {
   opposite?: boolean;
   logarithmic?: boolean;
   tickAmount?: number;
-  forceNiceScale: false,
+  forceNiceScale?: boolean,
   min?: number;
   max?: number;
   floating?: boolean;
