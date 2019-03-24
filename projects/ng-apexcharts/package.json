@@ -1,7 +1,7 @@
 {
   "name": "ng-apexcharts",
-  "version": "0.0.3",
-  "description": "an angular implementation of apexcharts",
+  "version": "1.0.0",
+  "description": "An angular implementation of ApexCharts",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0",
@@ -20,11 +20,11 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/morrisjdev/ng-apexcharts/issues"
+    "url": "https://github.com/apexcharts/ng-apexcharts/issues"
   },
-  "homepage": "https://github.com/morrisjdev/ng-apexcharts",
+  "homepage": "https://github.com/apexcharts/ng-apexcharts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/morrisjdev/ng-apexcharts.git"
+    "url": "https://github.com/apexcharts/ng-apexcharts.git"
   }
 }
