@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import {
   ApexAnnotations,
   ApexAxisChartSeries,
@@ -29,9 +29,9 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() chart: ApexChart;
   @Input() annotations: ApexAnnotations;
   @Input() colors: string[];
-  @Input() dataLabels: ApexDataLabels = {enabled: false};
+  @Input() dataLabels: ApexDataLabels = { enabled: false };
   @Input() series: ApexAxisChartSeries | ApexNonAxisChartSeries;
-  @Input() stroke: ApexStroke = {curve: 'straight'};
+  @Input() stroke: ApexStroke = { curve: 'straight' };
   @Input() labels: string[];
   @Input() legend: ApexLegend;
   @Input() fill: ApexFill;
@@ -142,7 +142,7 @@ export class ChartComponent implements OnInit, OnChanges {
     this.chartObj.addText(options, pushToMemory, context);
   }
 
-  public dataURI() {
+  public dataURI(): Promise<void> {
     return this.chartObj.dataURI();
   }
 }

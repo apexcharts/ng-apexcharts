@@ -63,6 +63,7 @@ export interface ApexChart {
     updated?(chart: any, options: any): void;
     click?(e: any, chart: any, options: any): void;
     legendClick?(chart: any, seriesIndex: number, options: any): void;
+    markerClick?(e: any, chart: any, options: any): void;
     selection?(chart: any, options: any): void;
     dataPointSelection?(e: any, chart: any, options: any): void;
     dataPointMouseEnter?(e: any, chart: any, options: any): void;
@@ -79,6 +80,7 @@ export interface ApexChart {
   id?: string;
   locales?: ApexLocale[];
   defaultLocale?: string;
+  parentHeightOffset?: number;
   sparkline?: {
     enabled?: boolean;
   };
@@ -334,6 +336,7 @@ export interface ApexPlotOptions {
       backgroundBarOpacity?: number;
     };
     dataLabels?: {
+      maxItems?: number;
       position?: string;
     }
   };
@@ -371,6 +374,7 @@ export interface ApexPlotOptions {
     expandOnClick?: boolean;
     dataLabels?: {
       offset?: number;
+      minAngleToShowLabel?: number;
     };
     donut?: {
       size?: string;
@@ -844,6 +848,7 @@ export interface ApexGrid {
 }
 
 export interface ApexTheme {
+  mode?: 'light' | 'dark';
   palette?: string;
   monochrome?: {
     enabled?: boolean,
