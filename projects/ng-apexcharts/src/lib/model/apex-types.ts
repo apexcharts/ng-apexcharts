@@ -899,4 +899,4 @@ export interface ApexNoData {
 }
 
 export type ChartType = 'line' | 'area' | 'bar' | 'histogram' | 'pie' | 'donut' |
-  'radialBar' | 'scatter' | 'bubble' | 'heatmap' | 'candlestick' | 'radar';
+  'radialBar' | 'scatter' | 'bubble' | 'heatmap' | 'candlestick' | 'radar' | 'rangeBar';
