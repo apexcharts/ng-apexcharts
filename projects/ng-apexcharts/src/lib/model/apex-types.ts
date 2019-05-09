@@ -640,7 +640,7 @@ export interface ApexTooltip {
  * See https://apexcharts.com/docs/options/xaxis/
  */
 export interface ApexXAxis {
-  type?: 'categories' | 'datetime' | 'numeric';
+  type?: 'category' | 'datetime' | 'numeric';
   categories?: string[] | number[];
   labels?: {
     show?: boolean;
