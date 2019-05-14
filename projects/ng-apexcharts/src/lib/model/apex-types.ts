@@ -27,6 +27,8 @@ export interface ApexOptions {
   tooltip?: ApexTooltip;
   plotOptions?: ApexPlotOptions;
   responsive?: ApexResponsive[];
+  markers?: ApexMarkers;
+  noData?: ApexNoData;
   xaxis?: ApexXAxis;
   yaxis?: ApexYAxis | ApexYAxis[];
   grid?: ApexGrid;
