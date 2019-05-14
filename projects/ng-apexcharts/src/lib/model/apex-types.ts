@@ -221,7 +221,6 @@ export interface ApexAnnotations {
   xaxis?: XAxisAnnotations[];
   points?: PointAnnotations[];
 }
-
 export interface AnnotationLabel {
   borderColor?: string;
   borderWidth?: number;
@@ -233,11 +232,11 @@ export interface AnnotationLabel {
   position?: string;
   orientation?: string;
 }
-
 export interface AnnotationStyle {
   background?: string;
   color?: string;
   fontSize?: string;
+  fontFamily?: string;
   cssClass?: string;
   padding?: {
     left?: number;
@@ -246,39 +245,32 @@ export interface AnnotationStyle {
     bottom?: number;
   };
 }
-
 export interface XAxisAnnotations {
-  x?: number;
+  x?: number | string;
+  x2?: null | number;
   strokeDashArray?: number;
+  fillColor?: string,
   borderColor?: string;
+  opacity?: number;
   offsetX?: number;
   offsetY?: number;
-  label?: {
-    borderColor?: string;
-    borderWidth?: number;
-    text?: string;
-    textAnchor?: string;
-    position?: string;
-    orientation?: string;
-    offsetX?: number;
-    offsetY?: number;
-    style?: AnnotationStyle;
-  };
+  label?: AnnotationLabel;
 }
-
 export interface YAxisAnnotations {
-  y?: number;
+  y?: null | number;
+  y2?: null | number,
   strokeDashArray?: number;
+  fillColor?: string,
   borderColor?: string;
+  opacity?: number;
   offsetX?: number;
   offsetY?: number;
   yAxisIndex?: number;
   label?: AnnotationLabel;
 }
-
 export interface PointAnnotations {
-  x?: number;
-  y?: null;
+  x?: number | string;
+  y?: null | number;
   yAxisIndex?: number;
   seriesIndex?: number;
   marker?: {
@@ -287,7 +279,10 @@ export interface PointAnnotations {
     strokeColor?: string;
     strokeWidth?: number;
     shape?: string;
+    offsetX?: number;
+    offsetY?: number;
     radius?: number;
+    cssClass?: string;
   };
   label?: AnnotationLabel;
 }
