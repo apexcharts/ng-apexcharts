@@ -31,9 +31,9 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input() chart: ApexChart;
   @Input() annotations: ApexAnnotations;
   @Input() colors: any[];
-  @Input() dataLabels: ApexDataLabels = { enabled: false };
+  @Input() dataLabels: ApexDataLabels;
   @Input() series: ApexAxisChartSeries | ApexNonAxisChartSeries;
-  @Input() stroke: ApexStroke = { curve: 'straight' };
+  @Input() stroke: ApexStroke;
   @Input() labels: string[];
   @Input() legend: ApexLegend;
   @Input() markers: ApexMarkers;
