@@ -8,6 +8,8 @@ import {
   ApexGrid,
   ApexLegend,
   ApexNonAxisChartSeries,
+  ApexMarkers,
+  ApexNoData,
   ApexPlotOptions,
   ApexResponsive,
   ApexStates,
@@ -28,26 +30,21 @@ declare var ApexCharts: any;
 export class ChartComponent implements OnInit, OnChanges {
   @Input() chart: ApexChart;
   @Input() annotations: ApexAnnotations;
-  @Input() colors: string[];
+  @Input() colors: any[];
   @Input() dataLabels: ApexDataLabels = { enabled: false };
   @Input() series: ApexAxisChartSeries | ApexNonAxisChartSeries;
   @Input() stroke: ApexStroke = { curve: 'straight' };
   @Input() labels: string[];
   @Input() legend: ApexLegend;
+  @Input() markers: ApexMarkers;
+  @Input() noData: ApexNoData;
   @Input() fill: ApexFill;
   @Input() tooltip: ApexTooltip;
   @Input() plotOptions: ApexPlotOptions;
   @Input() responsive: ApexResponsive[];
   @Input() xaxis: ApexXAxis;
   @Input() yaxis: ApexYAxis | ApexYAxis[];
-
-  @Input() grid: ApexGrid = {
-    row: {
-      colors: ['#f3f3f3', 'transparent'],
-      opacity: 0.5
-    }
-  };
-
+  @Input() grid: ApexGrid;
   @Input() states: ApexStates;
   @Input() title: ApexTitleSubtitle;
   @Input() subtitle: ApexTitleSubtitle;
@@ -90,6 +87,8 @@ export class ChartComponent implements OnInit, OnChanges {
     if (this.tooltip) { options.tooltip = this.tooltip; }
     if (this.plotOptions) { options.plotOptions = this.plotOptions; }
     if (this.responsive) { options.responsive = this.responsive; }
+    if (this.markers) { options.markers = this.markers; }
+    if (this.noData) { options.noData = this.noData; }
     if (this.xaxis) { options.xaxis = this.xaxis; }
     if (this.yaxis) { options.yaxis = this.yaxis; }
     if (this.grid) { options.grid = this.grid; }
@@ -122,10 +121,17 @@ export class ChartComponent implements OnInit, OnChanges {
     this.chartObj.updateSeries(newSeries, animate);
   }
 
+  public appendSeries(newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries, animate?: boolean) {
+    this.chartObj.appendSeries(newSeries, animate);
+  }
+
   public toggleSeries(seriesName: string) {
     this.chartObj.toggleSeries(seriesName);
   }
 
+  public destroy() {
+    this.chartObj.destroy()
+  }
   public addXaxisAnnotation(options: any, pushToMemory?: boolean, context?: any) {
     this.chartObj.addXaxisAnnotation(options, pushToMemory, context);
   }
