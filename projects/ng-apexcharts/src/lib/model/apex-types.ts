@@ -213,7 +213,7 @@ export interface ApexStroke {
   show?: boolean;
   curve?: 'smooth' | 'straight' | 'stepline';
   lineCap?: 'butt' | 'square' | 'round';
-  colors?: string;
+  colors?: string[];
   width?: number;
   dashArray?: number | number[];
 }
