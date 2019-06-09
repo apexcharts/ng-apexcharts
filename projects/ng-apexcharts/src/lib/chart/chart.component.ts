@@ -129,6 +129,14 @@ export class ChartComponent implements OnInit, OnChanges {
     this.chartObj.toggleSeries(seriesName);
   }
 
+  public resetSeries() {
+    this.chartObj.resetSeries();
+  }
+
+  public toggleDataPointSelection(seriesIndex: number, dataPointIndex?: number) {
+    this.chartObj.toggleDataPointSelection(seriesIndex, dataPointIndex);
+  }
+
   public destroy() {
     this.chartObj.destroy()
   }

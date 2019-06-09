@@ -104,6 +104,7 @@ export interface ApexChart {
   zoom?: {
     enabled?: boolean;
     type?: 'x' | 'y' | 'xy';
+    autoScaleYaxis?: boolean;
     zoomedArea?: {
       fill?: {
         color?: string;
@@ -350,6 +351,7 @@ export interface ApexPlotOptions {
     radius?: number;
     enableShades?: boolean;
     shadeIntensity?: number;
+    reverseNegativeShade?: boolean;
     distributed?: boolean;
     colorScale?: {
       ranges?: {
@@ -559,6 +561,7 @@ export interface ApexLegend {
  */
 export interface ApexDataLabels {
   enabled?: boolean;
+  enabledOnSeries?: undefined | boolean;
   textAnchor?: 'start' | 'middle' | 'end';
   offsetX?: number;
   offsetY?: number;
@@ -588,6 +591,7 @@ export interface ApexResponsive {
  */
 export interface ApexTooltip {
   enabled?: boolean;
+  enabledOnSeries?: undefined | boolean;
   shared?: boolean;
   followCursor?: boolean;
   intersect?: boolean;
