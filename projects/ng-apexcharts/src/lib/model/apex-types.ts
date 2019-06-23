@@ -189,6 +189,7 @@ export interface ApexTitleSubtitle {
   floating?: number;
   style?: {
     fontSize?: string;
+    fontFamily?: string,
     color?: string;
   };
 }
@@ -456,12 +457,14 @@ export interface ApexPlotOptions {
       name?: {
         show?: boolean;
         fontSize?: string;
+        fontFamily?: string;
         color?: string;
         offsetY?: number;
       };
       value?: {
         show?: boolean;
         fontSize?: string;
+        fontFamily?: string;
         color?: string;
         offsetY?: number;
         formatter?(val: number): string;
@@ -697,6 +700,7 @@ export interface ApexXAxis {
     offsetY?: number;
     style?: {
       color?: string;
+      fontFamily?: string;
       fontSize?: string;
       cssClass?: string;
     };
@@ -733,6 +737,11 @@ export interface ApexXAxis {
   tooltip?: {
     enabled?: boolean;
     offsetY?: number;
+    formatter?(value: string, opts: object): string;
+    style?: {
+      fontSize?: string,
+      fontFamily?: string
+    }
   };
 }
 
