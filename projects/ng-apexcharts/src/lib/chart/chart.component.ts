@@ -113,8 +113,8 @@ export class ChartComponent implements OnInit, OnChanges {
     return this.chartObj.render();
   }
 
-  public updateOptions(options: any, redrawPaths: boolean, animate: boolean): Promise<void> {
-    return this.chartObj.updateOptions(options, redrawPaths, animate);
+  public updateOptions(options: any, redrawPaths: boolean, animate: boolean, updateSyncedCharts: boolean): Promise<void> {
+    return this.chartObj.updateOptions(options, redrawPaths, animate, updateSyncedCharts);
   }
 
   public updateSeries(newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries, animate: boolean) {
