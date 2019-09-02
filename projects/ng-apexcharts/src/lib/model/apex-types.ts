@@ -321,7 +321,7 @@ export interface ApexLocale {
 export interface ApexPlotOptions {
   bar?: {
     horizontal?: boolean;
-    endingShape?: 'flat' | 'rounded' | 'arrow';
+    endingShape?: 'flat' | 'rounded';
     columnWidth?: string;
     barHeight?: string;
     distributed?: boolean;
@@ -516,6 +516,7 @@ export interface ApexLegend {
   showForNullSeries?: boolean;
   showForZeroSeries?: boolean;
   floating?: boolean;
+  inverseOrder?: boolean;
   position?: 'top' | 'right' | 'bottom' | 'left';
   horizontalAlign?: 'left' | 'center' | 'right';
   fontSize?: string;
@@ -524,6 +525,8 @@ export interface ApexLegend {
   height?: number;
   offsetX?: number;
   offsetY?: number;
+  formatter?(legendName: string, opts: any): string;
+  tooltipHoverFormatter?(legendName: string, opts: any): string;
   textAnchor?: string;
   labels?: {
     color?: string;
@@ -555,7 +558,6 @@ export interface ApexLegend {
   onItemHover?: {
     highlightDataSeries?: boolean;
   };
-  formatter?(val: string, opts: any): string;
 }
 
 /**
@@ -888,6 +890,8 @@ export interface ApexMarkers {
   radius?: number;
   offsetX?: number;
   offsetY?: number;
+  onClick?(e: any): void;
+  onDblClick?(e: any): void;
   hover?: {
     size?: number;
     sizeOffset?: number;
