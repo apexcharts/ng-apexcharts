@@ -63,6 +63,7 @@ export interface ApexChart {
     beforeMount?(chart: any, options: any): void;
     mounted?(chart: any, options: any): void;
     updated?(chart: any, options: any): void;
+    mouseMove?(e: any, chart: any, options: any): void;
     click?(e: any, chart: any, options: any): void;
     legendClick?(chart: any, seriesIndex: number, options: any): void;
     markerClick?(e: any, chart: any, options: any): void;
