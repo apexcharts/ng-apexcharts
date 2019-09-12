@@ -541,7 +541,6 @@ export interface ApexLegend {
     offsetX?: number;
     offsetY?: number;
     radius?: number;
-    shape?: 'circle' | 'square';
     customHTML?(): string;
     onClick?(): void;
   };
@@ -887,7 +886,7 @@ export interface ApexMarkers {
   strokeOpacity?: number;
   fillOpacity?: number;
   discrete?: ApexDiscretePoint[];
-  shape?: 'circle' | 'square';
+  shape?: 'circle' | 'square' | string[];
   radius?: number;
   offsetX?: number;
   offsetY?: number;
