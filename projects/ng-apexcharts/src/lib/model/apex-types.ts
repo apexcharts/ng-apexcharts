@@ -538,6 +538,7 @@ export interface ApexLegend {
     height?: number;
     strokeColor?: string;
     strokeWidth?: number;
+    fillColors?: string[];
     offsetX?: number;
     offsetY?: number;
     radius?: number;
@@ -627,7 +628,8 @@ export interface ApexTooltip {
     formatter?(val: number): string;
   };
   marker?: {
-    show?: boolean
+    show?: boolean;
+    fillColors?: string[];
   };
   items?: {
     display?: string
@@ -881,10 +883,10 @@ interface ApexDiscretePoint {
 export interface ApexMarkers {
   size?: number;
   colors?: string[];
-  strokeColor?: string;
-  strokeWidth?: number;
-  strokeOpacity?: number;
-  fillOpacity?: number;
+  strokeColor?: string | string[];
+  strokeWidth?: number | number[];
+  strokeOpacity?: number | number[];
+  fillOpacity?: number | number[];
   discrete?: ApexDiscretePoint[];
   shape?: 'circle' | 'square' | string[];
   radius?: number;
