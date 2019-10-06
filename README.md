@@ -82,7 +82,7 @@ This is a list of all available attributes:
 
 With the attribute `autoUpdateSeries` you can control if the chart component should
 call the `updateSeries` function automatically if the series attribute is changed.
-Set this attribute to false if you are using and changig the type property in your
+Set this attribute to false if you are using and changing the type property in your
 series for a mixed chart. This only has the effect that the whole chart rerenders
 even if only the series changes.
 
