@@ -20,7 +20,7 @@ import {
 } from '../model/apex-types';
 import { asapScheduler } from 'rxjs';
 
-declare var ApexCharts: any;
+import { default as ApexCharts } from 'apexcharts';
 
 @Component({
   selector: 'apx-chart',
