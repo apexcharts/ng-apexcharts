@@ -380,7 +380,7 @@ export interface ApexPlotOptions {
     donut?: {
       size?: string;
       background?: string;
-      labels: {
+      labels?: {
         show?: boolean;
         name?: {
           show?: boolean;
@@ -399,6 +399,7 @@ export interface ApexPlotOptions {
         };
         total?: {
           show?: boolean;
+          showAlways?: boolean;
           label?: string;
           color?: string;
           formatter?(w: any): string;
@@ -780,7 +781,7 @@ export interface ApexYAxis {
       fontFamily?: string;
       cssClass?: string;
     };
-    formatter?(val: number): string;
+    formatter?(val: number, opts?: any): string;
   };
   axisBorder?: {
     show?: boolean;
