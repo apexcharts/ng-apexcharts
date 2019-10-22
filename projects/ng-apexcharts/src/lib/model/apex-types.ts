@@ -337,7 +337,9 @@ export interface ApexPlotOptions {
     };
     dataLabels?: {
       maxItems?: number;
+      hideOverflowingLabels?: boolean;
       position?: string;
+      orientation?: 'horizontal' | 'vertical'
     }
   };
   candlestick?: {
