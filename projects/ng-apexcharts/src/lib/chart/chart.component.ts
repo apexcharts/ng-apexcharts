@@ -125,8 +125,16 @@ export class ChartComponent implements OnInit, OnChanges {
     this.chartObj.appendSeries(newSeries, animate);
   }
 
-  public toggleSeries(seriesName: string) {
-    this.chartObj.toggleSeries(seriesName);
+  public toggleSeries(seriesName: string): any {
+    return this.chartObj.toggleSeries(seriesName);
+  }
+
+  public showSeries(seriesName: string) {
+    this.chartObj.showSeries(seriesName);
+  }
+
+  public hideSeries(seriesName: string) {
+    this.chartObj.hideSeries(seriesName);
   }
 
   public resetSeries() {
