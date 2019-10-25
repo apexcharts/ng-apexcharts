@@ -763,8 +763,8 @@ export interface ApexYAxis {
   logarithmic?: boolean;
   tickAmount?: number;
   forceNiceScale?: boolean,
-  min?: number;
-  max?: number;
+  min?: number | ((min: number) => number);
+  max?: number | ((max: number) => number);
   floating?: boolean;
   decimalsInFloat?: number;
   labels?: {
