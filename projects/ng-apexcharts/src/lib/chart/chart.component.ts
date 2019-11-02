@@ -160,6 +160,14 @@ export class ChartComponent implements OnInit, OnChanges {
     this.chartObj.addPointAnnotation(options, pushToMemory, context);
   }
 
+  public removeAnnotation(id: string, options?: any) {
+    this.chartObj.removeAnnotation(id, options);
+  }
+
+  public clearAnnotations(options?: any) {
+    this.chartObj.clearAnnotations(options);
+  }
+
   public addText(options: any, pushToMemory?: boolean, context?: any) {
     this.chartObj.addText(options, pushToMemory, context);
   }
