@@ -97,13 +97,13 @@ export interface ApexChart {
   toolbar?: {
     show?: boolean;
     tools?: {
-      download?: boolean;
-      selection?: boolean;
-      zoom?: boolean;
-      zoomin?: boolean;
-      zoomout?: boolean;
-      pan?: boolean;
-      reset?: boolean;
+      download?: boolean | string;
+      selection?: boolean | string;
+      zoom?: boolean | string;
+      zoomin?: boolean | string;
+      zoomout?: boolean | string;
+      pan?: boolean | string;
+      reset?: boolean | string;
     };
     autoSelected?: "zoom" | "selection" | "pan";
   };
