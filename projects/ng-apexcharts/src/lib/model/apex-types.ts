@@ -537,7 +537,7 @@ export interface ApexLegend {
   tooltipHoverFormatter?(legendName: string, opts?: any): string;
   textAnchor?: string;
   labels?: {
-    color?: string;
+    color?: string | string[];
     useSeriesColors?: boolean;
   };
   markers?: {
@@ -660,7 +660,7 @@ export interface ApexXAxis {
     minHeight?: number;
     maxHeight?: number;
     style?: {
-      colors?: string[];
+      colors?: string | string[];
       fontSize?: string;
       fontFamily?: string;
       cssClass?: string;
