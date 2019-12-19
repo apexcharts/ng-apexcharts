@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from "@angular/core";
 import {
   ApexAnnotations,
   ApexAxisChartSeries,
@@ -13,19 +21,21 @@ import {
   ApexPlotOptions,
   ApexResponsive,
   ApexStates,
-  ApexStroke, ApexTheme, ApexTitleSubtitle,
+  ApexStroke,
+  ApexTheme,
+  ApexTitleSubtitle,
   ApexTooltip,
   ApexXAxis,
   ApexYAxis
-} from '../model/apex-types';
-import { asapScheduler } from 'rxjs';
+} from "../model/apex-types";
+import { asapScheduler } from "rxjs";
 
-import { default as ApexCharts } from 'apexcharts';
+import { default as ApexCharts } from "apexcharts";
 
 @Component({
-  selector: 'apx-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css']
+  selector: "apx-chart",
+  templateUrl: "./chart.component.html",
+  styleUrls: ["./chart.component.css"]
 })
 export class ChartComponent implements OnInit, OnChanges {
   @Input() chart: ApexChart;
@@ -52,7 +62,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
   @Input() autoUpdateSeries = true;
 
-  @ViewChild('chart') private chartElement: ElementRef;
+  @ViewChild("chart") private chartElement: ElementRef;
   private chartObj: any;
 
   ngOnInit() {
@@ -63,7 +73,10 @@ export class ChartComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     asapScheduler.schedule(() => {
-      if (this.autoUpdateSeries && Object.keys(changes).filter(c => c !== 'series').length === 0) {
+      if (
+        this.autoUpdateSeries &&
+        Object.keys(changes).filter(c => c !== "series").length === 0
+      ) {
         this.updateSeries(this.series, true);
         return;
       }
@@ -75,36 +88,75 @@ export class ChartComponent implements OnInit, OnChanges {
   private createElement() {
     const options: any = {};
 
-    if (this.annotations) { options.annotations = this.annotations; }
-    if (this.chart) { options.chart = this.chart; }
-    if (this.colors) { options.colors = this.colors; }
-    if (this.dataLabels) { options.dataLabels = this.dataLabels; }
-    if (this.series) { options.series = this.series; }
-    if (this.stroke) { options.stroke = this.stroke; }
-    if (this.labels) { options.labels = this.labels; }
-    if (this.legend) { options.legend = this.legend; }
-    if (this.fill) { options.fill = this.fill; }
-    if (this.tooltip) { options.tooltip = this.tooltip; }
-    if (this.plotOptions) { options.plotOptions = this.plotOptions; }
-    if (this.responsive) { options.responsive = this.responsive; }
-    if (this.markers) { options.markers = this.markers; }
-    if (this.noData) { options.noData = this.noData; }
-    if (this.xaxis) { options.xaxis = this.xaxis; }
-    if (this.yaxis) { options.yaxis = this.yaxis; }
-    if (this.grid) { options.grid = this.grid; }
-    if (this.states) { options.states = this.states; }
-    if (this.title) { options.title = this.title; }
-    if (this.subtitle) { options.subtitle = this.subtitle; }
-    if (this.theme) { options.theme = this.theme; }
+    if (this.annotations) {
+      options.annotations = this.annotations;
+    }
+    if (this.chart) {
+      options.chart = this.chart;
+    }
+    if (this.colors) {
+      options.colors = this.colors;
+    }
+    if (this.dataLabels) {
+      options.dataLabels = this.dataLabels;
+    }
+    if (this.series) {
+      options.series = this.series;
+    }
+    if (this.stroke) {
+      options.stroke = this.stroke;
+    }
+    if (this.labels) {
+      options.labels = this.labels;
+    }
+    if (this.legend) {
+      options.legend = this.legend;
+    }
+    if (this.fill) {
+      options.fill = this.fill;
+    }
+    if (this.tooltip) {
+      options.tooltip = this.tooltip;
+    }
+    if (this.plotOptions) {
+      options.plotOptions = this.plotOptions;
+    }
+    if (this.responsive) {
+      options.responsive = this.responsive;
+    }
+    if (this.markers) {
+      options.markers = this.markers;
+    }
+    if (this.noData) {
+      options.noData = this.noData;
+    }
+    if (this.xaxis) {
+      options.xaxis = this.xaxis;
+    }
+    if (this.yaxis) {
+      options.yaxis = this.yaxis;
+    }
+    if (this.grid) {
+      options.grid = this.grid;
+    }
+    if (this.states) {
+      options.states = this.states;
+    }
+    if (this.title) {
+      options.title = this.title;
+    }
+    if (this.subtitle) {
+      options.subtitle = this.subtitle;
+    }
+    if (this.theme) {
+      options.theme = this.theme;
+    }
 
     if (this.chartObj) {
       this.chartObj.destroy();
     }
 
-    this.chartObj = new ApexCharts(
-      this.chartElement.nativeElement,
-      options
-    );
+    this.chartObj = new ApexCharts(this.chartElement.nativeElement, options);
 
     this.render();
   }
@@ -113,15 +165,31 @@ export class ChartComponent implements OnInit, OnChanges {
     return this.chartObj.render();
   }
 
-  public updateOptions(options: any, redrawPaths: boolean, animate: boolean, updateSyncedCharts: boolean): Promise<void> {
-    return this.chartObj.updateOptions(options, redrawPaths, animate, updateSyncedCharts);
+  public updateOptions(
+    options: any,
+    redrawPaths: boolean,
+    animate: boolean,
+    updateSyncedCharts: boolean
+  ): Promise<void> {
+    return this.chartObj.updateOptions(
+      options,
+      redrawPaths,
+      animate,
+      updateSyncedCharts
+    );
   }
 
-  public updateSeries(newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries, animate: boolean) {
+  public updateSeries(
+    newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
+    animate: boolean
+  ) {
     this.chartObj.updateSeries(newSeries, animate);
   }
 
-  public appendSeries(newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries, animate?: boolean) {
+  public appendSeries(
+    newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
+    animate?: boolean
+  ) {
     this.chartObj.appendSeries(newSeries, animate);
   }
 
@@ -141,22 +209,34 @@ export class ChartComponent implements OnInit, OnChanges {
     this.chartObj.resetSeries();
   }
 
-  public toggleDataPointSelection(seriesIndex: number, dataPointIndex?: number) {
+  public toggleDataPointSelection(
+    seriesIndex: number,
+    dataPointIndex?: number
+  ) {
     this.chartObj.toggleDataPointSelection(seriesIndex, dataPointIndex);
   }
 
-  public destroy() {
-    this.chartObj.destroy()
-  }
-  public addXaxisAnnotation(options: any, pushToMemory?: boolean, context?: any) {
+  public addXaxisAnnotation(
+    options: any,
+    pushToMemory?: boolean,
+    context?: any
+  ) {
     this.chartObj.addXaxisAnnotation(options, pushToMemory, context);
   }
 
-  public addYaxisAnnotation(options: any, pushToMemory?: boolean, context?: any) {
+  public addYaxisAnnotation(
+    options: any,
+    pushToMemory?: boolean,
+    context?: any
+  ) {
     this.chartObj.addYaxisAnnotation(options, pushToMemory, context);
   }
 
-  public addPointAnnotation(options: any, pushToMemory?: boolean, context?: any) {
+  public addPointAnnotation(
+    options: any,
+    pushToMemory?: boolean,
+    context?: any
+  ) {
     this.chartObj.addPointAnnotation(options, pushToMemory, context);
   }
 
@@ -174,5 +254,13 @@ export class ChartComponent implements OnInit, OnChanges {
 
   public dataURI(): Promise<void> {
     return this.chartObj.dataURI();
+  }
+
+  public paper() {
+    this.chartObj.paper();
+  }
+
+  public destroy() {
+    this.chartObj.destroy();
   }
 }
