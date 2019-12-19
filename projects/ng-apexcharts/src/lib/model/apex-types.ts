@@ -38,6 +38,14 @@ export interface ApexOptions {
   theme?: ApexTheme;
 }
 
+type ApexDropShadow = {
+  enabled?: boolean;
+  top?: number;
+  left?: number;
+  blur?: number;
+  opacity?: number;
+};
+
 /**
  * Main Chart options
  * See https://apexcharts.com/docs/options/chart/
@@ -51,12 +59,9 @@ export interface ApexChart {
   background?: string;
   offsetX?: number;
   offsetY?: number;
-  dropShadow?: {
-    enabled?: boolean;
-    top?: number;
-    left?: number;
-    blur?: number;
-    opacity?: number;
+  dropShadow?: ApexDropShadow & {
+    enabledOnSeries?: number[];
+    color?: string | string[];
   };
   events?: {
     animationEnd?(chart: any, options?: any): void;
@@ -92,13 +97,13 @@ export interface ApexChart {
   toolbar?: {
     show?: boolean;
     tools?: {
-      download?: boolean;
-      selection?: boolean;
-      zoom?: boolean;
-      zoomin?: boolean;
-      zoomout?: boolean;
-      pan?: boolean;
-      reset?: boolean;
+      download?: boolean | string;
+      selection?: boolean | string;
+      zoom?: boolean | string;
+      zoomin?: boolean | string;
+      zoomout?: boolean | string;
+      pan?: boolean | string;
+      reset?: boolean | string;
     };
     autoSelected?: "zoom" | "selection" | "pan";
   };
@@ -443,6 +448,7 @@ export interface ApexPlotOptions {
       offsetY?: number;
       clipped?: boolean;
       position?: "front" | "back";
+      dropShadow?: ApexDropShadow;
     };
     track?: {
       show?: boolean;
@@ -452,13 +458,7 @@ export interface ApexPlotOptions {
       strokeWidth?: string;
       opacity?: number;
       margin?: number;
-      dropShadow?: {
-        enabled?: boolean;
-        top?: number;
-        left?: number;
-        blur?: number;
-        opacity?: number;
-      };
+      dropShadow?: ApexDropShadow;
     };
     dataLabels?: {
       show?: boolean;
@@ -583,13 +583,7 @@ export interface ApexDataLabels {
     fontFamily?: string;
     colors?: string[];
   };
-  dropShadow?: {
-    enabled: boolean;
-    top?: number;
-    left?: number;
-    blur?: number;
-    opacity?: number;
-  };
+  dropShadow?: ApexDropShadow;
   formatter?(val: number, opts?: any): string;
 }
 
@@ -736,13 +730,7 @@ export interface ApexXAxis {
         opacityTo?: number;
       };
     };
-    dropShadow?: {
-      enabled?: boolean;
-      top?: number;
-      left?: number;
-      blur?: number;
-      opacity?: number;
-    };
+    dropShadow?: ApexDropShadow;
   };
   tooltip?: {
     enabled?: boolean;
