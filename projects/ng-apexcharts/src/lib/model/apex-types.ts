@@ -611,7 +611,7 @@ export interface ApexTooltip {
     fontFamily?: string;
   };
   onDatasetHover?: {
-    highlightDAtaSeries?: boolean;
+    highlightDataSeries?: boolean;
   };
   x?: {
     show?: boolean;
