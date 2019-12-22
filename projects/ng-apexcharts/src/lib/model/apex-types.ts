@@ -489,7 +489,7 @@ export interface ApexPlotOptions {
 
 export interface ApexFill {
   colors?: string[];
-  opacity?: number;
+  opacity?: number | number[];
   type?: string;
   gradient?: {
     shade?: string;
