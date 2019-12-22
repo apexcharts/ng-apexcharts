@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://morrisj.net/storage/icons/ng-apexcharts/icon.svg" width="180" />
+  <img src="https://apexcharts.com/media/ng-apexcharts.png" height="150" />
 </p>
 
 # ng-apexcharts
