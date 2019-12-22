@@ -86,6 +86,8 @@ This is a list of all available attributes:
 @Input() theme: ApexTheme;
 ````
 
+You can visit the [docs](https://apexcharts.com/docs/) to read more about all the options listed above.
+
 #### Auto update series
 
 With the attribute `autoUpdateSeries` you can control if the chart component should
