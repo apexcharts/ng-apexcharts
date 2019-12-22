@@ -2,15 +2,23 @@
   <img src="https://apexcharts.com/media/ng-apexcharts.png" height="150" />
 </p>
 
-# ng-apexcharts
+<p align="center">
+  <a href="https://github.com/apexcharts/ng-apexcharts/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License"></a>
+  <a href="https://www.npmjs.com/package/ng-apexcharts"><img src="https://img.shields.io/npm/v/ng-apexcharts.svg" alt="ver"></a>
+</p>
 
-ng-apexcharts is a wrapper for [apexcharts](https://apexcharts.com/) for angular.
-It introduces one simple component that enables you to use apexcharts
-in an angular project.
+<p align="center">
+  <a href="https://twitter.com/intent/tweet?text=ng-ApexCharts%20A%20Angular%20Chart%20library%20built%20on%20ApexCharts.js&url=https://www.apexcharts.com&hashtags=javascript,charts,angular,apexcharts"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"> </a>
+</p>
+
+<p align="center">Angular wrapper for <a href="https://github.com/apexcharts/apexcharts.js">ApexCharts</a> to build interactive visualizations in Angular.</p>
+
+<p align="center"><a href="https://apexcharts.com/javascript-chart-demos/"><img src="https://apexcharts.com/media/apexcharts-banner.png"></a></p>
+
 
 For a demo checkout: <a href="https://ngapexcharts-demo.stackblitz.io/" target="_blank">Stackblitz example</a>
 
-## Installation
+## Download and Installation
 
 1. Install using npm:
 
@@ -106,6 +114,6 @@ and changing the template to this:
 
 Now you're able to call methods from your Component.
 
-## Author
+### Submitted by
 
-[Morris Janatzek](http://morrisj.net) ([morrisjdev](https://github.com/morrisjdev))
+Special thanks to [Morris Janatzek](http://morrisj.net) for contributing to ApexCharts project by creating this angular wrapper.
