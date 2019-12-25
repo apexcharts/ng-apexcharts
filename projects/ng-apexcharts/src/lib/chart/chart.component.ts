@@ -85,6 +85,12 @@ export class ChartComponent implements OnInit, OnChanges {
     });
   }
 
+  ngOnDestroy() {
+    if (this.chartObj) {
+      this.chartObj.destroy();
+    }
+  }
+
   private createElement() {
     const options: any = {};
 
