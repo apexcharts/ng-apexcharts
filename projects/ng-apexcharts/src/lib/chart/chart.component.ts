@@ -4,6 +4,7 @@ import {
   Input,
   OnChanges,
   OnInit,
+  OnDestroy,
   SimpleChanges,
   ViewChild
 } from "@angular/core";
@@ -37,7 +38,7 @@ import { default as ApexCharts } from "apexcharts";
   templateUrl: "./chart.component.html",
   styleUrls: ["./chart.component.css"]
 })
-export class ChartComponent implements OnInit, OnChanges {
+export class ChartComponent implements OnInit, OnChanges, OnDestroy {
   @Input() chart: ApexChart;
   @Input() annotations: ApexAnnotations;
   @Input() colors: any[];
