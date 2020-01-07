@@ -259,6 +259,10 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     this.chartObj.addText(options, pushToMemory, context);
   }
 
+  public setLocale(localeName?: string) {
+    this.chartObj.setLocale(localeName);
+  }
+
   public dataURI(): Promise<void> {
     return this.chartObj.dataURI();
   }

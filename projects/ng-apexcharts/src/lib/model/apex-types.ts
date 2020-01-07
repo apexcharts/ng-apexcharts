@@ -89,6 +89,7 @@ export interface ApexChart {
   locales?: ApexLocale[];
   defaultLocale?: string;
   parentHeightOffset?: number;
+  redrawOnParentResize?: boolean;
   sparkline?: {
     enabled?: boolean;
   };
@@ -207,7 +208,12 @@ export interface ApexTitleSubtitle {
  */
 export type ApexAxisChartSeries = {
   name: string;
-  data: number[] | { x: string; y: number }[];
+  type?: string;
+  data:
+    | number[]
+    | { x: any; y: any }[]
+    | [number, number][]
+    | [number, number[]][];
 }[];
 
 export type ApexNonAxisChartSeries = number[];
@@ -261,6 +267,7 @@ export interface XAxisAnnotations {
   strokeDashArray?: number;
   fillColor?: string;
   borderColor?: string;
+  borderWidth?: number;
   opacity?: number;
   offsetX?: number;
   offsetY?: number;
@@ -272,6 +279,7 @@ export interface YAxisAnnotations {
   strokeDashArray?: number;
   fillColor?: string;
   borderColor?: string;
+  borderWidth?: number;
   opacity?: number;
   offsetX?: number;
   offsetY?: number;
@@ -399,6 +407,7 @@ export interface ApexPlotOptions {
           fontFamily?: string;
           color?: string;
           offsetY?: number;
+          formatter?(val: string): string;
         };
         value?: {
           show?: boolean;
@@ -581,7 +590,17 @@ export interface ApexDataLabels {
   style?: {
     fontSize?: string;
     fontFamily?: string;
+    fontWeight?: string | number;
     colors?: string[];
+  };
+  background?: {
+    enabled?: boolean;
+    foreColor?: string;
+    borderRadius?: number;
+    padding?: number;
+    opacity?: number;
+    borderWidth?: number;
+    borderColor?: string;
   };
   dropShadow?: ApexDropShadow;
   formatter?(val: number, opts?: any): string;
@@ -779,6 +798,7 @@ export interface ApexYAxis {
   axisBorder?: {
     show?: boolean;
     color?: string;
+    width?: number;
     offsetX?: number;
     offsetY?: number;
   };
@@ -877,9 +897,10 @@ interface ApexDiscretePoint {
 export interface ApexMarkers {
   size?: number;
   colors?: string[];
-  strokeColor?: string | string[];
+  strokeColors?: string | string[];
   strokeWidth?: number | number[];
   strokeOpacity?: number | number[];
+  strokeDashArray?: number | number[];
   fillOpacity?: number | number[];
   discrete?: ApexDiscretePoint[];
   shape?: "circle" | "square" | string[];
