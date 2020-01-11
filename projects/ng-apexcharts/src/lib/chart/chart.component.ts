@@ -174,9 +174,9 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
 
   public updateOptions(
     options: any,
-    redrawPaths: boolean,
-    animate: boolean,
-    updateSyncedCharts: boolean
+    redrawPaths?: boolean,
+    animate?: boolean,
+    updateSyncedCharts?: boolean
   ): Promise<void> {
     return this.chartObj.updateOptions(
       options,
@@ -188,7 +188,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
 
   public updateSeries(
     newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
-    animate: boolean
+    animate?: boolean
   ) {
     this.chartObj.updateSeries(newSeries, animate);
   }
