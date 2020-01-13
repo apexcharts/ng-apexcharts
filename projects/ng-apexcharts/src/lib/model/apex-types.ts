@@ -38,13 +38,13 @@ export interface ApexOptions {
   theme?: ApexTheme;
 }
 
-type ApexDropShadow = {
+interface ApexDropShadow {
   enabled?: boolean;
   top?: number;
   left?: number;
   blur?: number;
   opacity?: number;
-};
+}
 
 /**
  * Main Chart options
@@ -94,7 +94,7 @@ export interface ApexChart {
     enabled?: boolean;
   };
   stacked?: boolean;
-  stackType?: "normal" | "100%";
+  stackType?: 'normal' | '100%';
   toolbar?: {
     show?: boolean;
     tools?: {
@@ -106,11 +106,11 @@ export interface ApexChart {
       pan?: boolean | string;
       reset?: boolean | string;
     };
-    autoSelected?: "zoom" | "selection" | "pan";
+    autoSelected?: 'zoom' | 'selection' | 'pan';
   };
   zoom?: {
     enabled?: boolean;
-    type?: "x" | "y" | "xy";
+    type?: 'x' | 'y' | 'xy';
     autoScaleYaxis?: boolean;
     zoomedArea?: {
       fill?: {
@@ -148,7 +148,7 @@ export interface ApexChart {
   };
   animations?: {
     enabled?: boolean;
-    easing?: "linear" | "easein" | "easeout" | "easeinout";
+    easing?: 'linear' | 'easein' | 'easeout' | 'easeinout';
     speed?: number;
     animateGradually?: {
       enabled?: boolean;
@@ -189,7 +189,7 @@ export interface ApexStates {
  */
 export interface ApexTitleSubtitle {
   text?: string;
-  align?: "left" | "center" | "right";
+  align?: 'left' | 'center' | 'right';
   margin?: number;
   offsetX?: number;
   offsetY?: number;
@@ -224,8 +224,8 @@ export type ApexNonAxisChartSeries = number[];
  */
 export interface ApexStroke {
   show?: boolean;
-  curve?: "smooth" | "straight" | "stepline";
-  lineCap?: "butt" | "square" | "round";
+  curve?: 'smooth' | 'straight' | 'stepline';
+  lineCap?: 'butt' | 'square' | 'round';
   colors?: string[];
   width?: number;
   dashArray?: number | number[];
@@ -335,7 +335,7 @@ export interface ApexLocale {
 export interface ApexPlotOptions {
   bar?: {
     horizontal?: boolean;
-    endingShape?: "flat" | "rounded";
+    endingShape?: 'flat' | 'rounded';
     columnWidth?: string;
     barHeight?: string;
     distributed?: boolean;
@@ -352,7 +352,7 @@ export interface ApexPlotOptions {
       maxItems?: number;
       hideOverflowingLabels?: boolean;
       position?: string;
-      orientation?: "horizontal" | "vertical";
+      orientation?: 'horizontal' | 'vertical';
     };
   };
   bubble?: {
@@ -456,7 +456,7 @@ export interface ApexPlotOptions {
       offsetX?: number;
       offsetY?: number;
       clipped?: boolean;
-      position?: "front" | "back";
+      position?: 'front' | 'back';
       dropShadow?: ApexDropShadow;
     };
     track?: {
@@ -534,16 +534,14 @@ export interface ApexLegend {
   showForZeroSeries?: boolean;
   floating?: boolean;
   inverseOrder?: boolean;
-  position?: "top" | "right" | "bottom" | "left";
-  horizontalAlign?: "left" | "center" | "right";
+  position?: 'top' | 'right' | 'bottom' | 'left';
+  horizontalAlign?: 'left' | 'center' | 'right';
   fontSize?: string;
   fontFamily?: string;
   width?: number;
   height?: number;
   offsetX?: number;
   offsetY?: number;
-  formatter?(legendName: string, opts?: any): string;
-  tooltipHoverFormatter?(legendName: string, opts?: any): string;
   textAnchor?: string;
   labels?: {
     color?: string | string[];
@@ -575,6 +573,8 @@ export interface ApexLegend {
   onItemHover?: {
     highlightDataSeries?: boolean;
   };
+  formatter?(legendName: string, opts?: any): string;
+  tooltipHoverFormatter?(legendName: string, opts?: any): string;
 }
 
 /**
@@ -584,7 +584,7 @@ export interface ApexLegend {
 export interface ApexDataLabels {
   enabled?: boolean;
   enabledOnSeries?: undefined | boolean;
-  textAnchor?: "start" | "middle" | "end";
+  textAnchor?: 'start' | 'middle' | 'end';
   offsetX?: number;
   offsetY?: number;
   style?: {
@@ -667,7 +667,7 @@ export interface ApexTooltip {
  * See https://apexcharts.com/docs/options/xaxis/
  */
 export interface ApexXAxis {
-  type?: "category" | "datetime" | "numeric";
+  type?: 'category' | 'datetime' | 'numeric';
   categories?: string[] | number[];
   labels?: {
     show?: boolean;
@@ -711,7 +711,7 @@ export interface ApexXAxis {
     offsetX?: number;
     offsetY?: number;
   };
-  tickAmount?: number | "dataPoints";
+  tickAmount?: number | 'dataPoints';
   min?: number;
   max?: number;
   range?: number;
@@ -754,11 +754,11 @@ export interface ApexXAxis {
   tooltip?: {
     enabled?: boolean;
     offsetY?: number;
-    formatter?(value: string, opts?: object): string;
     style?: {
       fontSize?: string;
       fontFamily?: string;
     };
+    formatter?(value: string, opts?: object): string;
   };
 }
 
@@ -785,7 +785,7 @@ export interface ApexYAxis {
     offsetX?: number;
     offsetY?: number;
     rotate?: number;
-    align?: "left" | "center" | "right";
+    align?: 'left' | 'center' | 'right';
     padding?: number;
     style?: {
       color?: string;
@@ -844,7 +844,7 @@ export interface ApexGrid {
   show?: boolean;
   borderColor?: string;
   strokeDashArray?: number;
-  position?: "front" | "back";
+  position?: 'front' | 'back';
   xaxis?: {
     lines?: {
       show?: boolean;
@@ -876,12 +876,12 @@ export interface ApexGrid {
 }
 
 export interface ApexTheme {
-  mode?: "light" | "dark";
+  mode?: 'light' | 'dark';
   palette?: string;
   monochrome?: {
     enabled?: boolean;
     color?: string;
-    shadeTo?: "light" | "dark";
+    shadeTo?: 'light' | 'dark';
     shadeIntensity?: number;
   };
 }
@@ -903,22 +903,22 @@ export interface ApexMarkers {
   strokeDashArray?: number | number[];
   fillOpacity?: number | number[];
   discrete?: ApexDiscretePoint[];
-  shape?: "circle" | "square" | string[];
+  shape?: 'circle' | 'square' | string[];
   radius?: number;
   offsetX?: number;
   offsetY?: number;
-  onClick?(e?: any): void;
-  onDblClick?(e?: any): void;
   hover?: {
     size?: number;
     sizeOffset?: number;
   };
+  onClick?(e?: any): void;
+  onDblClick?(e?: any): void;
 }
 
 export interface ApexNoData {
   text?: string;
-  align?: "left" | "right" | "center";
-  verticalAlign?: "top" | "middle" | "bottom";
+  align?: 'left' | 'right' | 'center';
+  verticalAlign?: 'top' | 'middle' | 'bottom';
   offsetX?: number;
   offsetY?: number;
   style?: {
@@ -929,16 +929,16 @@ export interface ApexNoData {
 }
 
 export type ChartType =
-  | "line"
-  | "area"
-  | "bar"
-  | "histogram"
-  | "pie"
-  | "donut"
-  | "radialBar"
-  | "scatter"
-  | "bubble"
-  | "heatmap"
-  | "candlestick"
-  | "radar"
-  | "rangeBar";
+  | 'line'
+  | 'area'
+  | 'bar'
+  | 'histogram'
+  | 'pie'
+  | 'donut'
+  | 'radialBar'
+  | 'scatter'
+  | 'bubble'
+  | 'heatmap'
+  | 'candlestick'
+  | 'radar'
+  | 'rangeBar';
