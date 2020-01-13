@@ -63,7 +63,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() autoUpdateSeries = true;
 
-  @ViewChild("chart") private chartElement: ElementRef;
+  @ViewChild("chart", {static: true}) private chartElement: ElementRef;
   private chartObj: any;
 
   ngOnInit() {
