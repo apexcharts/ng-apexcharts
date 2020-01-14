@@ -687,6 +687,7 @@ export interface ApexXAxis {
     offsetX?: number;
     offsetY?: number;
     format?: string;
+    datetimeUTC?: boolean;
     datetimeFormatter?: {
       year?: string;
       month?: string;
