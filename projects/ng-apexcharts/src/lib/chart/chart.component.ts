@@ -7,7 +7,7 @@ import {
   OnDestroy,
   SimpleChanges,
   ViewChild
-} from "@angular/core";
+} from '@angular/core';
 import {
   ApexAnnotations,
   ApexAxisChartSeries,
@@ -28,15 +28,15 @@ import {
   ApexTooltip,
   ApexXAxis,
   ApexYAxis
-} from "../model/apex-types";
-import { asapScheduler } from "rxjs";
+} from '../model/apex-types';
+import { asapScheduler } from 'rxjs';
 
-import { default as ApexCharts } from "apexcharts";
+import { default as ApexCharts } from 'apexcharts';
 
 @Component({
-  selector: "apx-chart",
-  templateUrl: "./chart.component.html",
-  styleUrls: ["./chart.component.css"]
+  selector: 'apx-chart',
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit, OnChanges, OnDestroy {
   @Input() chart: ApexChart;
@@ -63,7 +63,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() autoUpdateSeries = true;
 
-  @ViewChild("chart") private chartElement: ElementRef;
+  @ViewChild('chart', {static: true}) private chartElement: ElementRef;
   private chartObj: any;
 
   ngOnInit() {
@@ -76,7 +76,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     asapScheduler.schedule(() => {
       if (
         this.autoUpdateSeries &&
-        Object.keys(changes).filter(c => c !== "series").length === 0
+        Object.keys(changes).filter(c => c !== 'series').length === 0
       ) {
         this.updateSeries(this.series, true);
         return;

@@ -3,9 +3,9 @@
   "version": "1.1.4",
   "description": "An angular implementation of ApexCharts",
   "peerDependencies": {
-    "@angular/common": "^7.1.0",
-    "@angular/core": "^7.1.0",
-    "rxjs": "^6.3.0",
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0",
+    "rxjs": "^6.4.0",
     "apexcharts": "^3.11.2"
   },
   "keywords": [
