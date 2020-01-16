@@ -11,7 +11,7 @@ export class SeriesPipe implements PipeTransform {
         return {
           name: c.name,
           data: c.data
-        }
+        };
       });
     }
 

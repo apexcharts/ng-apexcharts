@@ -8,7 +8,7 @@ import {ChartComponent} from 'ng-apexcharts';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  @ViewChild('chart') chart: ChartComponent;
+  @ViewChild('chart', {static: true}) chart: ChartComponent;
 
   form: FormGroup;
 

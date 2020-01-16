@@ -38,13 +38,13 @@ export interface ApexOptions {
   theme?: ApexTheme;
 }
 
-type ApexDropShadow = {
+interface ApexDropShadow {
   enabled?: boolean;
   top?: number;
   left?: number;
   blur?: number;
   opacity?: number;
-};
+}
 
 /**
  * Main Chart options
@@ -548,8 +548,6 @@ export interface ApexLegend {
   height?: number;
   offsetX?: number;
   offsetY?: number;
-  formatter?(legendName: string, opts?: any): string;
-  tooltipHoverFormatter?(legendName: string, opts?: any): string;
   textAnchor?: string;
   labels?: {
     colors?: string | string[];
@@ -581,6 +579,8 @@ export interface ApexLegend {
   onItemHover?: {
     highlightDataSeries?: boolean;
   };
+  formatter?(legendName: string, opts?: any): string;
+  tooltipHoverFormatter?(legendName: string, opts?: any): string;
 }
 
 /**
@@ -762,11 +762,11 @@ export interface ApexXAxis {
   tooltip?: {
     enabled?: boolean;
     offsetY?: number;
-    formatter?(value: string, opts?: object): string;
     style?: {
       fontSize?: string;
       fontFamily?: string;
     };
+    formatter?(value: string, opts?: object): string;
   };
 }
 
@@ -915,12 +915,12 @@ export interface ApexMarkers {
   radius?: number;
   offsetX?: number;
   offsetY?: number;
-  onClick?(e?: any): void;
-  onDblClick?(e?: any): void;
   hover?: {
     size?: number;
     sizeOffset?: number;
   };
+  onClick?(e?: any): void;
+  onDblClick?(e?: any): void;
 }
 
 export interface ApexNoData {
