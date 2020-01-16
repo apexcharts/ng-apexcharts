@@ -86,6 +86,7 @@ export interface ApexChart {
     target?: string;
   };
   id?: string;
+  group?: string;
   locales?: ApexLocale[];
   defaultLocale?: string;
   parentHeightOffset?: number;
@@ -105,6 +106,11 @@ export interface ApexChart {
       zoomout?: boolean | string;
       pan?: boolean | string;
       reset?: boolean | string;
+      customIcons?: {
+        icon?: string;
+        title?: string;
+        index?: number;
+      }[];
     };
     autoSelected?: "zoom" | "selection" | "pan";
   };
@@ -207,7 +213,7 @@ export interface ApexTitleSubtitle {
  * See https://apexcharts.com/docs/options/series/
  */
 export type ApexAxisChartSeries = {
-  name: string;
+  name?: string;
   type?: string;
   data:
     | number[]
@@ -227,7 +233,7 @@ export interface ApexStroke {
   curve?: "smooth" | "straight" | "stepline";
   lineCap?: "butt" | "square" | "round";
   colors?: string[];
-  width?: number;
+  width?: number | number[];
   dashArray?: number | number[];
 }
 
@@ -451,11 +457,11 @@ export interface ApexPlotOptions {
       size?: string;
       background?: string;
       image?: string;
-      width?: number;
-      height?: number;
-      offsetX?: number;
-      offsetY?: number;
-      clipped?: boolean;
+      imageWidth?: number;
+      imageHeight?: number;
+      imageOffsetX?: number;
+      imageOffsetY?: number;
+      imageClipped?: boolean;
       position?: "front" | "back";
       dropShadow?: ApexDropShadow;
     };
@@ -499,7 +505,7 @@ export interface ApexPlotOptions {
 export interface ApexFill {
   colors?: string[];
   opacity?: number | number[];
-  type?: string;
+  type?: string | string[];
   gradient?: {
     shade?: string;
     type?: string;
@@ -511,12 +517,12 @@ export interface ApexFill {
     stops?: number[];
   };
   image?: {
-    src?: string[];
+    src?: string | string[];
     width?: number;
     height?: number;
   };
   pattern?: {
-    style?: string;
+    style?: string | string[];
     width?: number;
     height?: number;
     strokeWidth?: number;
@@ -546,7 +552,7 @@ export interface ApexLegend {
   tooltipHoverFormatter?(legendName: string, opts?: any): string;
   textAnchor?: string;
   labels?: {
-    color?: string | string[];
+    colors?: string | string[];
     useSeriesColors?: boolean;
   };
   markers?: {
@@ -558,7 +564,7 @@ export interface ApexLegend {
     offsetX?: number;
     offsetY?: number;
     radius?: number;
-    customHTML?(): string;
+    customHTML?(): any;
     onClick?(): void;
   };
   itemMargin?: {
@@ -583,7 +589,7 @@ export interface ApexLegend {
  */
 export interface ApexDataLabels {
   enabled?: boolean;
-  enabledOnSeries?: undefined | boolean;
+  enabledOnSeries?: undefined | number[];
   textAnchor?: "start" | "middle" | "end";
   offsetX?: number;
   offsetY?: number;
@@ -611,6 +617,12 @@ export interface ApexResponsive {
   options?: any;
 }
 
+type ApexTooltipY = {
+  title?: {
+    formatter?(seriesName: string): string;
+  };
+  formatter?(val: number, opts?: any): string;
+};
 /**
  * Chart Tooltip options
  * See https://apexcharts.com/docs/options/tooltip/
@@ -637,12 +649,7 @@ export interface ApexTooltip {
     format?: string;
     formatter?(val: number): string;
   };
-  y?: {
-    title?: {
-      formatter?(seriesName: string): string;
-    };
-    formatter?(val: number, opts?: any): string;
-  };
+  y?: ApexTooltipY | ApexTooltipY[];
   z?: {
     title?: string;
     formatter?(val: number): string;
@@ -896,7 +903,7 @@ interface ApexDiscretePoint {
 }
 
 export interface ApexMarkers {
-  size?: number;
+  size?: number | number[];
   colors?: string[];
   strokeColors?: string | string[];
   strokeWidth?: number | number[];
