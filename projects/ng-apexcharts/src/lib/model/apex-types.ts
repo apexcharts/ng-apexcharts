@@ -60,7 +60,7 @@ export interface ApexChart {
   offsetX?: number;
   offsetY?: number;
   dropShadow?: ApexDropShadow & {
-    enabledOnSeries?: number[];
+    enabledOnSeries?: undefined | number[];
     color?: string | string[];
   };
   events?: {
@@ -199,7 +199,7 @@ export interface ApexTitleSubtitle {
   margin?: number;
   offsetX?: number;
   offsetY?: number;
-  floating?: number;
+  floating?: boolean;
   style?: {
     fontSize?: string;
     fontFamily?: string;
@@ -217,7 +217,7 @@ export type ApexAxisChartSeries = {
   type?: string;
   data:
     | number[]
-    | { x: any; y: any }[]
+    | { x: any; y: any; fillColor?: string; strokeColor?: string }[]
     | [number, number][]
     | [number, number[]][];
 }[];
@@ -268,8 +268,8 @@ export interface AnnotationStyle {
   };
 }
 export interface XAxisAnnotations {
-  x?: number | string;
-  x2?: null | number;
+  x?: null | number | string;
+  x2?: null | number | string;
   strokeDashArray?: number;
   fillColor?: string;
   borderColor?: string;
@@ -280,8 +280,8 @@ export interface XAxisAnnotations {
   label?: AnnotationLabel;
 }
 export interface YAxisAnnotations {
-  y?: null | number;
-  y2?: null | number;
+  y?: null | number | string;
+  y2?: null | number | string;
   strokeDashArray?: number;
   fillColor?: string;
   borderColor?: string;
@@ -629,7 +629,7 @@ type ApexTooltipY = {
  */
 export interface ApexTooltip {
   enabled?: boolean;
-  enabledOnSeries?: undefined | boolean;
+  enabledOnSeries?: undefined | number[];
   shared?: boolean;
   followCursor?: boolean;
   intersect?: boolean;
@@ -647,7 +647,7 @@ export interface ApexTooltip {
   x?: {
     show?: boolean;
     format?: string;
-    formatter?(val: number): string;
+    formatter?(val: number, opts?: any): string;
   };
   y?: ApexTooltipY | ApexTooltipY[];
   z?: {
@@ -675,7 +675,7 @@ export interface ApexTooltip {
  */
 export interface ApexXAxis {
   type?: "category" | "datetime" | "numeric";
-  categories?: string[] | number[];
+  categories?: any;
   labels?: {
     show?: boolean;
     rotate?: number;
@@ -719,6 +719,7 @@ export interface ApexXAxis {
     offsetX?: number;
     offsetY?: number;
   };
+  tickPlacement?: string;
   tickAmount?: number | "dataPoints";
   min?: number;
   max?: number;
@@ -779,6 +780,7 @@ export interface ApexYAxis {
   showAlways?: boolean;
   seriesName?: string;
   opposite?: boolean;
+  reversed?: boolean;
   logarithmic?: boolean;
   tickAmount?: number;
   forceNiceScale?: boolean;
