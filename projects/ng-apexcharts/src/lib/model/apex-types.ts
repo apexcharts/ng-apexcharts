@@ -393,7 +393,6 @@ export interface ApexPlotOptions {
     };
   };
   pie?: {
-    size?: number;
     customScale?: number;
     offsetX?: number;
     offsetY?: number;
@@ -446,7 +445,6 @@ export interface ApexPlotOptions {
     };
   };
   radialBar?: {
-    size?: number;
     inverseOrder?: boolean;
     startAngle?: number;
     endAngle?: number;
