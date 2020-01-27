@@ -13,9 +13,11 @@
 
 <p align="center">Angular wrapper for <a href="https://github.com/apexcharts/apexcharts.js">ApexCharts</a> to build interactive visualizations in Angular.</p>
 
-<p align="center"><a href="https://apexcharts.com/javascript-chart-demos/"><img src="https://apexcharts.com/media/apexcharts-banner.png"></a></p>
+<p align="center"><a href="https://apexcharts.com/angular-chart-demos/"><img src="https://apexcharts.com/media/apexcharts-banner.png"></a></p>
 
-For a demo checkout: <a href="https://ngapexcharts-demo.stackblitz.io/" target="_blank">Stackblitz example</a>
+## Examples
+
+More than 80+ examples of all the chart types with sample codes can be found on the <a href="https://apexcharts.com/angular-chart-demos/">Angular Demos</a> page of the website. Here's a basic <a href="https://codesandbox.io/s/apx-line-basic-o2mwb">line chart</a> example built in codesandbox.
 
 ## Download and Installation
 
@@ -60,7 +62,7 @@ You can also use any other attribute from the following options.
 
 ### Options
 
-All options of the chart can inserted using the attributes.
+All options of the chart can be inserted using the attributes.
 This is a list of all available attributes:
 
 ```ts
@@ -87,21 +89,26 @@ This is a list of all available attributes:
 
 You can visit the [docs](https://apexcharts.com/docs/) to read more about all the options listed above.
 
-#### Auto update series
+### Updating the chart
 
-With the attribute `autoUpdateSeries` you can control if the chart component should
-call the `updateSeries` function automatically if the series attribute is changed.
-Set this attribute to false if you are using and changing the type property in your
-series for a mixed chart. This only has the effect that the whole chart rerenders
-even if only the series changes.
+Changing the attributes will automatically call the relevant update methods of ApexCharts and re-render it.
 
-### Use methods
+### Calling core ApexCharts methods
 
-For a basic usage of the charts you dont need to use the methods of the chart.
+You don't actually need to call updateSeries() or updateOptions() manually. Changing the props will automatically update the chart. But, in certain cases you may need to call these methods, so here's the reference.
 
-But if you want to toggle a series for example you need to call them. All methods
-are proxied through the component so that you dont need to access the DOM by
-yourself.
+| Method                                                                                   | Description                                                                                        |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| <a href="https://apexcharts.com/docs/methods/#updateSeries">updateSeries</a>             | Allows you to update the series array overriding the existing one                                  |
+| <a href="https://apexcharts.com/docs/methods/#updateOptions">updateOptions</a>           | Allows you to update the configuration object                                                      |
+| <a href="https://apexcharts.com/docs/methods/#toggleSeries">toggleSeries</a>             | Allows you to toggle the visibility of series programatically. Useful when you have custom legend. |
+| <a href="https://apexcharts.com/docs/methods/#appendData">appendData</a>                 | Allows you to append new data to the series array.                                                 |
+| <a href="https://apexcharts.com/docs/methods/#addtext">addText</a>                       | The addText() method can be used to draw text after chart is rendered.                             |
+| <a href="https://apexcharts.com/docs/methods/#addxaxisannotation">addXaxisAnnotation</a> | Draw x-axis annotations after chart is rendered.                                                   |
+| <a href="https://apexcharts.com/docs/methods/#addyaxisannotation">addYaxisAnnotation</a> | Draw y-axis annotations after chart is rendered.                                                   |
+| <a href="https://apexcharts.com/docs/methods/#addpointannotation">addPointAnnotation</a> | Draw point (xy) annotations after chart is rendered.                                               |
+
+All the methods are proxied through the component so that you dont need to access the DOM by yourself.
 
 Just reference the component as a ViewChild in your Component by using:
 
@@ -116,6 +123,44 @@ and changing the template to this:
 ```
 
 Now you're able to call methods from your Component.
+
+```javascript
+this.chart.toggleSeries("series-1");
+```
+
+## How to call the methods of ApexCharts without referencing the chart component?
+
+Sometimes, you may want to call methods of the core ApexCharts library from some other place, and you can do so on `this.$apexcharts` global variable directly. You need to target the chart by <code>chart.id</code> while calling this method
+
+Example
+
+```js
+window.ApexCharts.exec("ng-chart-example", "updateSeries", [
+  {
+    data: [40, 55, 65, 11, 23, 44, 54, 33]
+  }
+]);
+```
+
+In the above method, `ng-chart-example` is the ID of chart, `updateSeries` is the name of the method you want to call and the third parameter is the new Series you want to update.
+
+More info on the `.exec()` method can be found <a href="https://apexcharts.com/docs/methods/#exec">here</a>
+
+All other methods of ApexCharts can be called the same way.
+
+#### Turning off auto update of the series
+
+With the attribute `autoUpdateSeries` you can control if the chart component should call the `updateSeries` function automatically if the series attribute is changed. It is set to true by default, but in a mixed/combo chart, set this attribute to false if you are using and changing the type property in your series. This only has the effect that the whole chart rerenders even if only the series changes.
+
+## Supporting ApexCharts
+
+ApexCharts is an open source project. <br /> You can help by becoming a sponsor on <a href="https://patreon.com/junedchhipa">Patreon</a> or doing a one time donation on <a href="https://paypal.me/junedchhipa">PayPal</a> <br />
+
+<a href="https://patreon.com/junedchhipa"><img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" /> </a>
+
+## License
+
+ng-ApexCharts is released under MIT license. You are free to use, modify and distribute this software, as long as the copyright header is left intact.
 
 ### Submitted by
 
