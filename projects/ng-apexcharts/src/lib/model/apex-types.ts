@@ -425,6 +425,8 @@ export interface ApexPlotOptions {
         total?: {
           show?: boolean;
           showAlways?: boolean;
+          fontFamily?: string;
+          fontSize?: string;
           label?: string;
           color?: string;
           formatter?(w: any): string;
@@ -493,6 +495,8 @@ export interface ApexPlotOptions {
       total?: {
         show?: boolean;
         label?: string;
+        fontFamily?: string;
+        fontSize?: string;
         color?: string;
         formatter?(opts: any): string;
       };
