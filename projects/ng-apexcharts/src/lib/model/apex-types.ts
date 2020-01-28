@@ -203,6 +203,7 @@ export interface ApexTitleSubtitle {
   style?: {
     fontSize?: string;
     fontFamily?: string;
+    fontWeight?: string | number;
     color?: string;
   };
 }
