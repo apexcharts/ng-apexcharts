@@ -217,10 +217,10 @@ export type ApexAxisChartSeries = {
   name?: string;
   type?: string;
   data:
-    | number[]
+    | (number | null)[]
     | { x: any; y: any; fillColor?: string; strokeColor?: string }[]
-    | [number, number][]
-    | [number, number[]][];
+    | [number, (number | null)][]
+    | [number, (number | null)[]][];
 }[];
 
 export type ApexNonAxisChartSeries = number[];
