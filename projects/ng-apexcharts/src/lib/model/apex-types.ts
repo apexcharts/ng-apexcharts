@@ -219,7 +219,7 @@ export type ApexAxisChartSeries = {
   data:
     | (number | null)[]
     | { x: any; y: any; fillColor?: string; strokeColor?: string }[]
-    | [number, (number | null)][]
+    | [number, number | null][]
     | [number, (number | null)[]][];
 }[];
 
@@ -260,6 +260,7 @@ export interface AnnotationStyle {
   color?: string;
   fontSize?: string;
   fontFamily?: string;
+  fontWeight?: string | number;
   cssClass?: string;
   padding?: {
     left?: number;
@@ -310,6 +311,13 @@ export interface PointAnnotations {
     cssClass?: string;
   };
   label?: AnnotationLabel;
+  image?: {
+    path?: string;
+    width?: number;
+    height?: number;
+    offsetX?: number;
+    offsetY?: number;
+  };
 }
 
 /**
@@ -411,6 +419,7 @@ export interface ApexPlotOptions {
           show?: boolean;
           fontSize?: string;
           fontFamily?: string;
+          fontWeight?: string | number;
           color?: string;
           offsetY?: number;
           formatter?(val: string): string;
@@ -419,6 +428,7 @@ export interface ApexPlotOptions {
           show?: boolean;
           fontSize?: string;
           fontFamily?: string;
+          fontWeight?: string | number;
           color?: string;
           offsetY?: number;
           formatter?(val: string): string;
@@ -428,6 +438,7 @@ export interface ApexPlotOptions {
           showAlways?: boolean;
           fontFamily?: string;
           fontSize?: string;
+          fontWeight?: string | number;
           label?: string;
           color?: string;
           formatter?(w: any): string;
@@ -482,6 +493,7 @@ export interface ApexPlotOptions {
         show?: boolean;
         fontSize?: string;
         fontFamily?: string;
+        fontWeight?: string | number;
         color?: string;
         offsetY?: number;
       };
@@ -489,6 +501,7 @@ export interface ApexPlotOptions {
         show?: boolean;
         fontSize?: string;
         fontFamily?: string;
+        fontWeight?: string | number;
         color?: string;
         offsetY?: number;
         formatter?(val: number): string;
@@ -498,6 +511,7 @@ export interface ApexPlotOptions {
         label?: string;
         fontFamily?: string;
         fontSize?: string;
+        fontWeight?: string | number;
         color?: string;
         formatter?(opts: any): string;
       };
@@ -547,6 +561,7 @@ export interface ApexLegend {
   horizontalAlign?: "left" | "center" | "right";
   fontSize?: string;
   fontFamily?: string;
+  fontWeight?: string | number;
   width?: number;
   height?: number;
   offsetX?: number;
@@ -691,6 +706,7 @@ export interface ApexXAxis {
     style?: {
       colors?: string | string[];
       fontSize?: string;
+      fontWeight?: string | number;
       fontFamily?: string;
       cssClass?: string;
     };
@@ -705,7 +721,7 @@ export interface ApexXAxis {
       hour?: string;
       minute?: string;
     };
-    formatter?(value: string, timestamp?: number): string;
+    formatter?(value: string, timestamp?: number): string | string[];
   };
   axisBorder?: {
     show?: boolean;
@@ -736,6 +752,7 @@ export interface ApexXAxis {
     style?: {
       color?: string;
       fontFamily?: string;
+      fontWeight?: string | number;
       fontSize?: string;
       cssClass?: string;
     };
@@ -801,9 +818,10 @@ export interface ApexYAxis {
     align?: "left" | "center" | "right";
     padding?: number;
     style?: {
-      color?: string;
+      colors?: string;
       fontSize?: string;
       fontFamily?: string;
+      fontWeight?: string | number;
       cssClass?: string;
     };
     formatter?(val: number, opts?: any): string;
@@ -831,6 +849,7 @@ export interface ApexYAxis {
       color?: string;
       fontSize?: string;
       fontFamily?: string;
+      fontWeight?: string | number;
       cssClass?: string;
     };
   };
