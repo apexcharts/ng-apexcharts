@@ -397,6 +397,7 @@ export interface ApexPlotOptions {
         from?: number;
         to?: number;
         color?: string;
+        foreColor?: string;
         name?: string;
       }[];
       inverse?: boolean;
