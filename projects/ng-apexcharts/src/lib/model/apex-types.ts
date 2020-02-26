@@ -246,6 +246,8 @@ export interface ApexAnnotations {
   yaxis?: YAxisAnnotations[];
   xaxis?: XAxisAnnotations[];
   points?: PointAnnotations[];
+  rects?: RectAnnotations[];
+  texts?: TextAnnotations[];
 }
 export interface AnnotationLabel {
   borderColor?: string;
@@ -321,6 +323,38 @@ export interface PointAnnotations {
     offsetX?: number;
     offsetY?: number;
   };
+}
+
+export interface RectAnnotations {
+  x?: number;
+  y?: number;
+  rotate?: number;
+  width?: number | string;
+  height?: number;
+  backgroundColor?: string;
+  opacity?: number;
+  borderWidth?: number;
+  borderRadius?: number;
+  borderColor?: string;
+}
+
+export interface TextAnnotations {
+  x?: number;
+  y?: number;
+  text?: string;
+  textAnchor?: string;
+  foreColor?: string;
+  fontSize?: string | number;
+  fontFamily?: undefined | string;
+  fontWeight?: string | number;
+  backgroundColor?: string;
+  borderColor?: string;
+  borderRadius?: number;
+  borderWidth?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+  paddingTop?: number;
+  paddingBottom?: number;
 }
 
 /**
@@ -944,6 +978,7 @@ export interface ApexMarkers {
   radius?: number;
   offsetX?: number;
   offsetY?: number;
+  showNullDataPoints?: boolean;
   hover?: {
     size?: number;
     sizeOffset?: number;
