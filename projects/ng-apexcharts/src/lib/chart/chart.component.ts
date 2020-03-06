@@ -29,7 +29,7 @@ import {
   ApexXAxis,
   ApexYAxis
 } from "../model/apex-types";
-import { asapScheduler } from "rxjs";
+import { asapScheduler, BehaviorSubject } from "rxjs";
 
 import { default as ApexCharts } from "apexcharts";
 
@@ -60,6 +60,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
   @Input() title: ApexTitleSubtitle;
   @Input() subtitle: ApexTitleSubtitle;
   @Input() theme: ApexTheme;
+  public created: BehaviorSubject <boolean> = new BehaviorSubject(true);
 
   @Input() autoUpdateSeries = true;
 
@@ -164,7 +165,8 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     this.chartObj = new ApexCharts(this.chartElement.nativeElement, options);
-
+    this.created.next(true);
+    
     this.render();
   }
 
