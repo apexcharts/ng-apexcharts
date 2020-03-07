@@ -246,8 +246,9 @@ export interface ApexAnnotations {
   yaxis?: YAxisAnnotations[];
   xaxis?: XAxisAnnotations[];
   points?: PointAnnotations[];
-  rects?: RectAnnotations[];
+  shapes?: ShapeAnnotations[];
   texts?: TextAnnotations[];
+  images?: ImageAnnotations[];
 }
 export interface AnnotationLabel {
   borderColor?: string;
@@ -325,10 +326,10 @@ export interface PointAnnotations {
   };
 }
 
-export interface RectAnnotations {
+export interface ShapeAnnotations {
   x?: number;
   y?: number;
-  rotate?: number;
+  type?: string;
   width?: number | string;
   height?: number;
   backgroundColor?: string;
@@ -336,6 +337,14 @@ export interface RectAnnotations {
   borderWidth?: number;
   borderRadius?: number;
   borderColor?: string;
+}
+
+export interface ImageAnnotations {
+  path?: string;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
 }
 
 export interface TextAnnotations {

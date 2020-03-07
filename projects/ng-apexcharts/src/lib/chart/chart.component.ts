@@ -223,6 +223,18 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     this.chartObj.toggleDataPointSelection(seriesIndex, dataPointIndex);
   }
 
+  public destroy() {
+    this.chartObj.destroy();
+  }
+
+  public setLocale(localeName?: string) {
+    this.chartObj.setLocale(localeName);
+  }
+
+  public paper() {
+    this.chartObj.paper();
+  }
+
   public addXaxisAnnotation(
     options: any,
     pushToMemory?: boolean,
@@ -255,31 +267,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     this.chartObj.clearAnnotations(options);
   }
 
-  public addText(options: any, pushToMemory?: boolean, context?: any) {
-    this.chartObj.addText(options, pushToMemory, context);
-  }
-
-  public addRect(options: any, pushToMemory?: boolean, context?: any) {
-    this.chartObj.addRect(options, pushToMemory, context);
-  }
-
-  public addImage(options: any, pushToMemory?: boolean, context?: any) {
-    this.chartObj.addImage(options, pushToMemory, context);
-  }
-
-  public setLocale(localeName?: string) {
-    this.chartObj.setLocale(localeName);
-  }
-
   public dataURI(): Promise<void> {
     return this.chartObj.dataURI();
-  }
-
-  public paper() {
-    this.chartObj.paper();
-  }
-
-  public destroy() {
-    this.chartObj.destroy();
   }
 }
