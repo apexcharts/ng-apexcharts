@@ -332,6 +332,7 @@ export interface ShapeAnnotations {
   type?: string;
   width?: number | string;
   height?: number;
+  appendTo?: string;
   backgroundColor?: string;
   opacity?: number;
   borderWidth?: number;
@@ -345,6 +346,7 @@ export interface ImageAnnotations {
   y?: number;
   width?: number;
   height?: number;
+  appendTo?: string;
 }
 
 export interface TextAnnotations {
@@ -356,6 +358,7 @@ export interface TextAnnotations {
   fontSize?: string | number;
   fontFamily?: undefined | string;
   fontWeight?: string | number;
+  appendTo?: string;
   backgroundColor?: string;
   borderColor?: string;
   borderRadius?: number;
