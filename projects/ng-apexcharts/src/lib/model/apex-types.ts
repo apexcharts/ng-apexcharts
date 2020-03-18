@@ -396,6 +396,7 @@ export interface ApexLocale {
 export interface ApexPlotOptions {
   bar?: {
     horizontal?: boolean;
+    startingShape?: "flat" | "rounded";
     endingShape?: "flat" | "rounded";
     columnWidth?: string;
     barHeight?: string;
@@ -408,6 +409,7 @@ export interface ApexPlotOptions {
       }[];
       backgroundBarColors?: string[];
       backgroundBarOpacity?: number;
+      backgroundBarRadius?: number;
     };
     dataLabels?: {
       maxItems?: number;
@@ -435,6 +437,7 @@ export interface ApexPlotOptions {
     shadeIntensity?: number;
     reverseNegativeShade?: boolean;
     distributed?: boolean;
+    useFillColorAsStroke?: boolean;
     colorScale?: {
       ranges?: {
         from?: number;
@@ -656,6 +659,7 @@ export interface ApexDataLabels {
   enabled?: boolean;
   enabledOnSeries?: undefined | number[];
   textAnchor?: "start" | "middle" | "end";
+  distributed?: boolean;
   offsetX?: number;
   offsetY?: number;
   style?: {
@@ -846,6 +850,7 @@ export interface ApexXAxis {
 export interface ApexYAxis {
   show?: boolean;
   showAlways?: boolean;
+  showForNullSeries?: boolean;
   seriesName?: string;
   opposite?: boolean;
   reversed?: boolean;
