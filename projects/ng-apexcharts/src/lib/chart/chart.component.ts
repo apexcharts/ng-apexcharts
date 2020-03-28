@@ -216,6 +216,10 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     this.chartObj.resetSeries();
   }
 
+  public zoomX(min: number, max: number) {
+    this.chartObj.zoomX(min, max);
+  }
+
   public toggleDataPointSelection(
     seriesIndex: number,
     dataPointIndex?: number
