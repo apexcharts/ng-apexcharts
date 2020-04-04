@@ -499,12 +499,19 @@ export interface ApexPlotOptions {
       };
     };
   };
+  polarArea?: {
+    rings?: {
+      strokeWidth?: number;
+      strokeColor?: string;
+    };
+  };
   radar?: {
     size?: number;
     offsetX?: number;
     offsetY?: number;
     polygons?: {
-      strokeColor?: string;
+      strokeColors?: string | string[];
+      strokeWidth?: string | string[];
       connectorColors?: string | string[];
       fill?: {
         colors?: string[];
@@ -1033,4 +1040,5 @@ export type ChartType =
   | "heatmap"
   | "candlestick"
   | "radar"
+  | "polarArea"
   | "rangeBar";
