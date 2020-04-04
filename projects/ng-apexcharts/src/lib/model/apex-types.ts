@@ -404,6 +404,7 @@ export interface ApexPlotOptions {
     columnWidth?: string;
     barHeight?: string;
     distributed?: boolean;
+    rangeBarOverlap?: boolean;
     colors?: {
       ranges?: {
         from?: number;
