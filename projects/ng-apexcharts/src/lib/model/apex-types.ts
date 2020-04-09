@@ -234,7 +234,11 @@ export type ApexNonAxisChartSeries = number[];
  */
 export interface ApexStroke {
   show?: boolean;
-  curve?: "smooth" | "straight" | "stepline";
+  curve?:
+    | "smooth"
+    | "straight"
+    | "stepline"
+    | ("smooth" | "straight" | "stepline")[];
   lineCap?: "butt" | "square" | "round";
   colors?: string[];
   width?: number | number[];
