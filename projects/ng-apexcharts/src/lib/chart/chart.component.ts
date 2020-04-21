@@ -200,6 +200,10 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     this.chartObj.appendSeries(newSeries, animate);
   }
 
+  public appendData(newData: any[]) {
+    this.chartObj.appendData(newData);
+  }
+
   public toggleSeries(seriesName: string): any {
     return this.chartObj.toggleSeries(seriesName);
   }
