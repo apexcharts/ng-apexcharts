@@ -257,6 +257,7 @@ export interface ApexAnnotations {
 export interface AnnotationLabel {
   borderColor?: string;
   borderWidth?: number;
+  borderRadius?: number;
   text?: string;
   textAnchor?: string;
   offsetX?: number;
