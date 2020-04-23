@@ -36,8 +36,11 @@ npm install apexcharts ng-apexcharts --save
 ```
 
 3. Add ng-apexcharts-module to imports
-
 ```ts
+import { NgApexchartsModule } from "ng-apexcharts";
+
+...
+
 imports: [
   BrowserModule,
   FormsModule,
