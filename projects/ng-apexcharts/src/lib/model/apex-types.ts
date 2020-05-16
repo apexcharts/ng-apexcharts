@@ -463,6 +463,7 @@ export interface ApexPlotOptions {
     };
   };
   pie?: {
+    startAngle?: number;
     customScale?: number;
     offsetX?: number;
     offsetY?: number;
