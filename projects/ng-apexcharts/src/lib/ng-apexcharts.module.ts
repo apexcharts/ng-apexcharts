@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ChartComponent } from "./chart/chart.component";
-import { default as ApexCharts } from "apexcharts";
+import ApexCharts from "apexcharts/dist/apexcharts.esm.js";
 
 declare global {
   interface Window {
