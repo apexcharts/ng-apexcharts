@@ -31,7 +31,7 @@ import {
 } from "../model/apex-types";
 import { asapScheduler } from "rxjs";
 
-import { default as ApexCharts } from "apexcharts";
+import ApexCharts from "apexcharts/dist/apexcharts.esm.js";
 
 @Component({
   selector: "apx-chart",
