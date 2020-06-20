@@ -123,6 +123,7 @@ export interface ApexChart {
         columnDelimiter?: string;
         headerCategory?: string;
         headerValue?: string;
+        dateFormatter?(timestamp?: number): any;
       };
     };
     autoSelected?: "zoom" | "selection" | "pan";
@@ -412,6 +413,9 @@ export interface ApexLocale {
  * See https://apexcharts.com/docs/options/plotoptions/bar/
  */
 export interface ApexPlotOptions {
+  area?: {
+    fillTo?: "origin" | "end";
+  };
   bar?: {
     horizontal?: boolean;
     startingShape?: "flat" | "rounded";
