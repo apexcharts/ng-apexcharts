@@ -17,7 +17,7 @@
 export interface ApexOptions {
   annotations?: ApexAnnotations;
   chart?: ApexChart;
-  colors?: string[];
+  colors?: any[];
   dataLabels?: ApexDataLabels;
   series?: ApexAxisChartSeries | ApexNonAxisChartSeries;
   stroke?: ApexStroke;
@@ -601,7 +601,7 @@ export interface ApexPlotOptions {
 }
 
 export interface ApexFill {
-  colors?: string[];
+  colors?: any[];
   opacity?: number | number[];
   type?: string | string[];
   gradient?: {
