@@ -261,7 +261,6 @@ export interface ApexAnnotations {
   yaxis?: YAxisAnnotations[];
   xaxis?: XAxisAnnotations[];
   points?: PointAnnotations[];
-  shapes?: ShapeAnnotations[];
   texts?: TextAnnotations[];
   images?: ImageAnnotations[];
 }
@@ -340,20 +339,6 @@ export interface PointAnnotations {
     offsetX?: number;
     offsetY?: number;
   };
-}
-
-export interface ShapeAnnotations {
-  x?: number;
-  y?: number;
-  type?: string;
-  width?: number | string;
-  height?: number;
-  appendTo?: string;
-  backgroundColor?: string;
-  opacity?: number;
-  borderWidth?: number;
-  borderRadius?: number;
-  borderColor?: string;
 }
 
 export interface ImageAnnotations {
@@ -710,7 +695,7 @@ export interface ApexDataLabels {
     dropShadow?: ApexDropShadow;
   };
   dropShadow?: ApexDropShadow;
-  formatter?(val: number, opts?: any): string;
+  formatter?(val: number, opts?: any): string | number;
 }
 
 export interface ApexResponsive {
