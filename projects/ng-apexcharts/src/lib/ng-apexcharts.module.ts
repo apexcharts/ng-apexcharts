@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ChartComponent } from "./chart/chart.component";
-import ApexCharts from "apexcharts/dist/apexcharts.min.js";
+import ApexCharts from "apexcharts";
 
 declare global {
   interface Window {
