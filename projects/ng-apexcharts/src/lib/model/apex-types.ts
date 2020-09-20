@@ -1067,4 +1067,5 @@ export type ChartType =
   | "candlestick"
   | "radar"
   | "polarArea"
-  | "rangeBar";
+  | "rangeBar"
+  | "treemap";
