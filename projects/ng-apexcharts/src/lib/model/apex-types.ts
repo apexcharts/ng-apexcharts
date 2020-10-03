@@ -78,6 +78,7 @@ export interface ApexChart {
     dataPointMouseEnter?(e: any, chart?: any, options?: any): void;
     dataPointMouseLeave?(e: any, chart?: any, options?: any): void;
     beforeZoom?(chart: any, options?: any): void;
+    beforeResetZoom?(chart: any, options?: any): void;
     zoomed?(chart: any, options?: any): void;
     scrolled?(chart: any, options?: any): void;
     brushScrolled?(chart: any, options?: any): void;
@@ -465,6 +466,7 @@ export interface ApexPlotOptions {
     enableShades?: boolean;
     shadeIntensity?: number;
     distributed?: boolean;
+    reverseNegativeShade?: boolean;
     useFillColorAsStroke?: boolean;
     colorScale?: {
       inverse?: boolean;
@@ -812,7 +814,11 @@ export interface ApexXAxis {
       hour?: string;
       minute?: string;
     };
-    formatter?(value: string, timestamp?: number): string | string[];
+    formatter?(
+      value: string,
+      timestamp?: number,
+      opts?: any
+    ): string | string[];
   };
   axisBorder?: {
     show?: boolean;
