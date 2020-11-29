@@ -94,6 +94,7 @@ export interface ApexChart {
   defaultLocale?: string;
   parentHeightOffset?: number;
   redrawOnParentResize?: boolean;
+  redrawOnWindowResize?: boolean | Function;
   sparkline?: {
     enabled?: boolean;
   };
@@ -126,6 +127,12 @@ export interface ApexChart {
         headerCategory?: string;
         headerValue?: string;
         dateFormatter?(timestamp?: number): any;
+      };
+      svg?: {
+        filename?: undefined | string;
+      };
+      png?: {
+        filename?: undefined | string;
       };
     };
     autoSelected?: "zoom" | "selection" | "pan";
@@ -315,6 +322,7 @@ export interface YAxisAnnotations {
   opacity?: number;
   offsetX?: number;
   offsetY?: number;
+  width?: number | string;
   yAxisIndex?: number;
   label?: AnnotationLabel;
 }
@@ -484,6 +492,7 @@ export interface ApexPlotOptions {
   };
   pie?: {
     startAngle?: number;
+    endAngle?: number;
     customScale?: number;
     offsetX?: number;
     offsetY?: number;
