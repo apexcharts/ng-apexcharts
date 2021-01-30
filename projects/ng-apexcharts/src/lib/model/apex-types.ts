@@ -416,6 +416,8 @@ export interface ApexPlotOptions {
     horizontal?: boolean;
     startingShape?: "flat" | "rounded";
     endingShape?: "flat" | "rounded";
+    borderRadius?: number;
+    radiusOnLastStackedBar?: boolean;
     columnWidth?: string;
     barHeight?: string;
     distributed?: boolean;
@@ -541,6 +543,10 @@ export interface ApexPlotOptions {
     rings?: {
       strokeWidth?: number;
       strokeColor?: string;
+    };
+    spokes?: {
+      strokeWidth?: number;
+      connectorColors?: string | string[];
     };
   };
   radar?: {
@@ -714,7 +720,7 @@ export interface ApexDataLabels {
     fontSize?: string;
     fontFamily?: string;
     fontWeight?: string | number;
-    colors?: string[];
+    colors?: any[];
   };
   background?: {
     enabled?: boolean;
