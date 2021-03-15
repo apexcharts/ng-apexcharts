@@ -414,11 +414,10 @@ export interface ApexPlotOptions {
   };
   bar?: {
     horizontal?: boolean;
-    startingShape?: "flat" | "rounded";
-    endingShape?: "flat" | "rounded";
     columnWidth?: string;
     barHeight?: string;
     distributed?: boolean;
+    borderRadius?: number;
     rangeBarOverlap?: boolean;
     rangeBarGroupRows?: boolean;
     colors?: {
@@ -1046,6 +1045,8 @@ interface ApexDiscretePoint {
 
 export interface ApexMarkers {
   size?: number | number[];
+  width?: number | number[];
+  height?: number | number[];
   colors?: string[];
   strokeColors?: string | string[];
   strokeWidth?: number | number[];
@@ -1053,7 +1054,7 @@ export interface ApexMarkers {
   strokeDashArray?: number | number[];
   fillOpacity?: number | number[];
   discrete?: ApexDiscretePoint[];
-  shape?: "circle" | "square" | string[];
+  shape?: "circle" | "square" | "rect" | string[];
   radius?: number;
   offsetX?: number;
   offsetY?: number;
