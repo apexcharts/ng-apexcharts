@@ -941,7 +941,7 @@ export interface ApexYAxis {
       fontWeight?: string | number;
       cssClass?: string;
     };
-    formatter?(val: number, opts?: any): string;
+    formatter?(val: number, opts?: any): string | string[];
   };
   axisBorder?: {
     show?: boolean;
