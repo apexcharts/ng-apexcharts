@@ -736,7 +736,7 @@ export interface ApexDataLabels {
     dropShadow?: ApexDropShadow;
   };
   dropShadow?: ApexDropShadow;
-  formatter?(val: number, opts?: any): string | number;
+  formatter?(val: string | number | number[], opts?: any): string | number;
 }
 
 export interface ApexResponsive {
