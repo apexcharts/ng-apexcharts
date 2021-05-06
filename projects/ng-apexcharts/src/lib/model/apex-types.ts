@@ -936,13 +936,13 @@ export interface ApexYAxis {
     align?: "left" | "center" | "right";
     padding?: number;
     style?: {
-      colors?: string;
+      colors?: string | string[];
       fontSize?: string;
       fontFamily?: string;
       fontWeight?: string | number;
       cssClass?: string;
     };
-    formatter?(val: number, opts?: any): string;
+    formatter?(val: number, opts?: any): string | string[];
   };
   axisBorder?: {
     show?: boolean;
