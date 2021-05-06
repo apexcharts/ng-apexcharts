@@ -860,6 +860,7 @@ export interface ApexXAxis {
   max?: number;
   range?: number;
   floating?: boolean;
+  decimalsInFloat?: number;
   position?: string;
   title?: {
     text?: string;
