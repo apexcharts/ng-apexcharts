@@ -803,6 +803,7 @@ export interface ApexTooltip {
 export interface ApexXAxis {
   type?: "category" | "datetime" | "numeric";
   categories?: any;
+  overwriteCategories?: number[] | string[] | undefined;
   offsetX?: number;
   offsetY?: number;
   sorted?: boolean;
