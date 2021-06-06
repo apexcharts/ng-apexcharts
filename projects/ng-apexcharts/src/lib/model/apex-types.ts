@@ -681,7 +681,7 @@ export interface ApexLegend {
   offsetX?: number;
   offsetY?: number;
   textAnchor?: string;
-  customLegendItems: string[];
+  customLegendItems?: string[];
   labels?: {
     colors?: string | string[];
     useSeriesColors?: boolean;
