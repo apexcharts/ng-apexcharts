@@ -1,6 +1,6 @@
 {
   "name": "ng-apexcharts",
-  "version": "1.5.11",
+  "version": "1.5.12",
   "description": "An angular implementation of ApexCharts",
   "peerDependencies": {
     "@angular/common": ">=9.0.0 <13.0.0",
