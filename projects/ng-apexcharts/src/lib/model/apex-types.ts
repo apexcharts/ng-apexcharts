@@ -242,7 +242,14 @@ export type ApexAxisChartSeries = {
   color?: string;
   data:
     | (number | null)[]
-    | { x: any; y: any; fillColor?: string; strokeColor?: string }[]
+    | {
+        x: any;
+        y: any;
+        fillColor?: string;
+        strokeColor?: string;
+        meta?: any;
+        goals?: any;
+      }[]
     | [number, number | null][]
     | [number, (number | null)[]][];
 }[];
