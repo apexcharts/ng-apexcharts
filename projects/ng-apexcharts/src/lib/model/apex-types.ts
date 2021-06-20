@@ -772,6 +772,7 @@ export interface ApexTooltip {
   custom?: ((options: any) => any) | ((options: any) => any)[];
   fillSeriesColor?: boolean;
   theme?: string;
+  preventOverflow?: boolean;
   style?: {
     fontSize?: string;
     fontFamily?: string;
@@ -1045,12 +1046,15 @@ export interface ApexTheme {
   };
 }
 
+type ApexMarkerShape = "circle" | "square" | "rect" | string[];
+
 interface ApexDiscretePoint {
   seriesIndex?: number;
   dataPointIndex?: number;
   fillColor?: string;
   strokeColor?: string;
   size?: number;
+  shape?: ApexMarkerShape;
 }
 
 export interface ApexMarkers {
@@ -1064,7 +1068,7 @@ export interface ApexMarkers {
   strokeDashArray?: number | number[];
   fillOpacity?: number | number[];
   discrete?: ApexDiscretePoint[];
-  shape?: "circle" | "square" | "rect" | string[];
+  shape?: ApexMarkerShape;
   radius?: number;
   offsetX?: number;
   offsetY?: number;
