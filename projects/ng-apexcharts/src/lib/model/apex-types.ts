@@ -70,6 +70,7 @@ export interface ApexChart {
     mounted?(chart: any, options?: any): void;
     updated?(chart: any, options?: any): void;
     mouseMove?(e: any, chart?: any, options?: any): void;
+    mouseLeave?(e: any, chart?: any, options?: any): void;
     click?(e: any, chart?: any, options?: any): void;
     legendClick?(chart: any, seriesIndex?: number, options?: any): void;
     markerClick?(e: any, chart?: any, options?: any): void;
@@ -772,7 +773,6 @@ export interface ApexTooltip {
   custom?: ((options: any) => any) | ((options: any) => any)[];
   fillSeriesColor?: boolean;
   theme?: string;
-  preventOverflow?: boolean;
   style?: {
     fontSize?: string;
     fontFamily?: string;
