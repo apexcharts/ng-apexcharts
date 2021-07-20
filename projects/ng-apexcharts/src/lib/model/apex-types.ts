@@ -31,6 +31,7 @@ export interface ApexOptions {
   noData?: ApexNoData;
   xaxis?: ApexXAxis;
   yaxis?: ApexYAxis | ApexYAxis[];
+  forecastDataPoints?: ApexForecastDataPoints;
   grid?: ApexGrid;
   states?: ApexStates;
   title?: ApexTitleSubtitle;
@@ -994,6 +995,13 @@ export interface ApexYAxis {
     enabled?: boolean;
     offsetX?: number;
   };
+}
+
+export interface ApexForecastDataPoints {
+  count?: number;
+  fillOpacity?: number;
+  strokeWidth?: undefined | number;
+  dashArray: number;
 }
 
 /**
