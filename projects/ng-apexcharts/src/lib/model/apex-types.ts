@@ -1,19 +1,3 @@
-// export declare class ApexCharts {
-//   constructor(el: any, options: ApexOptions);
-//   static exec(chartID: string, fn: () => void, options: any): any;
-//   static initOnLoad(): void;
-//   render(): Promise<void>;
-//   updateOptions(options: any, redrawPaths: boolean, animate: boolean, updateSyncedCharts: boolean): Promise<void>;
-//   updateSeries(newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries, animate: boolean): void;
-//   toggleSeries(seriesName: string): void;
-//   destroy(): void;
-//   addXaxisAnnotation(options: any, pushToMemory?: boolean, context?: any): void;
-//   addYaxisAnnotation(options: any, pushToMemory?: boolean, context?: any): void;
-//   addPointAnnotation(options: any, pushToMemory?: boolean, context?: any): void;
-//   addText(options: any, pushToMemory?: boolean, context?: any): void;
-//   dataURI(): void;
-// }
-
 export interface ApexOptions {
   annotations?: ApexAnnotations;
   chart?: ApexChart;
