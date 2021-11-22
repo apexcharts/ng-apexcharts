@@ -294,6 +294,7 @@ export interface AnnotationStyle {
   };
 }
 export interface XAxisAnnotations {
+  id?: number | string;
   x?: null | number | string;
   x2?: null | number | string;
   strokeDashArray?: number;
@@ -306,6 +307,7 @@ export interface XAxisAnnotations {
   label?: AnnotationLabel;
 }
 export interface YAxisAnnotations {
+  id?: number | string;
   y?: null | number | string;
   y2?: null | number | string;
   strokeDashArray?: number;
@@ -320,6 +322,7 @@ export interface YAxisAnnotations {
   label?: AnnotationLabel;
 }
 export interface PointAnnotations {
+  id?: number | string;
   x?: number | string;
   y?: null | number;
   yAxisIndex?: number;
