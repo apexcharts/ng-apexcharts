@@ -23,6 +23,9 @@
     "url": "https://github.com/apexcharts/ng-apexcharts/issues"
   },
   "homepage": "https://github.com/apexcharts/ng-apexcharts",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/apexcharts/ng-apexcharts.git"
