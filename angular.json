@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "3baaf504-dbc1-40db-9aea-56a6da334a34"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -23,7 +26,6 @@
           "skipTests": true
         },
         "@schematics/angular:module": {
-          "skipTests": true
         },
         "@schematics/angular:pipe": {
           "skipTests": true
@@ -48,8 +50,13 @@
             "styles": [
               "src/styles.less"
             ],
-            "scripts": [
-            ]
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -62,9 +69,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -161,10 +166,15 @@
       "prefix": "apx",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ng-apexcharts/tsconfig.lib.json",
             "project": "projects/ng-apexcharts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-apexcharts/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
