@@ -278,6 +278,8 @@ export interface AnnotationLabel {
   style?: AnnotationStyle;
   position?: string;
   orientation?: string;
+  mouseEnter?: Function;
+  mouseLeave?: Function;
 }
 export interface AnnotationStyle {
   background?: string;
@@ -918,6 +920,7 @@ export interface ApexYAxis {
   opposite?: boolean;
   reversed?: boolean;
   logarithmic?: boolean;
+  logBase?: number;
   tickAmount?: number;
   forceNiceScale?: boolean;
   min?: number | ((min: number) => number);
