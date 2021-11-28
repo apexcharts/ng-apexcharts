@@ -329,6 +329,8 @@ export interface PointAnnotations {
   y?: null | number;
   yAxisIndex?: number;
   seriesIndex?: number;
+  mouseEnter?: Function;
+  mouseLeave?: Function;
   marker?: {
     size?: number;
     fillColor?: string;
