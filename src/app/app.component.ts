@@ -12,6 +12,14 @@ export class AppComponent {
 
   form: FormGroup;
 
+  public get series() {
+    return this.form.get('series') as FormArray;
+  }
+
+  public get xaxis() {
+    return this.form.get('xaxis') as FormArray;
+  }
+
   constructor() {
     this.form = new FormGroup({
       title: new FormControl('Basic Chart'),

@@ -34,7 +34,7 @@
     <div style="width: 80%; display: inline-block;" formArrayName="series">
       <h4>Data</h4>
 
-      <div *ngFor="let series of form.get('series').controls; let i = index" style="width: 20%; display: inline-block">
+      <div *ngFor="let series of series.controls; let i = index" style="width: 20%; display: inline-block">
         <div [formGroupName]="i">
           Name: <input type="text" formControlName="name"><br>
           Type: <select formControlName="type">
@@ -56,7 +56,7 @@
 
     <div formArrayName="xaxis" style="width: 20%; display: inline-block">
       <h4>XAxis</h4>
-      <div *ngFor="let alias of form.get('xaxis').controls; let i=index">
+      <div *ngFor="let alias of xaxis.controls; let i=index">
         <label>
           Value:
           <input type="text" [formControlName]="i">
