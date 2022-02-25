@@ -7,6 +7,7 @@ import {
   OnDestroy,
   SimpleChanges,
   ViewChild,
+  NgZone,
 } from "@angular/core";
 import {
   ApexAnnotations,
@@ -65,6 +66,10 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild("chart", { static: true }) private chartElement: ElementRef;
   private chartObj: any;
+
+  constructor(private ngZone: NgZone) {
+
+  }
 
   ngOnInit() {
     asapScheduler.schedule(() => {
@@ -163,13 +168,15 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
       this.chartObj.destroy();
     }
 
-    this.chartObj = new ApexCharts(this.chartElement.nativeElement, options);
-
+    this.ngZone.runOutsideAngular(() => {
+      this.chartObj = new ApexCharts(this.chartElement.nativeElement, options);
+    });
+    
     this.render();
   }
 
   public render(): Promise<void> {
-    return this.chartObj.render();
+    return this.ngZone.runOutsideAngular(() => this.chartObj.render());
   }
 
   public updateOptions(
@@ -178,19 +185,19 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     animate?: boolean,
     updateSyncedCharts?: boolean
   ): Promise<void> {
-    return this.chartObj.updateOptions(
+    return this.ngZone.runOutsideAngular(() => this.chartObj.updateOptions(
       options,
       redrawPaths,
       animate,
       updateSyncedCharts
-    );
+    ));
   }
 
   public updateSeries(
     newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
     animate?: boolean
   ) {
-    this.chartObj.updateSeries(newSeries, animate);
+    return this.chartObj.updateSeries(newSeries, animate);
   }
 
   public appendSeries(
