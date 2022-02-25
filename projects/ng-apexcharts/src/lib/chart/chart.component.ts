@@ -92,7 +92,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  private createElement() {
+  private createElement(): void {
     const options: any = {};
 
     if (this.annotations) {
@@ -189,18 +189,18 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
   public updateSeries(
     newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
     animate?: boolean
-  ) {
+  ): void {
     this.chartObj.updateSeries(newSeries, animate);
   }
 
   public appendSeries(
     newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
     animate?: boolean
-  ) {
+  ): void {
     this.chartObj.appendSeries(newSeries, animate);
   }
 
-  public appendData(newData: any[]) {
+  public appendData(newData: any[]): void {
     this.chartObj.appendData(newData);
   }
 
@@ -208,34 +208,34 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     return this.chartObj.toggleSeries(seriesName);
   }
 
-  public showSeries(seriesName: string) {
+  public showSeries(seriesName: string): void {
     this.chartObj.showSeries(seriesName);
   }
 
-  public hideSeries(seriesName: string) {
+  public hideSeries(seriesName: string): void {
     this.chartObj.hideSeries(seriesName);
   }
 
-  public resetSeries() {
+  public resetSeries(): void {
     this.chartObj.resetSeries();
   }
 
-  public zoomX(min: number, max: number) {
+  public zoomX(min: number, max: number): void {
     this.chartObj.zoomX(min, max);
   }
 
   public toggleDataPointSelection(
     seriesIndex: number,
     dataPointIndex?: number
-  ) {
+  ): void {
     this.chartObj.toggleDataPointSelection(seriesIndex, dataPointIndex);
   }
 
-  public destroy() {
+  public destroy(): void {
     this.chartObj.destroy();
   }
 
-  public setLocale(localeName?: string) {
+  public setLocale(localeName?: string): void {
     this.chartObj.setLocale(localeName);
   }
 
