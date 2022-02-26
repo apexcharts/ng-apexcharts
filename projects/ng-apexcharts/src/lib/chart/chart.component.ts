@@ -8,6 +8,7 @@ import {
   SimpleChanges,
   ViewChild,
   NgZone,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import {
   ApexAnnotations,
@@ -38,6 +39,7 @@ import ApexCharts from "apexcharts";
   selector: "apx-chart",
   templateUrl: "./chart.component.html",
   styleUrls: ["./chart.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartComponent implements OnInit, OnChanges, OnDestroy {
   @Input() chart: ApexChart;
