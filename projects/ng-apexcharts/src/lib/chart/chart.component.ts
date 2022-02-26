@@ -197,45 +197,45 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
     animate?: boolean
   ) {
-    return this.chartObj.updateSeries(newSeries, animate);
+    return this.ngZone.runOutsideAngular(() => this.chartObj.updateSeries(newSeries, animate));
   }
 
   public appendSeries(
     newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
     animate?: boolean
   ) {
-    this.chartObj.appendSeries(newSeries, animate);
+    this.ngZone.runOutsideAngular(() => this.chartObj.appendSeries(newSeries, animate));
   }
 
   public appendData(newData: any[]) {
-    this.chartObj.appendData(newData);
+    this.ngZone.runOutsideAngular(() => this.chartObj.appendData(newData));
   }
 
   public toggleSeries(seriesName: string): any {
-    return this.chartObj.toggleSeries(seriesName);
+    return this.ngZone.runOutsideAngular(() => this.chartObj.toggleSeries(seriesName));
   }
 
   public showSeries(seriesName: string) {
-    this.chartObj.showSeries(seriesName);
+    this.ngZone.runOutsideAngular(() => this.chartObj.showSeries(seriesName));
   }
 
   public hideSeries(seriesName: string) {
-    this.chartObj.hideSeries(seriesName);
+    this.ngZone.runOutsideAngular(() => this.chartObj.hideSeries(seriesName));
   }
 
   public resetSeries() {
-    this.chartObj.resetSeries();
+    this.ngZone.runOutsideAngular(() => this.chartObj.resetSeries());
   }
 
   public zoomX(min: number, max: number) {
-    this.chartObj.zoomX(min, max);
+    this.ngZone.runOutsideAngular(() => this.chartObj.zoomX(min, max));
   }
 
   public toggleDataPointSelection(
     seriesIndex: number,
     dataPointIndex?: number
   ) {
-    this.chartObj.toggleDataPointSelection(seriesIndex, dataPointIndex);
+    this.ngZone.runOutsideAngular(() => this.chartObj.toggleDataPointSelection(seriesIndex, dataPointIndex));
   }
 
   public destroy() {
@@ -243,11 +243,11 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public setLocale(localeName?: string) {
-    this.chartObj.setLocale(localeName);
+    this.ngZone.runOutsideAngular(() => this.chartObj.setLocale(localeName));
   }
 
   public paper() {
-    this.chartObj.paper();
+    this.ngZone.runOutsideAngular(() => this.chartObj.paper());
   }
 
   public addXaxisAnnotation(
@@ -255,7 +255,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     pushToMemory?: boolean,
     context?: any
   ) {
-    this.chartObj.addXaxisAnnotation(options, pushToMemory, context);
+    this.ngZone.runOutsideAngular(() => this.chartObj.addXaxisAnnotation(options, pushToMemory, context));
   }
 
   public addYaxisAnnotation(
@@ -263,7 +263,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     pushToMemory?: boolean,
     context?: any
   ) {
-    this.chartObj.addYaxisAnnotation(options, pushToMemory, context);
+    this.ngZone.runOutsideAngular(() => this.chartObj.addYaxisAnnotation(options, pushToMemory, context));
   }
 
   public addPointAnnotation(
@@ -271,15 +271,15 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     pushToMemory?: boolean,
     context?: any
   ) {
-    this.chartObj.addPointAnnotation(options, pushToMemory, context);
+    this.ngZone.runOutsideAngular(() => this.chartObj.addPointAnnotation(options, pushToMemory, context));
   }
 
   public removeAnnotation(id: string, options?: any) {
-    this.chartObj.removeAnnotation(id, options);
+    this.ngZone.runOutsideAngular(() => this.chartObj.removeAnnotation(id, options));
   }
 
   public clearAnnotations(options?: any) {
-    this.chartObj.clearAnnotations(options);
+    this.ngZone.runOutsideAngular(() => this.chartObj.clearAnnotations(options));
   }
 
   public dataURI(options?: any): Promise<void> {
