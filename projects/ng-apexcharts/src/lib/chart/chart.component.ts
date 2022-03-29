@@ -275,7 +275,7 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
     this.chartObj.clearAnnotations(options);
   }
 
-  public dataURI(options?: any): Promise<void> {
+  public dataURI(options?: any): Promise<{ imgURI: string }> {
     return this.chartObj.dataURI(options);
   }
 }

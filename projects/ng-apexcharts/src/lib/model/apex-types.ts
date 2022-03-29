@@ -765,6 +765,7 @@ export interface ApexTooltip {
   custom?: ((options: any) => any) | ((options: any) => any)[];
   fillSeriesColor?: boolean;
   theme?: string;
+  cssClass?: string;
   style?: {
     fontSize?: string;
     fontFamily?: string;
@@ -834,6 +835,16 @@ export interface ApexXAxis {
       day?: string;
       hour?: string;
       minute?: string;
+    };
+    group?: {
+      groups?: { title: string; cols: number }[];
+      style?: {
+        colors?: string | string[];
+        fontSize?: string;
+        fontFamily?: string;
+        fontWeight?: string | number;
+        cssClass?: string;
+      };
     };
     formatter?(
       value: string,
