@@ -19,6 +19,11 @@ export class AppComponent {
   public get xaxis() {
     return this.form.get('xaxis') as FormArray;
   }
+  private det = 0;
+  changeDet(): boolean{
+    console.log(`change${this.det++}`);
+    return false;
+  }
 
   constructor() {
     this.form = new FormGroup({
