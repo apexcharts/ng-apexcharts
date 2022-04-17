@@ -836,21 +836,21 @@ export interface ApexXAxis {
       hour?: string;
       minute?: string;
     };
-    group?: {
-      groups?: { title: string; cols: number }[];
-      style?: {
-        colors?: string | string[];
-        fontSize?: string;
-        fontFamily?: string;
-        fontWeight?: string | number;
-        cssClass?: string;
-      };
-    };
     formatter?(
       value: string,
       timestamp?: number,
       opts?: any
     ): string | string[];
+  };
+  group?: {
+    groups?: { title: string; cols: number }[];
+    style?: {
+      colors?: string | string[];
+      fontSize?: string;
+      fontFamily?: string;
+      fontWeight?: string | number;
+      cssClass?: string;
+    };
   };
   axisBorder?: {
     show?: boolean;
