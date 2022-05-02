@@ -257,6 +257,7 @@ export interface ApexStroke {
   colors?: string[];
   width?: number | number[];
   dashArray?: number | number[];
+  fill?: ApexFill;
 }
 
 export interface ApexAnnotations {
