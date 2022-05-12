@@ -401,6 +401,10 @@ export interface ApexLocale {
       zoomOut?: string;
       pan?: string;
       reset?: string;
+      exportToSVG?: string;
+      exportToPNG?: string;
+      exportToCSV: string;
+      menu?: string;
     };
   };
 }
