@@ -637,8 +637,8 @@ export interface ApexFill {
     shadeIntensity?: number;
     gradientToColors?: string[];
     inverseColors?: boolean;
-    opacityFrom?: number;
-    opacityTo?: number;
+    opacityFrom?: number | number[];
+    opacityTo?: number | number[];
     stops?: number[];
   };
   image?: {
