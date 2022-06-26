@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {ChartComponent} from 'ng-apexcharts';
 
 @Component({
@@ -10,14 +10,14 @@ import {ChartComponent} from 'ng-apexcharts';
 export class AppComponent {
   @ViewChild('chart', {static: true}) chart: ChartComponent;
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   public get series() {
-    return this.form.get('series') as FormArray;
+    return this.form.get('series') as UntypedFormArray;
   }
 
   public get xaxis() {
-    return this.form.get('xaxis') as FormArray;
+    return this.form.get('xaxis') as UntypedFormArray;
   }
   private det = 0;
   changeDet(): boolean{
@@ -26,47 +26,47 @@ export class AppComponent {
   }
 
   constructor() {
-    this.form = new FormGroup({
-      title: new FormControl('Basic Chart'),
-      type: new FormControl('line'),
-      height: new FormControl(350),
-      series: new FormArray([
-        new FormGroup({
-          name: new FormControl('Series'),
-          type: new FormControl('line'),
-          data: new FormArray([
-            new FormControl(this.getRandomArbitrary(0, 100)),
-            new FormControl(this.getRandomArbitrary(0, 100)),
-            new FormControl(this.getRandomArbitrary(0, 100)),
-            new FormControl(this.getRandomArbitrary(0, 100))
+    this.form = new UntypedFormGroup({
+      title: new UntypedFormControl('Basic Chart'),
+      type: new UntypedFormControl('line'),
+      height: new UntypedFormControl(350),
+      series: new UntypedFormArray([
+        new UntypedFormGroup({
+          name: new UntypedFormControl('Series'),
+          type: new UntypedFormControl('line'),
+          data: new UntypedFormArray([
+            new UntypedFormControl(this.getRandomArbitrary(0, 100)),
+            new UntypedFormControl(this.getRandomArbitrary(0, 100)),
+            new UntypedFormControl(this.getRandomArbitrary(0, 100)),
+            new UntypedFormControl(this.getRandomArbitrary(0, 100))
           ])
         })
       ]),
-      xaxis: new FormArray([
-        new FormControl('Jan'),
-        new FormControl('Feb'),
-        new FormControl('Mar'),
-        new FormControl('Apr')
+      xaxis: new UntypedFormArray([
+        new UntypedFormControl('Jan'),
+        new UntypedFormControl('Feb'),
+        new UntypedFormControl('Mar'),
+        new UntypedFormControl('Apr')
       ])
     });
   }
 
   addValue() {
-    (<FormArray>this.form.get('series')).controls.forEach((c) => {
-      (<FormArray>c.get('data')).push(new FormControl(this.getRandomArbitrary(0, 100)));
+    (<UntypedFormArray>this.form.get('series')).controls.forEach((c) => {
+      (<UntypedFormArray>c.get('data')).push(new UntypedFormControl(this.getRandomArbitrary(0, 100)));
     });
-    (<FormArray>this.form.get('xaxis')).push(new FormControl('Jan'));
+    (<UntypedFormArray>this.form.get('xaxis')).push(new UntypedFormControl('Jan'));
   }
 
   addSeries() {
-    (<FormArray>this.form.get('series')).push(new FormGroup({
-      name: new FormControl('Series'),
-      type: new FormControl('line'),
-      data: new FormArray([
-        new FormControl(this.getRandomArbitrary(0, 100)),
-        new FormControl(this.getRandomArbitrary(0, 100)),
-        new FormControl(this.getRandomArbitrary(0, 100)),
-        new FormControl(this.getRandomArbitrary(0, 100))
+    (<UntypedFormArray>this.form.get('series')).push(new UntypedFormGroup({
+      name: new UntypedFormControl('Series'),
+      type: new UntypedFormControl('line'),
+      data: new UntypedFormArray([
+        new UntypedFormControl(this.getRandomArbitrary(0, 100)),
+        new UntypedFormControl(this.getRandomArbitrary(0, 100)),
+        new UntypedFormControl(this.getRandomArbitrary(0, 100)),
+        new UntypedFormControl(this.getRandomArbitrary(0, 100))
       ])
     }));
   }
