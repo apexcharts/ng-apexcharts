@@ -840,6 +840,7 @@ export interface ApexXAxis {
       day?: string;
       hour?: string;
       minute?: string;
+      second?: string;
     };
     formatter?(
       value: string,
