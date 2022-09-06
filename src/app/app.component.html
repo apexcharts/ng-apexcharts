@@ -14,7 +14,8 @@
                     blur: 10,
                     opacity: 1
                 }}"
-           [title]="{ text: form.value.title }" [autoUpdateSeries]="false"></apx-chart>
+           [title]="{ text: form.value.title }" [autoUpdateSeries]="false"
+           (chartReady)="onChartReady($event)"></apx-chart>
 
 <form [formGroup]="form" [class.tes]="changeDet()">
   Title: <input type="text" formControlName="title"><br>
