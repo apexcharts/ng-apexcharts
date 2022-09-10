@@ -237,7 +237,8 @@ export type ApexAxisChartSeries = {
         goals?: any;
       }[]
     | [number, number | null][]
-    | [number, (number | null)[]][];
+    | [number, (number | null)[]][]
+    | number[][];
 }[];
 
 export type ApexNonAxisChartSeries = number[];
@@ -281,6 +282,7 @@ export interface AnnotationLabel {
   orientation?: string;
   mouseEnter?: Function;
   mouseLeave?: Function;
+  click?: Function;
 }
 export interface AnnotationStyle {
   background?: string;
@@ -332,6 +334,7 @@ export interface PointAnnotations {
   seriesIndex?: number;
   mouseEnter?: Function;
   mouseLeave?: Function;
+  click?: Function;
   marker?: {
     size?: number;
     fillColor?: string;
@@ -440,6 +443,18 @@ export interface ApexPlotOptions {
       hideOverflowingLabels?: boolean;
       position?: string;
       orientation?: "horizontal" | "vertical";
+      total?: {
+        enabled?: boolean;
+        formatter?(val?: string, opts?: any): string;
+        offsetX?: number;
+        offsetY?: number;
+        style?: {
+          color?: string;
+          fontSize?: string;
+          fontFamily?: string;
+          fontWeight?: number | string;
+        };
+      };
     };
   };
   bubble?: {
