@@ -3,7 +3,6 @@ import {
   ElementRef,
   Input,
   OnChanges,
-  OnInit,
   OnDestroy,
   SimpleChanges,
   ViewChild,
@@ -42,7 +41,7 @@ import ApexCharts from "apexcharts";
   styleUrls: ["./chart.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChartComponent implements OnInit, OnChanges, OnDestroy {
+export class ChartComponent implements OnChanges, OnDestroy {
   @Input() chart: ApexChart;
   @Input() annotations: ApexAnnotations;
   @Input() colors: any[];
@@ -73,12 +72,6 @@ export class ChartComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(private ngZone: NgZone) {
 
-  }
-
-  ngOnInit() {
-    asapScheduler.schedule(() => {
-      this.createElement();
-    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
