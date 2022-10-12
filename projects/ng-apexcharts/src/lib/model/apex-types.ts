@@ -59,6 +59,7 @@ export interface ApexChart {
     click?(e: any, chart?: any, options?: any): void;
     legendClick?(chart: any, seriesIndex?: number, options?: any): void;
     markerClick?(e: any, chart?: any, options?: any): void;
+    xAxisLabelClick?(e: any, chart?: any, options?: any): void;
     selection?(chart: any, options?: any): void;
     dataPointSelection?(e: any, chart?: any, options?: any): void;
     dataPointMouseEnter?(e: any, chart?: any, options?: any): void;
