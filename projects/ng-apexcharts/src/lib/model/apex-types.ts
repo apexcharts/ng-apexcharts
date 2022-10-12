@@ -608,7 +608,7 @@ export interface ApexPlotOptions {
       show?: boolean;
       startAngle?: number;
       endAngle?: number;
-      background?: string;
+      background?: string | string[];
       strokeWidth?: string;
       opacity?: number;
       margin?: number;
