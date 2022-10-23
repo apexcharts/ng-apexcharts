@@ -232,7 +232,7 @@ export type ApexAxisChartSeries = {
     | {
         x: any;
         y: any;
-        fill: ApexFill;
+        fill?: ApexFill;
         fillColor?: string;
         strokeColor?: string;
         meta?: any;
