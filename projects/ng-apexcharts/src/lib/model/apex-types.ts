@@ -232,10 +232,13 @@ export type ApexAxisChartSeries = {
     | {
         x: any;
         y: any;
+        fill: ApexFill;
         fillColor?: string;
         strokeColor?: string;
         meta?: any;
         goals?: any;
+        barHeightOffset?: number;
+        columnWidthOffset?: number;
       }[]
     | [number, number | null][]
     | [number, (number | null)[]][]
@@ -427,6 +430,8 @@ export interface ApexPlotOptions {
     barHeight?: string;
     distributed?: boolean;
     borderRadius?: number;
+    borderRadiusApplication?: "around" | "end";
+    borderRadiusWhenStacked?: "all" | "last";
     rangeBarOverlap?: boolean;
     rangeBarGroupRows?: boolean;
     colors?: {
