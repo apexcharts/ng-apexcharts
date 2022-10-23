@@ -1148,4 +1148,5 @@ export type ChartType =
   | "radar"
   | "polarArea"
   | "rangeBar"
+  | "rangeArea"
   | "treemap";
