@@ -410,7 +410,7 @@ export interface ApexLocale {
       reset?: string;
       exportToSVG?: string;
       exportToPNG?: string;
-      exportToCSV: string;
+      exportToCSV?: string;
       menu?: string;
     };
   };
@@ -1031,7 +1031,7 @@ export interface ApexForecastDataPoints {
   count?: number;
   fillOpacity?: number;
   strokeWidth?: undefined | number;
-  dashArray: number;
+  dashArray?: number;
 }
 
 /**
