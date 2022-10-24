@@ -464,6 +464,7 @@ export interface ApexPlotOptions {
     };
   };
   bubble?: {
+    zScaling?: boolean;
     minBubbleRadius?: number;
     maxBubbleRadius?: number;
   };
