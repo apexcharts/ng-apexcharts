@@ -1137,7 +1137,6 @@ export type ChartType =
   | "line"
   | "area"
   | "bar"
-  | "histogram"
   | "pie"
   | "donut"
   | "radialBar"
