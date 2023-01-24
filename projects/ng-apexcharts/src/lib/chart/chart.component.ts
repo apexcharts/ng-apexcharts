@@ -37,8 +37,7 @@ import ApexCharts from "apexcharts";
 
 @Component({
   selector: "apx-chart",
-  templateUrl: "./chart.component.html",
-  styleUrls: ["./chart.component.css"],
+  template: `<div #chart></div>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartComponent implements OnChanges, OnDestroy {
