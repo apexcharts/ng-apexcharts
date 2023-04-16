@@ -227,6 +227,7 @@ export type ApexAxisChartSeries = {
   name?: string;
   type?: string;
   color?: string;
+  group?: string;
   data:
     | (number | null)[]
     | {
@@ -266,7 +267,6 @@ export interface ApexStroke {
 }
 
 export interface ApexAnnotations {
-  position?: string;
   yaxis?: YAxisAnnotations[];
   xaxis?: XAxisAnnotations[];
   points?: PointAnnotations[];
@@ -432,6 +432,7 @@ export interface ApexPlotOptions {
     borderRadius?: number;
     borderRadiusApplication?: "around" | "end";
     borderRadiusWhenStacked?: "all" | "last";
+    hideZeroBarsWhenGrouped?: boolean;
     rangeBarOverlap?: boolean;
     rangeBarGroupRows?: boolean;
     colors?: {
