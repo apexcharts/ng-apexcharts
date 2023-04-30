@@ -426,8 +426,8 @@ export interface ApexPlotOptions {
   };
   bar?: {
     horizontal?: boolean;
-    columnWidth?: string;
-    barHeight?: string;
+    columnWidth?: string | number;
+    barHeight?: string | number;
     distributed?: boolean;
     borderRadius?: number;
     borderRadiusApplication?: "around" | "end";
@@ -435,6 +435,8 @@ export interface ApexPlotOptions {
     hideZeroBarsWhenGrouped?: boolean;
     rangeBarOverlap?: boolean;
     rangeBarGroupRows?: boolean;
+    isDumbbell?: boolean;
+    dumbbellColors?: string[];
     colors?: {
       ranges?: {
         from?: number;
