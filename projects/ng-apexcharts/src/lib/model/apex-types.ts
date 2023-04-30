@@ -436,7 +436,7 @@ export interface ApexPlotOptions {
     rangeBarOverlap?: boolean;
     rangeBarGroupRows?: boolean;
     isDumbbell?: boolean;
-    dumbbellColors?: string[];
+    dumbbellColors?: string[][];
     colors?: {
       ranges?: {
         from?: number;
