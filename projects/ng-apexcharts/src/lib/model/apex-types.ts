@@ -437,6 +437,8 @@ export interface ApexPlotOptions {
     rangeBarGroupRows?: boolean;
     isDumbbell?: boolean;
     dumbbellColors?: string[][];
+    isFunnel?: boolean;
+    isFunnel3d?: boolean;
     colors?: {
       ranges?: {
         from?: number;
