@@ -74,6 +74,7 @@ export interface ApexChart {
     enabled?: boolean;
     autoScaleYaxis?: boolean;
     target?: string;
+    targets?: string[];
   };
   id?: string;
   group?: string;
@@ -514,6 +515,7 @@ export interface ApexPlotOptions {
     distributed?: boolean;
     reverseNegativeShade?: boolean;
     useFillColorAsStroke?: boolean;
+    dataLabels?: { format?: "scale" | "truncate" };
     colorScale?: {
       inverse?: boolean;
       ranges?: {
