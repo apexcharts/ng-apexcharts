@@ -7,7 +7,6 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "package": "ng build ng-apexcharts --configuration production"
   },
   "private": true,
