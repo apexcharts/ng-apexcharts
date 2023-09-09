@@ -259,7 +259,8 @@ export interface ApexStroke {
     | "smooth"
     | "straight"
     | "stepline"
-    | ("smooth" | "straight" | "stepline")[];
+    | "monotoneCubic"
+    | ("smooth" | "straight" | "stepline" | "monotoneCubic")[];
   lineCap?: "butt" | "square" | "round";
   colors?: string[];
   width?: number | number[];
@@ -660,6 +661,11 @@ export interface ApexPlotOptions {
   };
 }
 
+type ApexColorStop = {
+  offset: number;
+  color: string;
+  opacity: number;
+};
 export interface ApexFill {
   colors?: any[];
   opacity?: number | number[];
@@ -672,7 +678,7 @@ export interface ApexFill {
     inverseColors?: boolean;
     opacityFrom?: number | number[];
     opacityTo?: number | number[];
-    stops?: number[];
+    colorStops?: ApexColorStop[][] | ApexColorStop[];
   };
   image?: {
     src?: string | string[];
