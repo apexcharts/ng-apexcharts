@@ -87,6 +87,7 @@ export interface ApexChart {
     enabled?: boolean;
   };
   stacked?: boolean;
+  stackOnlyBar?: boolean;
   stackType?: "normal" | "100%";
   toolbar?: {
     show?: boolean;
@@ -229,6 +230,7 @@ export type ApexAxisChartSeries = {
   type?: string;
   color?: string;
   group?: string;
+  zIndex?: number;
   data:
     | (number | null)[]
     | {
@@ -806,6 +808,7 @@ export interface ApexTooltip {
   fillSeriesColor?: boolean;
   theme?: string;
   cssClass?: string;
+  hideEmptySeries?: boolean;
   style?: {
     fontSize?: string;
     fontFamily?: string;
