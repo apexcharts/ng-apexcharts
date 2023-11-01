@@ -1,20 +1,9 @@
-import { NgModule } from "@angular/core";
-import { ChartComponent } from "./chart/chart.component";
-import ApexCharts from "apexcharts";
-
-declare global {
-  interface Window {
-    ApexCharts: any;
-  }
-}
-
-window.ApexCharts = ApexCharts;
-
-const declerations = [ChartComponent];
+import { NgModule } from '@angular/core';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
-  declarations: [...declerations],
-  imports: [],
-  exports: [...declerations],
+  declarations: [],
+  imports: [ChartComponent],
+  exports: [ChartComponent],
 })
 export class NgApexchartsModule {}
