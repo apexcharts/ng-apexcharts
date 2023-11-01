@@ -3,8 +3,8 @@
   "version": "1.8.0",
   "description": "An angular implementation of ApexCharts",
   "peerDependencies": {
-    "@angular/common": ">=13.0.0",
-    "@angular/core": ">=13.0.0",
+    "@angular/common": ">=14.0.0",
+    "@angular/core": ">=14.0.0",
     "rxjs": "^6.5.3 || ^7.4.0",
     "apexcharts": "^3.41.0"
   },
