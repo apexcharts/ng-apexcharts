@@ -4,6 +4,7 @@
   [series]="form.value.series | series: form.value.type"
   [xaxis]="{ categories: form.value.xaxis }"
   [chart]="{
+    id: 'ng-chart-example',
     height: form.value.height!,
     type: form.value.type!,
     zoom: {
