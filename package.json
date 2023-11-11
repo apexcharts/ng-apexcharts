@@ -4,10 +4,16 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
+    "test:schematics": "ts-node --project ./projects/ng-apexcharts/schematics/tsconfig.json node_modules/jasmine/bin/jasmine.js \"projects/ng-apexcharts/schematics/**/*[sS]pec.ts\"",
     "lint": "ng lint",
-    "package": "ng build ng-apexcharts --configuration production"
+    "build:pkg": "ng build ng-apexcharts --configuration production",
+    "build:schematics": "tsc -p ./projects/ng-apexcharts/schematics/tsconfig.json --outDir dist/ng-apexcharts/schematics",
+    "copyfile:lincense": "copyfiles ./LICENSE ./dist/ng-apexcharts",
+    "copyfile:schema": "copyfiles -f ./projects/ng-apexcharts/schematics/ng-add/schema.json ./dist/ng-apexcharts/schematics/ng-add",
+    "copyfile:collection": "copyfiles -f ./projects/ng-apexcharts/schematics/collection.json ./dist/ng-apexcharts/schematics",
+    "copyfile": "concurrently -c cyan,green 'npm run copyfile:*'",
+    "package": "concurrently -c cyan,green 'npm run build:*' && npm run copyfile"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +25,7 @@
     "@angular/platform-browser": "^16.1.5",
     "@angular/platform-browser-dynamic": "^16.1.5",
     "@angular/router": "^16.1.5",
+    "@schematics/angular": "^16.1.5",
     "apexcharts": "^3.41.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
@@ -39,6 +46,8 @@
     "@types/node": "~14.0.4",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
+    "concurrently": "^8.2.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.39.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
