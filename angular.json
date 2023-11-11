@@ -88,18 +88,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-apexcharts-demo:build"
+            "buildTarget": "ng-apexcharts-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-apexcharts-demo:build:production"
+              "buildTarget": "ng-apexcharts-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-apexcharts-demo:build"
+            "buildTarget": "ng-apexcharts-demo:build"
           }
         },
         "test": {
