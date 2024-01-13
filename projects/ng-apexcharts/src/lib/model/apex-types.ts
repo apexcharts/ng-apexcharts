@@ -520,6 +520,7 @@ export interface ApexPlotOptions {
     reverseNegativeShade?: boolean;
     useFillColorAsStroke?: boolean;
     dataLabels?: { format?: "scale" | "truncate" };
+    borderRadius?: number;
     colorScale?: {
       inverse?: boolean;
       ranges?: {
@@ -660,6 +661,16 @@ export interface ApexPlotOptions {
         color?: string;
         formatter?(opts: any): string;
       };
+    };
+    barLabels?: {
+      enabled?: boolean;
+      margin?: number;
+      useSeriesColors?: boolean;
+      fontFamily?: string;
+      fontWeight?: string | number;
+      fontSize?: string;
+      formatter?: (barName: string, opts?: any) => string;
+      onClick?: (barName: string, opts?: any) => void;
     };
   };
 }
@@ -913,6 +924,7 @@ export interface ApexXAxis {
     offsetY?: number;
   };
   tickPlacement?: string;
+  stepSize?: number;
   tickAmount?: number | "dataPoints";
   min?: number;
   max?: number;
@@ -980,6 +992,7 @@ export interface ApexYAxis {
   logarithmic?: boolean;
   logBase?: number;
   tickAmount?: number;
+  stepSize?: number;
   forceNiceScale?: boolean;
   min?: number | ((min: number) => number);
   max?: number | ((max: number) => number);
