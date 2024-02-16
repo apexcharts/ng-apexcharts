@@ -78,6 +78,7 @@ export interface ApexChart {
   };
   id?: string;
   group?: string;
+  nonce?: string;
   locales?: ApexLocale[];
   defaultLocale?: string;
   parentHeightOffset?: number;
