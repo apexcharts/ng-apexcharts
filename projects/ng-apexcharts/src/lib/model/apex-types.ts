@@ -1115,7 +1115,16 @@ export interface ApexTheme {
   };
 }
 
-type ApexMarkerShape = "circle" | "square" | "rect" | string[];
+type MarkerShapeOptions =
+  | "circle"
+  | "square"
+  | "rect"
+  | "x"
+  | "X"
+  | "plus"
+  | "+";
+
+type ApexMarkerShape = MarkerShapeOptions | MarkerShapeOptions[];
 
 interface ApexDiscretePoint {
   seriesIndex?: number;
