@@ -692,6 +692,7 @@ export interface ApexFill {
     inverseColors?: boolean;
     opacityFrom?: number | number[];
     opacityTo?: number | number[];
+    stops?:  number[];
     colorStops?: ApexColorStop[][] | ApexColorStop[];
   };
   image?: {
