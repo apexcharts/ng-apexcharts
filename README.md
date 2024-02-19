@@ -97,6 +97,7 @@ This is a list of all available attributes:
 @Input() title: ApexTitleSubtitle;
 @Input() subtitle: ApexTitleSubtitle;
 @Input() theme: ApexTheme;
+@Output() chartReady;
 ```
 
 You can visit the [docs](https://apexcharts.com/docs/) to read more about all the options listed above.

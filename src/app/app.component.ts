@@ -71,6 +71,10 @@ export class AppComponent {
     }));
   }
 
+  onChartReady(event: any) {
+    console.log('Chart ready', event);
+  }
+
   private getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
   }
