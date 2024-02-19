@@ -2,8 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
-    "module": "es2015",
+    "module": "es2022",
     "moduleResolution": "node",
+    "strict": true,
     "declaration": true,
     "sourceMap": true,
     "inlineSources": true,
@@ -21,6 +22,8 @@
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
     "enableResourceInlining": true
   },
   "exclude": ["src/test.ts", "**/*.spec.ts"]
