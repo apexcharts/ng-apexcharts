@@ -265,7 +265,7 @@ export interface ApexStroke {
     | "monotoneCubic"
     | ("smooth" | "straight" | "stepline" | "monotoneCubic")[];
   lineCap?: "butt" | "square" | "round";
-  colors?: string[];
+  colors?: any[];
   width?: number | number[];
   dashArray?: number | number[];
   fill?: ApexFill;
@@ -426,6 +426,9 @@ export interface ApexLocale {
  * See https://apexcharts.com/docs/options/plotoptions/bar/
  */
 export interface ApexPlotOptions {
+  line?: {
+    isSlopeChart?: boolean;
+  };
   area?: {
     fillTo?: "origin" | "end";
   };
