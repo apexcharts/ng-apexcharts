@@ -2,12 +2,14 @@ import {
   Component,
   ElementRef,
   Input,
+  Output,
   OnChanges,
   OnDestroy,
   SimpleChanges,
   ViewChild,
   NgZone,
   ChangeDetectionStrategy,
+  EventEmitter,
 } from "@angular/core";
 import {
   ApexAnnotations,
@@ -65,6 +67,8 @@ export class ChartComponent implements OnChanges, OnDestroy {
   @Input() theme: ApexTheme;
 
   @Input() autoUpdateSeries = true;
+
+  @Output() chartReady = new EventEmitter();
 
   @ViewChild("chart", { static: true }) private chartElement: ElementRef;
   private chartObj: any;
@@ -172,6 +176,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
     });
 
     this.render();
+    this.chartReady.emit({chartObj: this.chartObj})
   }
 
   public render(): Promise<void> {
