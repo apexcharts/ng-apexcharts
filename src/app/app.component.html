@@ -3,6 +3,7 @@
   [autoUpdateSeries]="false"
   [series]="form.value.series | series: form.value.type"
   [xaxis]="{ categories: form.value.xaxis }"
+  (chartReady)="onChartReady($event)"
   [chart]="{
     id: 'ng-chart-example',
     height: form.value.height!,

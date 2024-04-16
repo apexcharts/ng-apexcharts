@@ -21,6 +21,14 @@ More than 80+ examples of all the chart types with sample codes can be found on 
 
 ## Download and Installation
 
+Use the Angular CLI's install [schematics](https://angular.io/guide/schematics) to set up ngx-apexcharts by running the following command:
+
+```bash
+ng add ng-apexcharts
+```
+
+if you don't like the above way, the following is also supported.
+
 1. Install using npm:
 
 ```ts
@@ -36,6 +44,7 @@ npm install apexcharts ng-apexcharts --save
 ```
 
 3. Add ng-apexcharts-module to imports
+
 ```ts
 import { NgApexchartsModule } from "ng-apexcharts";
 
@@ -88,6 +97,7 @@ This is a list of all available attributes:
 @Input() title: ApexTitleSubtitle;
 @Input() subtitle: ApexTitleSubtitle;
 @Input() theme: ApexTheme;
+@Output() chartReady;
 ```
 
 You can visit the [docs](https://apexcharts.com/docs/) to read more about all the options listed above.
@@ -140,8 +150,8 @@ Example
 ```js
 window.ApexCharts.exec("ng-chart-example", "updateSeries", [
   {
-    data: [40, 55, 65, 11, 23, 44, 54, 33]
-  }
+    data: [40, 55, 65, 11, 23, 44, 54, 33],
+  },
 ]);
 ```
 

@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Adds ng-apexcharts to the application",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "aliases": [
+        "ng-apexcharts-shell",
+        "install"
+      ]
+    }
+  }
+}

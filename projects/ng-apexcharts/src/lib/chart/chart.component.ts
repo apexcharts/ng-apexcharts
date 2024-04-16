@@ -2,14 +2,17 @@ import {
   Component,
   ElementRef,
   Input,
+  Output,
   OnChanges,
   OnDestroy,
   SimpleChanges,
   ViewChild,
   NgZone,
   ChangeDetectionStrategy,
-  inject
+  inject,
+  EventEmitter
 } from '@angular/core';
+
 import {
   ApexAnnotations,
   ApexAxisChartSeries,
@@ -50,7 +53,37 @@ declare global {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartComponent implements OnChanges, OnDestroy {
-  private readonly ngZone = inject(NgZone);
+  @Input() chart: ApexChart;
+  @Input() annotations: ApexAnnotations;
+  @Input() colors: any[];
+  @Input() dataLabels: ApexDataLabels;
+  @Input() series: ApexAxisChartSeries | ApexNonAxisChartSeries;
+  @Input() stroke: ApexStroke;
+  @Input() labels: string[];
+  @Input() legend: ApexLegend;
+  @Input() markers: ApexMarkers;
+  @Input() noData: ApexNoData;
+  @Input() fill: ApexFill;
+  @Input() tooltip: ApexTooltip;
+  @Input() plotOptions: ApexPlotOptions;
+  @Input() responsive: ApexResponsive[];
+  @Input() xaxis: ApexXAxis;
+  @Input() yaxis: ApexYAxis | ApexYAxis[];
+  @Input() forecastDataPoints: ApexForecastDataPoints;
+  @Input() grid: ApexGrid;
+  @Input() states: ApexStates;
+  @Input() title: ApexTitleSubtitle;
+  @Input() subtitle: ApexTitleSubtitle;
+  @Input() theme: ApexTheme;
+
+  @Input() autoUpdateSeries = true;
+
+  @Output() chartReady = new EventEmitter();
+
+  @ViewChild("chart", { static: true }) private chartElement: ElementRef;
+  private chartObj: any;
+
+  constructor(private ngZone: NgZone) {
 
   @Input()
   public chart!: ApexChart;
@@ -164,7 +197,10 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
       this.render();
       this.hasPendingLoad = false;
+      this.chartReady.emit({chartObj: this.chartObj})
+
     });
+
   }
 
   render(): Promise<void>|undefined {
