@@ -695,7 +695,7 @@ export interface ApexFill {
     inverseColors?: boolean;
     opacityFrom?: number | number[];
     opacityTo?: number | number[];
-    stops?:  number[];
+    stops?: number[];
     colorStops?: ApexColorStop[][] | ApexColorStop[];
   };
   image?: {
@@ -990,7 +990,7 @@ export interface ApexYAxis {
   show?: boolean;
   showAlways?: boolean;
   showForNullSeries?: boolean;
-  seriesName?: string;
+  seriesName?: string | string[];
   opposite?: boolean;
   reversed?: boolean;
   logarithmic?: boolean;
