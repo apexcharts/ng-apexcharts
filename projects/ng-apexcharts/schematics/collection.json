@@ -5,10 +5,14 @@
       "description": "Adds ng-apexcharts to the application",
       "factory": "./ng-add/index",
       "schema": "./ng-add/schema.json",
-      "aliases": [
-        "ng-apexcharts-shell",
-        "install"
-      ]
+      "aliases": ["ng-apexcharts-shell", "install"]
+    },
+    "ng-add-setup-project": {
+      "description": "Sets up the specified project after the ng-add dependencies have been installed.",
+      "private": true,
+      "factory": "./ng-add/setup-project",
+      "schema": "./ng-add/schema.json",
+      "hidden": true
     }
   }
 }

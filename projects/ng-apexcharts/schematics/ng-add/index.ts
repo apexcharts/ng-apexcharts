@@ -1,7 +1,10 @@
 
 import { JsonValue } from '@angular-devkit/core';
 import { Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import {
+  NodePackageInstallTask,
+  RunSchematicTask,
+} from "@angular-devkit/schematics/tasks";
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 import { ProjectDefinition, WorkspaceDefinition, getWorkspace } from '@schematics/angular/utility/workspace';
 import { addSymbolToNgModuleMetadata, insertImport } from '@schematics/angular/utility/ast-utils';
@@ -9,32 +12,41 @@ import { ProjectType } from '@schematics/angular/utility/workspace-models';
 import { InsertChange } from '@schematics/angular/utility/change';
 
 import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
+import { NgApexchartNgAddSchema } from './schema';
 
 const scriptPath = `/node_modules/apexcharts/dist/apexcharts.min.js`;
 
-interface NgApexchartNgAddSchema {
-  project?: string;
-}
-
-export default function(options: NgApexchartNgAddSchema): Rule {
+export default function (options: NgApexchartNgAddSchema): Rule {
   return async (_host: Tree, _context: SchematicContext) => {
-    const workspace = await getWorkspace(_host);
-    const project = getProjectFromWorkspace(workspace, options.project);
-
-    if (!project) {
-      throw new Error(`can not find ${options.project} angular project`);
-    }
-    if (project.extensions.projectType === ProjectType.Application) {
-      addNgPendoModule(project as ProjectDefinition, _host);
-      addScripts(workspace, options.project!, 'build', _host, scriptPath);
-      addScripts(workspace, options.project!, 'test', _host, scriptPath);
-    }
-    addPackageToPackageJson(_host, 'ng-apexcharts', '~1.8.0');
-    addPackageToPackageJson(_host, 'apexcharts', '~3.41.0');
-    _context.logger.log('info', '✅️ Added "ng-apexcharts"');
-    _context.addTask(new NodePackageInstallTask());
+    addPackageToPackageJson(_host, "apexcharts", "~3.49.0");
+    const installTaskId = _context.addTask(new NodePackageInstallTask());
+    _context.addTask(new RunSchematicTask("ng-add-setup-project", options), [
+      installTaskId,
+    ]);
+    _context.logger.log("info", '✅️ Added "ng-apexcharts"');
   };
 }
+
+
+// export default function(options: NgApexchartNgAddSchema): Rule {
+//   return async (_host: Tree, _context: SchematicContext) => {
+//     const workspace = await getWorkspace(_host);
+//     const project = getProjectFromWorkspace(workspace, options.project);
+
+//     if (!project) {
+//       throw new Error(`can not find ${options.project} angular project`);
+//     }
+//     if (project.extensions.projectType === ProjectType.Application) {
+//       addNgPendoModule(project as ProjectDefinition, _host);
+//       addScripts(workspace, options.project!, 'build', _host, scriptPath);
+//       addScripts(workspace, options.project!, 'test', _host, scriptPath);
+//     }
+//     addPackageToPackageJson(_host, 'ng-apexcharts', '~1.8.0');
+//     addPackageToPackageJson(_host, 'apexcharts', '~3.41.0');
+//     _context.logger.log('info', '✅️ Added "ng-apexcharts"');
+//     _context.addTask(new NodePackageInstallTask());
+//   };
+// }
 
 function addNgPendoModule(project: ProjectDefinition, _host: Tree): void {
   if (!project) {
