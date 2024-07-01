@@ -1,53 +1,69 @@
-<apx-chart #chart [series]="form.value.series | series: form.value.type"
-           [xaxis]="{ categories: form.value.xaxis }"
-           [chart]="{
-              height: form.value.height,
-              type: form.value.type,
-              zoom: {
-                enabled: false
-              },
-              shadow: {
-                    enabled: true,
-                    color: '#000',
-                    top: 18,
-                    left: 7,
-                    blur: 10,
-                    opacity: 1
-                }}"
-           [title]="{ text: form.value.title }" [autoUpdateSeries]="false"
-           (chartReady)="onChartReady($event)"></apx-chart>
+<apx-chart
+  #chart
+  [series]="form.value.series | series : form.value.type"
+  [xaxis]="{ categories: form.value.xaxis }"
+  [chart]="{
+    height: form.value.height,
+    type: form.value.type,
+    zoom: {
+      enabled: false
+    },
+    shadow: {
+      enabled: true,
+      color: '#000',
+      top: 18,
+      left: 7,
+      blur: 10,
+      opacity: 1
+    }
+  }"
+  [title]="{ text: form.value.title }"
+  [autoUpdateSeries]="false"
+  (chartReady)="onChartReady($event)"
+></apx-chart>
 
 <form [formGroup]="form" [class.tes]="changeDet()">
-  Title: <input type="text" formControlName="title"><br>
-  Height: <input type="number" formControlName="height"><br>
-  Type: <select formControlName="type">
-  <option value="line">Line</option>
-  <option value="area">Area</option>
-  <option value="bar">Bar</option>
-  <option value="radar">Radar</option>
-</select>
+  Title: <input type="text" formControlName="title" /><br />
+  Height: <input type="number" formControlName="height" /><br />
+  Type:
+  <select formControlName="type">
+    <option value="line">Line</option>
+    <option value="area">Area</option>
+    <option value="bar">Bar</option>
+    <option value="radar">Radar</option>
+  </select>
 
   <h3>Values</h3>
   <button (click)="addSeries()">Add series</button>
   <button (click)="addValue()">Add value</button>
 
   <div>
-    <div style="width: 80%; display: inline-block;" formArrayName="series">
+    <div style="width: 80%; display: inline-block" formArrayName="series">
       <h4>Data</h4>
 
-      <div *ngFor="let series of series.controls; let i = index" style="width: 20%; display: inline-block">
+      <div
+        *ngFor="let series of series.controls; let i = index"
+        style="width: 20%; display: inline-block"
+      >
         <div [formGroupName]="i">
-          Name: <input type="text" formControlName="name"><br>
-          Type: <select formControlName="type">
-          <option value="line">Line</option>
-          <option value="area">Area</option>
-          <option value="bar">Bar</option>
-        </select>
+          Name: <input type="text" formControlName="name" /><br />
+          Type:
+          <select formControlName="type">
+            <option value="line">Line</option>
+            <option value="area">Area</option>
+            <option value="bar">Bar</option>
+          </select>
 
           <div formArrayName="data">
-            <div *ngFor="let alias of form.get('series').controls[i].get('data').controls; let y=index">
+            <div
+              *ngFor="
+                let alias of form.get('series').controls[i].get('data')
+                  .controls;
+                let y = index
+              "
+            >
               <label>
-                Value: <input type="number" [formControlName]="y">
+                Value: <input type="number" [formControlName]="y" />
               </label>
             </div>
           </div>
@@ -57,16 +73,14 @@
 
     <div formArrayName="xaxis" style="width: 20%; display: inline-block">
       <h4>XAxis</h4>
-      <div *ngFor="let alias of xaxis.controls; let i=index">
+      <div *ngFor="let alias of xaxis.controls; let i = index">
         <label>
           Value:
-          <input type="text" [formControlName]="i">
+          <input type="text" [formControlName]="i" />
         </label>
       </div>
     </div>
   </div>
 </form>
 
-{{form.value | json}}
-
-<router-outlet></router-outlet>
+{{ form.value | json }}
