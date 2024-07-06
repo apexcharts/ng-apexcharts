@@ -116,7 +116,8 @@ export interface ApexChart {
         columnDelimiter?: string;
         headerCategory?: string;
         headerValue?: string;
-        dateFormatter?(timestamp?: number): any;
+        categoryFormatter?(value?: number): any;
+        valueFormatter?(value?: number): any;
       };
       svg?: {
         filename?: undefined | string;
@@ -738,11 +739,10 @@ export interface ApexLegend {
     useSeriesColors?: boolean;
   };
   markers?: {
-    width?: number;
-    height?: number;
     strokeColor?: string;
     strokeWidth?: number;
     fillColors?: string[];
+    shape?: ApexMarkerShape;
     offsetX?: number;
     offsetY?: number;
     radius?: number;
@@ -1123,10 +1123,9 @@ type MarkerShapeOptions =
   | "circle"
   | "square"
   | "rect"
-  | "x"
-  | "X"
-  | "plus"
-  | "+";
+  | "line"
+  | "cross"
+  | "plus";
 
 type ApexMarkerShape = MarkerShapeOptions | MarkerShapeOptions[];
 
@@ -1141,8 +1140,6 @@ interface ApexDiscretePoint {
 
 export interface ApexMarkers {
   size?: number | number[];
-  width?: number | number[];
-  height?: number | number[];
   colors?: string[];
   strokeColors?: string | string[];
   strokeWidth?: number | number[];
