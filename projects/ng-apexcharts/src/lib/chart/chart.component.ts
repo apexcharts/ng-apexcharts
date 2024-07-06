@@ -10,6 +10,9 @@ import {
   NgZone,
   ChangeDetectionStrategy,
   EventEmitter,
+  inject,
+  PLATFORM_ID,
+  signal,
 } from "@angular/core";
 import {
   ApexAnnotations,
@@ -33,14 +36,20 @@ import {
   ApexYAxis,
   ApexForecastDataPoints,
 } from "../model/apex-types";
-import { asapScheduler } from "rxjs";
+import { BehaviorSubject, asapScheduler } from "rxjs";
+import { isPlatformBrowser } from "@angular/common";
 
-import ApexCharts from "apexcharts";
+declare global {
+  interface Window {
+    ApexCharts: any;
+  }
+}
 
 @Component({
   selector: "apx-chart",
   template: `<div #chart></div>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class ChartComponent implements OnChanges, OnDestroy {
   @Input() chart: ApexChart;
@@ -71,33 +80,44 @@ export class ChartComponent implements OnChanges, OnDestroy {
   @Output() chartReady = new EventEmitter();
 
   @ViewChild("chart", { static: true }) private chartElement: ElementRef;
-  private chartObj: any;
 
-  constructor(private ngZone: NgZone) {
+  // The instance stored in `signal` will be exposed in the future.
+  // Consumers can then use it in conjunction with `computed` to retrieve
+  // the latest chart instance and execute logic on the chart whenever it changes.
+  private chartInstance = signal<import("apexcharts") | null>(null);
 
-  }
+  private ngZone = inject(NgZone);
+  private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   ngOnChanges(changes: SimpleChanges): void {
-    asapScheduler.schedule(() => {
-      if (
-        this.autoUpdateSeries &&
-        Object.keys(changes).filter((c) => c !== "series").length === 0
-      ) {
-        this.updateSeries(this.series, true);
-        return;
-      }
+    if (!this.isBrowser) return;
 
-      this.createElement();
+    this.ngZone.runOutsideAngular(() => {
+      asapScheduler.schedule(() => this.hydrate(changes));
     });
   }
 
   ngOnDestroy() {
-    if (this.chartObj) {
-      this.chartObj.destroy();
-    }
+    this.destroy();
   }
 
-  private createElement() {
+  private hydrate(changes: SimpleChanges): void {
+    const shouldUpdateSeries =
+      this.autoUpdateSeries &&
+      Object.keys(changes).filter((c) => c !== "series").length === 0;
+
+    if (shouldUpdateSeries) {
+      this.updateSeries(this.series, true);
+      return;
+    }
+
+    this.createElement();
+  }
+
+  private async createElement() {
+    const { default: ApexCharts } = await import("apexcharts");
+    window.ApexCharts ||= ApexCharts;
+
     const options: any = {};
 
     if (this.annotations) {
@@ -167,20 +187,20 @@ export class ChartComponent implements OnChanges, OnDestroy {
       options.theme = this.theme;
     }
 
-    if (this.chartObj) {
-      this.chartObj.destroy();
-    }
+    this.destroy();
 
-    this.ngZone.runOutsideAngular(() => {
-      this.chartObj = new ApexCharts(this.chartElement.nativeElement, options);
-    });
+    const chartInstance = this.ngZone.runOutsideAngular(
+      () => new ApexCharts(this.chartElement.nativeElement, options)
+    );
+
+    this.chartInstance.set(chartInstance);
 
     this.render();
-    this.chartReady.emit({chartObj: this.chartObj})
+    this.chartReady.emit({ chartObj: chartInstance });
   }
 
-  public render(): Promise<void> {
-    return this.ngZone.runOutsideAngular(() => this.chartObj.render());
+  public render() {
+    return this.ngZone.runOutsideAngular(() => this.chartInstance()?.render());
   }
 
   public updateOptions(
@@ -188,70 +208,92 @@ export class ChartComponent implements OnChanges, OnDestroy {
     redrawPaths?: boolean,
     animate?: boolean,
     updateSyncedCharts?: boolean
-  ): Promise<void> {
-    return this.ngZone.runOutsideAngular(() => this.chartObj.updateOptions(
-      options,
-      redrawPaths,
-      animate,
-      updateSyncedCharts
-    ));
+  ) {
+    return this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.updateOptions(
+        options,
+        redrawPaths,
+        animate,
+        updateSyncedCharts
+      )
+    );
   }
 
   public updateSeries(
     newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
     animate?: boolean
   ) {
-    return this.ngZone.runOutsideAngular(() => this.chartObj.updateSeries(newSeries, animate));
+    return this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.updateSeries(newSeries, animate)
+    );
   }
 
   public appendSeries(
     newSeries: ApexAxisChartSeries | ApexNonAxisChartSeries,
     animate?: boolean
   ) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.appendSeries(newSeries, animate));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.appendSeries(newSeries, animate)
+    );
   }
 
   public appendData(newData: any[]) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.appendData(newData));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.appendData(newData)
+    );
   }
 
   public toggleSeries(seriesName: string): any {
-    return this.ngZone.runOutsideAngular(() => this.chartObj.toggleSeries(seriesName));
+    return this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.toggleSeries(seriesName)
+    );
   }
 
   public showSeries(seriesName: string) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.showSeries(seriesName));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.showSeries(seriesName)
+    );
   }
 
   public hideSeries(seriesName: string) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.hideSeries(seriesName));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.hideSeries(seriesName)
+    );
   }
 
   public resetSeries() {
-    this.ngZone.runOutsideAngular(() => this.chartObj.resetSeries());
+    this.ngZone.runOutsideAngular(() => this.chartInstance()?.resetSeries());
   }
 
   public zoomX(min: number, max: number) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.zoomX(min, max));
+    this.ngZone.runOutsideAngular(() => this.chartInstance()?.zoomX(min, max));
   }
 
   public toggleDataPointSelection(
     seriesIndex: number,
     dataPointIndex?: number
   ) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.toggleDataPointSelection(seriesIndex, dataPointIndex));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.toggleDataPointSelection(
+        seriesIndex,
+        dataPointIndex
+      )
+    );
   }
 
   public destroy() {
-    this.chartObj.destroy();
+    this.chartInstance()?.destroy();
+    this.chartInstance.set(null);
   }
 
-  public setLocale(localeName?: string) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.setLocale(localeName));
+  public setLocale(localeName: string) {
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.setLocale(localeName)
+    );
   }
 
   public paper() {
-    this.ngZone.runOutsideAngular(() => this.chartObj.paper());
+    this.ngZone.runOutsideAngular(() => this.chartInstance()?.paper());
   }
 
   public addXaxisAnnotation(
@@ -259,7 +301,9 @@ export class ChartComponent implements OnChanges, OnDestroy {
     pushToMemory?: boolean,
     context?: any
   ) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.addXaxisAnnotation(options, pushToMemory, context));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.addXaxisAnnotation(options, pushToMemory, context)
+    );
   }
 
   public addYaxisAnnotation(
@@ -267,7 +311,9 @@ export class ChartComponent implements OnChanges, OnDestroy {
     pushToMemory?: boolean,
     context?: any
   ) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.addYaxisAnnotation(options, pushToMemory, context));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.addYaxisAnnotation(options, pushToMemory, context)
+    );
   }
 
   public addPointAnnotation(
@@ -275,18 +321,24 @@ export class ChartComponent implements OnChanges, OnDestroy {
     pushToMemory?: boolean,
     context?: any
   ) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.addPointAnnotation(options, pushToMemory, context));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.addPointAnnotation(options, pushToMemory, context)
+    );
   }
 
   public removeAnnotation(id: string, options?: any) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.removeAnnotation(id, options));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.removeAnnotation(id, options)
+    );
   }
 
   public clearAnnotations(options?: any) {
-    this.ngZone.runOutsideAngular(() => this.chartObj.clearAnnotations(options));
+    this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.clearAnnotations(options)
+    );
   }
 
-  public dataURI(options?: any): Promise<{ imgURI: string }> {
-    return this.chartObj.dataURI(options);
+  public dataURI(options?: any) {
+    return this.chartInstance()?.dataURI(options);
   }
 }

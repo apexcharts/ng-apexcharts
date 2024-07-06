@@ -6,26 +6,17 @@
     "sourceMap": true,
     "declaration": false,
     "esModuleInterop": true,
-    "module": "es2015",
-    "moduleResolution": "node",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["ES2022", "dom"],
     "paths": {
-      "ng-apexcharts": [
-        "dist/ng-apexcharts"
-      ],
-      "ng-apexcharts/*": [
-        "dist/ng-apexcharts/*"
-      ]
+      "ng-apexcharts": ["projects/ng-apexcharts/src/public_api.ts"]
     },
     "useDefineForClassFields": false
   }
