@@ -353,7 +353,6 @@ export interface PointAnnotations {
     shape?: string;
     offsetX?: number;
     offsetY?: number;
-    radius?: number;
     cssClass?: string;
   };
   label?: AnnotationLabel;
@@ -668,7 +667,8 @@ export interface ApexPlotOptions {
     };
     barLabels?: {
       enabled?: boolean;
-      margin?: number;
+      offsetX?: number;
+      offsetY?: number;
       useSeriesColors?: boolean;
       fontFamily?: string;
       fontWeight?: string | number;
@@ -745,7 +745,6 @@ export interface ApexLegend {
     shape?: ApexMarkerShape;
     offsetX?: number;
     offsetY?: number;
-    radius?: number;
     customHTML?(): any;
     onClick?(): void;
   };
@@ -1125,7 +1124,11 @@ type MarkerShapeOptions =
   | "rect"
   | "line"
   | "cross"
-  | "plus";
+  | "plus"
+  | "star"
+  | "sparkle"
+  | "diamond"
+  | "triangle";
 
 type ApexMarkerShape = MarkerShapeOptions | MarkerShapeOptions[];
 
@@ -1148,7 +1151,6 @@ export interface ApexMarkers {
   fillOpacity?: number | number[];
   discrete?: ApexDiscretePoint[];
   shape?: ApexMarkerShape;
-  radius?: number;
   offsetX?: number;
   offsetY?: number;
   showNullDataPoints?: boolean;
