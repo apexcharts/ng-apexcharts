@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "build:pkg": "ng build ng-apexcharts --configuration production",
     "build:schematics": "tsc -p ./projects/ng-apexcharts/schematics/tsconfig.json --outDir dist/ng-apexcharts/schematics",
-    "copyfile:lincense": "copyfiles ./LICENSE ./dist/ng-apexcharts",
+    "copyfile:license": "copyfiles ./LICENSE ./dist/ng-apexcharts",
     "copyfile:schema": "copyfiles -f ./projects/ng-apexcharts/schematics/ng-add/schema.json ./dist/ng-apexcharts/schematics/ng-add",
     "copyfile:collection": "copyfiles -f ./projects/ng-apexcharts/schematics/collection.json ./dist/ng-apexcharts/schematics",
     "copyfile": "concurrently -c cyan,green 'npm run copyfile:*'",
