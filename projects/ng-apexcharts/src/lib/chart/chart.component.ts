@@ -1,30 +1,33 @@
+import { isPlatformBrowser } from "@angular/common";
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Input,
-  Output,
-  OnChanges,
-  OnDestroy,
-  SimpleChanges,
-  ViewChild,
-  NgZone,
-  ChangeDetectionStrategy,
   EventEmitter,
   inject,
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  Output,
   PLATFORM_ID,
   signal,
+  SimpleChanges,
+  ViewChild,
 } from "@angular/core";
+import { asapScheduler } from "rxjs";
 import {
   ApexAnnotations,
   ApexAxisChartSeries,
   ApexChart,
   ApexDataLabels,
   ApexFill,
+  ApexForecastDataPoints,
   ApexGrid,
   ApexLegend,
-  ApexNonAxisChartSeries,
   ApexMarkers,
   ApexNoData,
+  ApexNonAxisChartSeries,
   ApexPlotOptions,
   ApexResponsive,
   ApexStates,
@@ -34,10 +37,7 @@ import {
   ApexTooltip,
   ApexXAxis,
   ApexYAxis,
-  ApexForecastDataPoints,
 } from "../model/apex-types";
-import { BehaviorSubject, asapScheduler } from "rxjs";
-import { isPlatformBrowser } from "@angular/common";
 
 declare global {
   interface Window {
@@ -52,28 +52,28 @@ declare global {
   standalone: true,
 })
 export class ChartComponent implements OnChanges, OnDestroy {
-  @Input() chart: ApexChart;
-  @Input() annotations: ApexAnnotations;
-  @Input() colors: any[];
-  @Input() dataLabels: ApexDataLabels;
-  @Input() series: ApexAxisChartSeries | ApexNonAxisChartSeries;
-  @Input() stroke: ApexStroke;
-  @Input() labels: string[];
-  @Input() legend: ApexLegend;
-  @Input() markers: ApexMarkers;
-  @Input() noData: ApexNoData;
-  @Input() fill: ApexFill;
-  @Input() tooltip: ApexTooltip;
-  @Input() plotOptions: ApexPlotOptions;
-  @Input() responsive: ApexResponsive[];
-  @Input() xaxis: ApexXAxis;
-  @Input() yaxis: ApexYAxis | ApexYAxis[];
-  @Input() forecastDataPoints: ApexForecastDataPoints;
-  @Input() grid: ApexGrid;
-  @Input() states: ApexStates;
-  @Input() title: ApexTitleSubtitle;
-  @Input() subtitle: ApexTitleSubtitle;
-  @Input() theme: ApexTheme;
+  @Input() chart?: ApexChart;
+  @Input() annotations?: ApexAnnotations;
+  @Input() colors?: any[];
+  @Input() dataLabels?: ApexDataLabels;
+  @Input() series?: ApexAxisChartSeries | ApexNonAxisChartSeries;
+  @Input() stroke?: ApexStroke;
+  @Input() labels?: string[];
+  @Input() legend?: ApexLegend;
+  @Input() markers?: ApexMarkers;
+  @Input() noData?: ApexNoData;
+  @Input() fill?: ApexFill;
+  @Input() tooltip?: ApexTooltip;
+  @Input() plotOptions?: ApexPlotOptions;
+  @Input() responsive?: ApexResponsive[];
+  @Input() xaxis?: ApexXAxis;
+  @Input() yaxis?: ApexYAxis | ApexYAxis[];
+  @Input() forecastDataPoints?: ApexForecastDataPoints;
+  @Input() grid?: ApexGrid;
+  @Input() states?: ApexStates;
+  @Input() title?: ApexTitleSubtitle;
+  @Input() subtitle?: ApexTitleSubtitle;
+  @Input() theme?: ApexTheme;
 
   @Input() autoUpdateSeries = true;
 
