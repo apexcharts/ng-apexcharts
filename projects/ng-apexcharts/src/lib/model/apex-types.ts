@@ -732,14 +732,12 @@ export interface ApexLegend {
   height?: number;
   offsetX?: number;
   offsetY?: number;
-  textAnchor?: string;
   customLegendItems?: string[];
   labels?: {
     colors?: string | string[];
     useSeriesColors?: boolean;
   };
   markers?: {
-    strokeColor?: string;
     strokeWidth?: number;
     fillColors?: string[];
     shape?: ApexMarkerShape;
@@ -751,10 +749,6 @@ export interface ApexLegend {
   itemMargin?: {
     horizontal?: number;
     vertical?: number;
-  };
-  containerMargin?: {
-    left?: number;
-    top?: number;
   };
   onItemClick?: {
     toggleDataSeries?: boolean;
