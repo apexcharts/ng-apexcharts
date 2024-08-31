@@ -125,6 +125,8 @@ export interface ApexChart {
       png?: {
         filename?: undefined | string;
       };
+      width?: number;
+      scale?: number;
     };
     autoSelected?: "zoom" | "selection" | "pan";
   };
@@ -132,6 +134,7 @@ export interface ApexChart {
     enabled?: boolean;
     type?: "x" | "y" | "xy";
     autoScaleYaxis?: boolean;
+    allowMouseWheelZoom?: boolean;
     zoomedArea?: {
       fill?: {
         color?: string;
@@ -233,6 +236,7 @@ export type ApexAxisChartSeries = {
   color?: string;
   group?: string;
   zIndex?: number;
+  hidden?: boolean;
   data:
     | (number | null)[]
     | {

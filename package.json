@@ -28,7 +28,7 @@
     "@angular/router": "^18.0.4",
     "@angular/ssr": "^18.0.4",
     "@schematics/angular": "^18.0.4",
-    "apexcharts": "^3.49.0",
+    "apexcharts": "^3.53.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.14.2"

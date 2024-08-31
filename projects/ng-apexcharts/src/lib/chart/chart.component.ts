@@ -243,6 +243,12 @@ export class ChartComponent implements OnChanges, OnDestroy {
     );
   }
 
+  public highlightSeries(seriesName: string): any {
+    return this.ngZone.runOutsideAngular(() =>
+      this.chartInstance()?.highlightSeries(seriesName)
+    );
+  }
+
   public toggleSeries(seriesName: string): any {
     return this.ngZone.runOutsideAngular(() =>
       this.chartInstance()?.toggleSeries(seriesName)
