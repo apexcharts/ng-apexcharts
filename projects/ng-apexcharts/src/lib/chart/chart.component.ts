@@ -3,17 +3,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   inject,
-  Input,
+  input,
   NgZone,
   OnChanges,
   OnDestroy,
-  Output,
+  output,
   PLATFORM_ID,
   signal,
   SimpleChanges,
-  ViewChild,
+  viewChild,
 } from "@angular/core";
 import { asapScheduler } from "rxjs";
 import {
@@ -39,9 +38,11 @@ import {
   ApexYAxis,
 } from "../model/apex-types";
 
+type ApexCharts = import("apexcharts");
+
 declare global {
   interface Window {
-    ApexCharts: any;
+    ApexCharts: typeof ApexCharts;
   }
 }
 
@@ -52,39 +53,41 @@ declare global {
   standalone: true,
 })
 export class ChartComponent implements OnChanges, OnDestroy {
-  @Input() chart?: ApexChart;
-  @Input() annotations?: ApexAnnotations;
-  @Input() colors?: any[];
-  @Input() dataLabels?: ApexDataLabels;
-  @Input() series?: ApexAxisChartSeries | ApexNonAxisChartSeries;
-  @Input() stroke?: ApexStroke;
-  @Input() labels?: string[];
-  @Input() legend?: ApexLegend;
-  @Input() markers?: ApexMarkers;
-  @Input() noData?: ApexNoData;
-  @Input() fill?: ApexFill;
-  @Input() tooltip?: ApexTooltip;
-  @Input() plotOptions?: ApexPlotOptions;
-  @Input() responsive?: ApexResponsive[];
-  @Input() xaxis?: ApexXAxis;
-  @Input() yaxis?: ApexYAxis | ApexYAxis[];
-  @Input() forecastDataPoints?: ApexForecastDataPoints;
-  @Input() grid?: ApexGrid;
-  @Input() states?: ApexStates;
-  @Input() title?: ApexTitleSubtitle;
-  @Input() subtitle?: ApexTitleSubtitle;
-  @Input() theme?: ApexTheme;
+  readonly chart = input<ApexChart>();
+  readonly annotations = input<ApexAnnotations>();
+  readonly colors = input<any[]>();
+  readonly dataLabels = input<ApexDataLabels>();
+  readonly series = input<ApexAxisChartSeries | ApexNonAxisChartSeries>();
+  readonly stroke = input<ApexStroke>();
+  readonly labels = input<string[]>();
+  readonly legend = input<ApexLegend>();
+  readonly markers = input<ApexMarkers>();
+  readonly noData = input<ApexNoData>();
+  readonly fill = input<ApexFill>();
+  readonly tooltip = input<ApexTooltip>();
+  readonly plotOptions = input<ApexPlotOptions>();
+  readonly responsive = input<ApexResponsive[]>();
+  readonly xaxis = input<ApexXAxis>();
+  readonly yaxis = input<ApexYAxis | ApexYAxis[]>();
+  readonly forecastDataPoints = input<ApexForecastDataPoints>();
+  readonly grid = input<ApexGrid>();
+  readonly states = input<ApexStates>();
+  readonly title = input<ApexTitleSubtitle>();
+  readonly subtitle = input<ApexTitleSubtitle>();
+  readonly theme = input<ApexTheme>();
 
-  @Input() autoUpdateSeries = true;
+  readonly autoUpdateSeries = input(true);
 
-  @Output() chartReady = new EventEmitter();
+  readonly chartReady = output<{ chartObj: ApexCharts }>();
 
-  @ViewChild("chart", { static: true }) private chartElement: ElementRef;
+  // If consumers need to capture the `chartInstance` for use, consumers
+  // can access the component instance through `viewChild` and use `computed`
+  // or `effect` on `component.chartInstance()` to monitor its changes and
+  // recompute effects or computations whenever `chartInstance` is updated.
+  readonly chartInstance = signal<ApexCharts | null>(null);
 
-  // The instance stored in `signal` will be exposed in the future.
-  // Consumers can then use it in conjunction with `computed` to retrieve
-  // the latest chart instance and execute logic on the chart whenever it changes.
-  private chartInstance = signal<import("apexcharts") | null>(null);
+  private readonly chartElement =
+    viewChild.required<ElementRef<HTMLElement>>("chart");
 
   private ngZone = inject(NgZone);
   private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
@@ -103,11 +106,11 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
   private hydrate(changes: SimpleChanges): void {
     const shouldUpdateSeries =
-      this.autoUpdateSeries &&
+      this.autoUpdateSeries() &&
       Object.keys(changes).filter((c) => c !== "series").length === 0;
 
     if (shouldUpdateSeries) {
-      this.updateSeries(this.series, true);
+      this.updateSeries(this.series(), true);
       return;
     }
 
@@ -120,77 +123,42 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
     const options: any = {};
 
-    if (this.annotations) {
-      options.annotations = this.annotations;
-    }
-    if (this.chart) {
-      options.chart = this.chart;
-    }
-    if (this.colors) {
-      options.colors = this.colors;
-    }
-    if (this.dataLabels) {
-      options.dataLabels = this.dataLabels;
-    }
-    if (this.series) {
-      options.series = this.series;
-    }
-    if (this.stroke) {
-      options.stroke = this.stroke;
-    }
-    if (this.labels) {
-      options.labels = this.labels;
-    }
-    if (this.legend) {
-      options.legend = this.legend;
-    }
-    if (this.fill) {
-      options.fill = this.fill;
-    }
-    if (this.tooltip) {
-      options.tooltip = this.tooltip;
-    }
-    if (this.plotOptions) {
-      options.plotOptions = this.plotOptions;
-    }
-    if (this.responsive) {
-      options.responsive = this.responsive;
-    }
-    if (this.markers) {
-      options.markers = this.markers;
-    }
-    if (this.noData) {
-      options.noData = this.noData;
-    }
-    if (this.xaxis) {
-      options.xaxis = this.xaxis;
-    }
-    if (this.yaxis) {
-      options.yaxis = this.yaxis;
-    }
-    if (this.forecastDataPoints) {
-      options.forecastDataPoints = this.forecastDataPoints;
-    }
-    if (this.grid) {
-      options.grid = this.grid;
-    }
-    if (this.states) {
-      options.states = this.states;
-    }
-    if (this.title) {
-      options.title = this.title;
-    }
-    if (this.subtitle) {
-      options.subtitle = this.subtitle;
-    }
-    if (this.theme) {
-      options.theme = this.theme;
-    }
+    const properties = [
+      "annotations",
+      "chart",
+      "colors",
+      "dataLabels",
+      "series",
+      "stroke",
+      "labels",
+      "legend",
+      "fill",
+      "tooltip",
+      "plotOptions",
+      "responsive",
+      "markers",
+      "noData",
+      "xaxis",
+      "yaxis",
+      "forecastDataPoints",
+      "grid",
+      "states",
+      "title",
+      "subtitle",
+      "theme",
+    ] as const;
+
+    properties.forEach((property) => {
+      const value = this[property]();
+      if (value) {
+        options[property] = value;
+      }
+    });
 
     this.destroy();
 
     const chartInstance = this.ngZone.runOutsideAngular(
-      () => new ApexCharts(this.chartElement.nativeElement, options)
+      () => new ApexCharts(this.chartElement().nativeElement, options)
     );
 
     this.chartInstance.set(chartInstance);
