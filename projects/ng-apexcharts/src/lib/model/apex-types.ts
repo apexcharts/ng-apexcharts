@@ -1001,6 +1001,7 @@ export interface ApexYAxis {
   decimalsInFloat?: number;
   labels?: {
     show?: boolean;
+    showDuplicates?: boolean;
     minWidth?: number;
     maxWidth?: number;
     offsetX?: number;
