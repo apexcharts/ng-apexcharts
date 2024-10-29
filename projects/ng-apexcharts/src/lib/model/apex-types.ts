@@ -171,7 +171,6 @@ export interface ApexChart {
   };
   animations?: {
     enabled?: boolean;
-    easing?: "linear" | "easein" | "easeout" | "easeinout";
     speed?: number;
     animateGradually?: {
       enabled?: boolean;
