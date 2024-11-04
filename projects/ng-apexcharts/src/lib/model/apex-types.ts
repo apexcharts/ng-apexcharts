@@ -245,7 +245,15 @@ export type ApexAxisChartSeries = {
         fillColor?: string;
         strokeColor?: string;
         meta?: any;
-        goals?: any;
+        goals?: {
+          name?: string;
+          value: number;
+          strokeHeight?: number;
+          strokeWidth?: number;
+          strokeColor?: string;
+          strokeDashArray?: number;
+          strokeLineCap?: "butt" | "square" | "round";
+        }[];
         barHeightOffset?: number;
         columnWidthOffset?: number;
       }[]
