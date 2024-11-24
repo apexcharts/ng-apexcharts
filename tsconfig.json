@@ -8,7 +8,6 @@
     "esModuleInterop": true,
     "module": "ES2022",
     "moduleResolution": "Bundler",
-    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
