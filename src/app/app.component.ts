@@ -12,17 +12,16 @@ import { ChartComponent } from "ng-apexcharts";
 import { SeriesPipe } from "./series.pipe";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.less"],
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ChartComponent,
-    SeriesPipe,
-  ],
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.less"],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ChartComponent,
+        SeriesPipe,
+    ]
 })
 export class AppComponent {
   @ViewChild("chart", { static: true }) chart: ChartComponent;
