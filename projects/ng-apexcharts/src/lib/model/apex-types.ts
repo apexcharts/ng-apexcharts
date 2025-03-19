@@ -491,8 +491,8 @@ export interface ApexPlotOptions {
   };
   candlestick?: {
     colors?: {
-      upward?: string;
-      downward?: string;
+      upward?: string | string[];
+      downward?: string | string[];
     };
     wick?: {
       useFillColor?: boolean;
@@ -500,8 +500,8 @@ export interface ApexPlotOptions {
   };
   boxPlot?: {
     colors?: {
-      upper?: string;
-      lower?: string;
+      upper?: string | string[];
+      lower?: string | string[];
     };
   };
   heatmap?: {
@@ -543,6 +543,28 @@ export interface ApexPlotOptions {
       }[];
       min?: number;
       max?: number;
+    };
+    seriesTitle?: {
+      show?: boolean;
+      offsetY?: number;
+      offsetX?: number;
+      borderColor?: string;
+      borderWidth?: number;
+      borderRadius?: number;
+      style?: {
+        background?: string;
+        color?: string;
+        fontSize?: string;
+        fontFamily?: string;
+        fontWeight?: number | string;
+        cssClass?: string;
+        padding?: {
+          left?: number;
+          right?: number;
+          top?: number;
+          bottom?: number;
+        };
+      };
     };
   };
   pie?: {
@@ -799,7 +821,7 @@ export interface ApexDataLabels {
   formatter?(
     val: string | number | number[],
     opts?: any
-  ): string | number | string[];
+  ): string | number | (string | number)[];
 }
 
 export interface ApexResponsive {
