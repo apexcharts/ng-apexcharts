@@ -490,6 +490,7 @@ export interface ApexPlotOptions {
     maxBubbleRadius?: number;
   };
   candlestick?: {
+    type?: string;
     colors?: {
       upward?: string | string[];
       downward?: string | string[];
@@ -810,6 +811,7 @@ export interface ApexDataLabels {
   background?: {
     enabled?: boolean;
     foreColor?: string;
+    backgroundColor?: string;
     borderRadius?: number;
     padding?: number;
     opacity?: number;
