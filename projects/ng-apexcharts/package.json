@@ -3,9 +3,9 @@
   "version": "1.15.0",
   "description": "An angular implementation of ApexCharts",
   "peerDependencies": {
-    "@angular/common": "^19.0.0",
-    "@angular/core": "^19.0.0",
-    "rxjs": "^6.5.5 || ^7.4.0",
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "rxjs": "^7.8.2",
     "apexcharts": ">=4.0.0"
   },
   "keywords": [
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/apexcharts/ng-apexcharts",
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.8.1"
   },
   "repository": {
     "type": "git",
