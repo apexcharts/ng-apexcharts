@@ -82,7 +82,7 @@ describe("ng add ng-apexcharts", () => {
       appTree,
     );
     const appmodule = tree.readContent(
-      "/projects/ng-apexcharts-app/src/app/app.module.ts",
+      "/projects/ng-apexcharts-app/src/app/app-module.ts",
     );
     expect(appmodule).toMatch(
       /import.*NgApexchartsModule.*from 'ng-apexcharts'/,
@@ -121,7 +121,7 @@ describe("ng add ng-apexcharts", () => {
       "import { NgApexchartsModule } from 'ng-apexcharts'",
     );
     expect(appconfig).toMatch(
-      /providers:\s*\[.*importProvidersFrom\(NgApexchartsModule\).*\]/,
+      /providers:\s*\[[\s\S]*importProvidersFrom\(NgApexchartsModule\)[\s\S]*\]/,
     );
     const angularJson = JSON.parse(tree.readContent("angular.json"));
     expect(

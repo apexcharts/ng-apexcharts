@@ -12,10 +12,17 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["ES2022", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "paths": {
-      "ng-apexcharts": ["projects/ng-apexcharts/src/public_api.ts"]
+      "ng-apexcharts": [
+        "projects/ng-apexcharts/src/public_api.ts"
+      ]
     },
     "useDefineForClassFields": false
   }
