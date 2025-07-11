@@ -15,7 +15,7 @@
     "copyfile": "concurrently -c cyan,green 'npm run copyfile:*'",
     "package": "concurrently -c cyan,green 'npm run build:*' && npm run copyfile"
   },
-  "private": true,
+  "license": "See License in LICENSE",
   "dependencies": {
     "@angular/animations": "^20.0.2",
     "@angular/common": "^20.0.2",
