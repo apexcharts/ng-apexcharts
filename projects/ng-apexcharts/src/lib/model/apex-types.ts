@@ -13,6 +13,10 @@ export interface ApexOptions {
   responsive?: ApexResponsive[];
   markers?: ApexMarkers;
   noData?: ApexNoData;
+  parsing?: {
+    x?: string;
+    y?: string;
+  };
   xaxis?: ApexXAxis;
   yaxis?: ApexYAxis | ApexYAxis[];
   forecastDataPoints?: ApexForecastDataPoints;
@@ -218,7 +222,6 @@ export interface ApexTitleSubtitle {
 
 /**
  * Chart Series options.
- * Use ApexNonAxisChartSeries for Pie and Donut charts.
  * See https://apexcharts.com/docs/options/series/
  */
 export type ApexAxisChartSeries = {
@@ -226,8 +229,12 @@ export type ApexAxisChartSeries = {
   type?: string;
   color?: string;
   group?: string;
-  zIndex?: number;
   hidden?: boolean;
+  zIndex?: number;
+  parsing?: {
+    x?: string;
+    y?: string;
+  };
   data:
     | (number | null)[]
     | {
@@ -251,7 +258,8 @@ export type ApexAxisChartSeries = {
       }[]
     | [number, number | null][]
     | [number, (number | null)[]][]
-    | number[][];
+    | number[][]
+    | Record<string, any>[];
 }[];
 
 export type ApexNonAxisChartSeries = number[];
