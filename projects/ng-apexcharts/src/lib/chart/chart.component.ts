@@ -26,6 +26,7 @@ import {
   ApexLegend,
   ApexMarkers,
   ApexNoData,
+  ApexParsing,
   ApexNonAxisChartSeries,
   ApexPlotOptions,
   ApexResponsive,
@@ -63,6 +64,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
   readonly legend = input<ApexLegend>();
   readonly markers = input<ApexMarkers>();
   readonly noData = input<ApexNoData>();
+  readonly parsing = input<ApexParsing>();
   readonly fill = input<ApexFill>();
   readonly tooltip = input<ApexTooltip>();
   readonly plotOptions = input<ApexPlotOptions>();
@@ -138,6 +140,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
       "responsive",
       "markers",
       "noData",
+      "parsing",
       "xaxis",
       "yaxis",
       "forecastDataPoints",

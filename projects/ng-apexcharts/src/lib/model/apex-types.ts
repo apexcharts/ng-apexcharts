@@ -13,10 +13,7 @@ export interface ApexOptions {
   responsive?: ApexResponsive[];
   markers?: ApexMarkers;
   noData?: ApexNoData;
-  parsing?: {
-    x?: string;
-    y?: string;
-  };
+  parsing?: ApexParsing;
   xaxis?: ApexXAxis;
   yaxis?: ApexYAxis | ApexYAxis[];
   forecastDataPoints?: ApexForecastDataPoints;
@@ -262,7 +259,7 @@ export type ApexAxisChartSeries = {
     | Record<string, any>[];
 }[];
 
-export type ApexNonAxisChartSeries = number[];
+export type ApexNonAxisChartSeries = number[] | ApexAxisChartSeries;
 
 /**
  * Options for the line drawn on line and area charts.
@@ -1211,6 +1208,11 @@ export interface ApexNoData {
     fontSize?: string;
     fontFamily?: string;
   };
+}
+
+export interface ApexParsing {
+  x?: string;
+  y?: string;
 }
 
 export type ChartType =
