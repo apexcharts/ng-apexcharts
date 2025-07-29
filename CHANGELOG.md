@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/apexcharts/ng-apexcharts/compare/v1.0.0...v1.0.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* update semantic-release to use conventionalcommits preset ([d7c2556](https://github.com/apexcharts/ng-apexcharts/commit/d7c25563500dc7e899d04874768beb6d043be9b8))
+* use @semantic-release/commit-analyzer ([6f445a5](https://github.com/apexcharts/ng-apexcharts/commit/6f445a5da708f59055b709989c0a0670d8b4ff19))
+* use angular-preset for semantic-release ([a17e146](https://github.com/apexcharts/ng-apexcharts/commit/a17e14699eb993ed2e0e6e7439d3abe518965f35))
+
 # 1.0.0 (2025-07-29)
 
 
