@@ -7,6 +7,7 @@
     [
       "@semantic-release/commit-analyzer",
       {
+        "preset": "angular",
         "releaseRules": [
           {
             "type": "feat",
@@ -21,17 +22,40 @@
             "release": "patch"
           },
           {
-            "scope": "BREAKING CHANGE",
-            "release": "major"
+            "type": "docs",
+            "release": "patch"
           },
           {
             "breaking": true,
             "release": "major"
+          },
+          {
+            "subject": "*BREAKING CHANGE*",
+            "release": "major"
           }
-        ]
+        ],
+        "parserOpts": {
+          "noteKeywords": [
+            "BREAKING CHANGE",
+            "BREAKING CHANGES",
+            "BREAKING"
+          ]
+        }
       }
     ],
-    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "angular",
+        "parserOpts": {
+          "noteKeywords": [
+            "BREAKING CHANGE",
+            "BREAKING CHANGES",
+            "BREAKING"
+          ]
+        }
+      }
+    ],
     [
       "@semantic-release/changelog",
       {
@@ -41,7 +65,7 @@
     [
       "@semantic-release/exec",
       {
-        "verifyConditionsCmd": "echo 'Verifying build environment...' && npx ng version",
+        "verifyConditionsCmd": "echo 'Verifying build environment...' && npx ng version && echo 'Checking commit history...' && git log --oneline -10",
         "prepareCmd": "echo 'Updating library version to ${nextRelease.version}' && npm run update-lib-version ${nextRelease.version} && echo 'Verifying source update:' && cat projects/ng-apexcharts/package.json | grep version"
       }
     ],
