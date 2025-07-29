@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/apexcharts/ng-apexcharts/compare/v1.0.0...v1.0.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* git repository url ([25141a9](https://github.com/apexcharts/ng-apexcharts/commit/25141a95704c186fa0e0dc9a9e72fa896ddccef2))
+
 # 1.0.0 (2025-07-29)
 
 
