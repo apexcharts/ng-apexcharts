@@ -25,9 +25,9 @@
       }
     ],
     [
-      "@semantic-release/npm",
+      "@semantic-release/exec",
       {
-        "pkgRoot": "dist/ng-apexcharts"
+        "publishCmd": "cd dist/ng-apexcharts && npm publish"
       }
     ],
     [
