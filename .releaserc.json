@@ -6,7 +6,7 @@
     [
       "@semantic-release/commit-analyzer",
       {
-        "preset": "conventionalcommits",
+        "preset": "angular",
         "releaseRules": [
           {
             "type": "feat",
@@ -31,7 +31,7 @@
           {
             "type": "feat",
             "scope": "*",
-            "subject": "*BREAKING CHANGE*",
+            "subject": "*!*",
             "release": "major"
           },
           {
@@ -44,7 +44,7 @@
     [
       "@semantic-release/release-notes-generator",
       {
-        "preset": "conventionalcommits"
+        "preset": "angular"
       }
     ],
     [
