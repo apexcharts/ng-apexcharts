@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/apexcharts/ng-apexcharts/compare/v1.17.0...v1.17.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* new config for semantic-release ([f15a9a7](https://github.com/apexcharts/ng-apexcharts/commit/f15a9a70a046da7df16f8c4302ed92bab94536dc))
+
 ## [1.0.1](https://github.com/apexcharts/ng-apexcharts/compare/v1.0.0...v1.0.1) (2025-07-29)
 
 
