@@ -45,6 +45,13 @@
     "@angular/cli": "^20.0.1",
     "@angular/compiler-cli": "^20.0.2",
     "@angular/language-service": "^20.0.2",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.0.0",
+    "@semantic-release/npm": "^11.0.0",
+    "@semantic-release/release-notes-generator": "^12.0.0",
     "@types/jasmine": "~5.1.8",
     "@types/jasminewd2": "~2.0.13",
     "@types/node": "~22.15.30",
@@ -62,15 +69,8 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.0.0",
     "protractor": "~7.0.0",
-    "ts-node": "~10.9.2",
-    "typescript": "~5.8.3",
     "semantic-release": "^22.0.0",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^11.0.0",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^9.0.0",
-    "@semantic-release/npm": "^11.0.0",
-    "@semantic-release/release-notes-generator": "^12.0.0"
+    "ts-node": "~10.9.2",
+    "typescript": "~5.8.3"
   }
 }
