@@ -2,12 +2,11 @@
   "branches": [
     "master"
   ],
-  "tagFormat": "v${version}",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
       {
-        "preset": "angular",
+        "preset": "conventionalcommits",
         "releaseRules": [
           {
             "type": "feat",
@@ -30,30 +29,22 @@
             "release": "major"
           },
           {
+            "type": "feat",
+            "scope": "*",
+            "subject": "*BREAKING CHANGE*",
+            "release": "major"
+          },
+          {
             "subject": "*BREAKING CHANGE*",
             "release": "major"
           }
-        ],
-        "parserOpts": {
-          "noteKeywords": [
-            "BREAKING CHANGE",
-            "BREAKING CHANGES",
-            "BREAKING"
-          ]
-        }
+        ]
       }
     ],
     [
       "@semantic-release/release-notes-generator",
       {
-        "preset": "angular",
-        "parserOpts": {
-          "noteKeywords": [
-            "BREAKING CHANGE",
-            "BREAKING CHANGES",
-            "BREAKING"
-          ]
-        }
+        "preset": "conventionalcommits"
       }
     ],
     [
