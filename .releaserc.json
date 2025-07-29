@@ -29,13 +29,23 @@
             "release": "major"
           },
           {
-            "type": "feat",
+            "type": "*",
             "scope": "*",
             "subject": "*!*",
             "release": "major"
           },
           {
+            "type": "*",
+            "scope": "*",
             "subject": "*BREAKING CHANGE*",
+            "release": "major"
+          },
+          {
+            "message": "*BREAKING CHANGE*",
+            "release": "major"
+          },
+          {
+            "message": "*feat!*",
             "release": "major"
           }
         ]
@@ -56,8 +66,8 @@
     [
       "@semantic-release/exec",
       {
-        "verifyConditionsCmd": "echo 'Verifying build environment...' && npx ng version && echo 'Checking commit history...' && git log --oneline -10",
-        "prepareCmd": "echo 'Updating library version to ${nextRelease.version}' && npm run update-lib-version ${nextRelease.version} && echo 'Verifying source update:' && cat projects/ng-apexcharts/package.json | grep version"
+        "verifyConditionsCmd": "echo 'Verifying build environment...' && npx ng version && echo 'Checking commit history...' && git log --oneline -10 && echo 'Testing commit analysis...' && echo 'Looking for breaking changes:' && git log --oneline -10 | grep -E 'feat!|BREAKING CHANGE' || echo 'No breaking changes found in recent commits'",
+        "prepareCmd": "echo 'Semantic-release determined version: ${nextRelease.version}' && echo 'Updating library version to ${nextRelease.version}' && npm run update-lib-version ${nextRelease.version} && echo 'Verifying source update:' && cat projects/ng-apexcharts/package.json | grep version"
       }
     ],
     [
