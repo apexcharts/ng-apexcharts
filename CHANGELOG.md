@@ -1,3 +1,5 @@
+# [2.0.0](https://github.com/apexcharts/ng-apexcharts/compare/v1.17.1...v2.0.0) (2025-07-29)
+
 ## [1.17.1](https://github.com/apexcharts/ng-apexcharts/compare/v1.17.0...v1.17.1) (2025-07-29)
 
 
