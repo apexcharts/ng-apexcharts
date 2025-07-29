@@ -15,10 +15,6 @@
     "statistics",
     "ui"
   ],
-  "author": {
-    "name": "Morris Janatzek"
-  },
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/apexcharts/ng-apexcharts/issues"
   },

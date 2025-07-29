@@ -78,6 +78,7 @@ export interface ApexChart {
     targets?: string[];
   };
   id?: string;
+  injectStyleSheet?: boolean;
   group?: string;
   nonce?: string;
   locales?: ApexLocale[];
@@ -1212,7 +1213,8 @@ export interface ApexNoData {
 
 export interface ApexParsing {
   x?: string;
-  y?: string;
+  y?: string | string[];
+  z?: string;
 }
 
 export type ChartType =

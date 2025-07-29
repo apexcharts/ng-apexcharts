@@ -3,7 +3,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/apexcharts/ng-apexcharts/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License"></a>
   <a href="https://www.npmjs.com/package/ng-apexcharts"><img src="https://img.shields.io/npm/v/ng-apexcharts.svg" alt="ver"></a>
 </p>
 
@@ -164,11 +163,3 @@ All other methods of ApexCharts can be called the same way.
 #### Turning off auto update of the series
 
 With the attribute `autoUpdateSeries` you can control if the chart component should call the `updateSeries` function automatically if the series attribute is changed. It is set to true by default, but in a mixed/combo chart, set this attribute to false if you are using and changing the type property in your series. This only has the effect that the whole chart rerenders even if only the series changes.
-
-## License
-
-ng-ApexCharts is released under MIT license. You are free to use, modify and distribute this software, as long as the copyright header is left intact.
-
-### Submitted by
-
-Special thanks to [Morris Janatzek](http://morrisj.net) for contributing to ApexCharts project by creating this angular wrapper.
