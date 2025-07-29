@@ -13,7 +13,10 @@
     "copyfile:schema": "copyfiles -f ./projects/ng-apexcharts/schematics/ng-add/schema.json ./dist/ng-apexcharts/schematics/ng-add",
     "copyfile:collection": "copyfiles -f ./projects/ng-apexcharts/schematics/collection.json ./dist/ng-apexcharts/schematics",
     "copyfile": "concurrently -c cyan,green 'npm run copyfile:*'",
-    "package": "concurrently -c cyan,green 'npm run build:*' && npm run copyfile"
+    "package": "concurrently -c cyan,green 'npm run build:*' && npm run copyfile",
+    "update-lib-version": "node scripts/update-lib-version.js",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run"
   },
   "license": "See License in LICENSE",
   "dependencies": {
@@ -60,6 +63,14 @@
     "ng-packagr": "^20.0.0",
     "protractor": "~7.0.0",
     "ts-node": "~10.9.2",
-    "typescript": "~5.8.3"
+    "typescript": "~5.8.3",
+    "semantic-release": "^22.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^11.0.0",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.0.0",
+    "@semantic-release/npm": "^11.0.0",
+    "@semantic-release/release-notes-generator": "^12.0.0"
   }
 }
