@@ -15,19 +15,19 @@
       "@semantic-release/exec",
       {
         "verifyConditionsCmd": "echo 'Verifying build environment...' && npx ng version",
-        "prepareCmd": "npm run update-lib-version ${nextRelease.version}"
+        "prepareCmd": "echo 'Updating library version to ${nextRelease.version}' && npm run update-lib-version ${nextRelease.version} && echo 'Verifying source update:' && cat projects/ng-apexcharts/package.json | grep version"
       }
     ],
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "echo 'Building ng-apexcharts...' && ng build ng-apexcharts"
+        "prepareCmd": "echo 'Building ng-apexcharts...' && ng build ng-apexcharts && echo 'Verifying built version:' && cat dist/ng-apexcharts/package.json | grep version"
       }
     ],
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "cd dist/ng-apexcharts && npm publish"
+        "publishCmd": "echo 'About to publish:' && cat dist/ng-apexcharts/package.json | grep -E '\"version|\"name' && cd dist/ng-apexcharts && npm publish"
       }
     ],
     [

@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/apexcharts/ng-apexcharts.git"
+    "url": "git+https://github.com/apexcharts/ng-apexcharts.git"
   },
   "schematics": "./schematics/collection.json"
 }
