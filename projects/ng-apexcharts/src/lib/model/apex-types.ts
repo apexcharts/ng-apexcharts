@@ -229,10 +229,7 @@ export type ApexAxisChartSeries = {
   group?: string;
   hidden?: boolean;
   zIndex?: number;
-  parsing?: {
-    x?: string;
-    y?: string;
-  };
+  parsing?: ApexParsing;
   data:
     | (number | null)[]
     | {
