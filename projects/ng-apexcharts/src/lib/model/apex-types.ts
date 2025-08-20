@@ -273,7 +273,8 @@ export interface ApexStroke {
     | "straight"
     | "stepline"
     | "monotoneCubic"
-    | ("smooth" | "straight" | "stepline" | "monotoneCubic")[];
+    | "linestep"
+    | ("smooth" | "straight" | "stepline" | "monotoneCubic" | "linestep")[];
   lineCap?: "butt" | "square" | "round";
   colors?: any[];
   width?: number | number[];
