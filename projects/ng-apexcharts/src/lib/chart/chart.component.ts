@@ -195,7 +195,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
     animate?: boolean
   ) {
     return this.ngZone.runOutsideAngular(() =>
-      this.chartInstance()?.updateSeries(newSeries, animate)
+      this.chartInstance()?.updateSeries(newSeries as any, animate)
     );
   }
 
@@ -204,7 +204,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
     animate?: boolean
   ) {
     this.ngZone.runOutsideAngular(() =>
-      this.chartInstance()?.appendSeries(newSeries, animate)
+      this.chartInstance()?.appendSeries(newSeries as any, animate)
     );
   }
 
