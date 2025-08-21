@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/apexcharts/ng-apexcharts/compare/v2.0.0...v2.0.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* updateSeries and appendSeries type compatibility ([748e2b4](https://github.com/apexcharts/ng-apexcharts/commit/748e2b42f8784e65b8a2485defbdedbc8a20b0f1))
+* use ApexParsing for ApexAxisChartSeries ([484afea](https://github.com/apexcharts/ng-apexcharts/commit/484afead45d2e3047a6853e527fd7b420b20f319))
+
 # [2.0.0](https://github.com/apexcharts/ng-apexcharts/compare/v1.17.1...v2.0.0) (2025-07-29)
 
 ## [1.17.1](https://github.com/apexcharts/ng-apexcharts/compare/v1.17.0...v1.17.1) (2025-07-29)
