@@ -1,9 +1,13 @@
 import { isPlatformBrowser } from "@angular/common";
 import {
+  afterEveryRender,
+  AfterRenderRef,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
+  Injector,
   input,
   NgZone,
   OnChanges,
@@ -14,7 +18,6 @@ import {
   SimpleChanges,
   viewChild,
 } from "@angular/core";
-import { asapScheduler } from "rxjs";
 import {
   ApexAnnotations,
   ApexAxisChartSeries,
@@ -53,7 +56,7 @@ declare global {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class ChartComponent implements OnChanges, OnDestroy {
+export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   readonly chart = input<ApexChart>();
   readonly annotations = input<ApexAnnotations>();
   readonly colors = input<any[]>();
@@ -94,20 +97,36 @@ export class ChartComponent implements OnChanges, OnDestroy {
   private ngZone = inject(NgZone);
   private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
+  private _destroyed = false;
+  private readonly _injector = inject(Injector);
+  private waitingForConnectedRef: AfterRenderRef | null = null;
+
+
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.isBrowser) return;
 
-    this.ngZone.runOutsideAngular(() => {
-      asapScheduler.schedule(() => this.hydrate(changes));
-    });
+    if (this.chartElement().nativeElement) {
+      this.hydrate(changes);
+    }
+  }
+
+  ngAfterViewInit() {
+    if (!this.isBrowser) return;
+    this.createElement();
   }
 
   ngOnDestroy() {
     this.destroy();
+    this._destroyed = true;
   }
 
+  /** Determine if the host element is connected to the document */
+  private get isConnected() {
+    return this.chartElement()?.nativeElement.isConnected;
+  }
   private hydrate(changes: SimpleChanges): void {
     const shouldUpdateSeries =
+      this.chartInstance() &&
       this.autoUpdateSeries() &&
       Object.keys(changes).filter((c) => c !== "series").length === 0;
 
@@ -120,8 +139,13 @@ export class ChartComponent implements OnChanges, OnDestroy {
   }
 
   private async createElement() {
-    const { default: ApexCharts } = await import("apexcharts");
-    window.ApexCharts ||= ApexCharts;
+    window.ApexCharts ||= (await import("apexcharts")).default;
+
+    if (this._destroyed) return;
+    if (!this.isConnected) {
+      this.waitForConnected();
+      return;
+    }
 
     const options: any = {};
 
@@ -171,7 +195,11 @@ export class ChartComponent implements OnChanges, OnDestroy {
   }
 
   public render() {
-    return this.ngZone.runOutsideAngular(() => this.chartInstance()?.render());
+    if (this.isConnected) {
+      return this.ngZone.runOutsideAngular(() => this.chartInstance()?.render());
+    } else {
+      this.waitForConnected();
+    }
   }
 
   public updateOptions(
@@ -317,5 +345,21 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
   public dataURI(options?: any) {
     return this.chartInstance()?.dataURI(options);
+  }
+
+  private waitForConnected() {
+    if (this.waitingForConnectedRef) {
+      return;
+    }
+
+    this.waitingForConnectedRef = afterEveryRender({
+      read: () => {
+        if (this.isConnected) {
+          this.waitingForConnectedRef.destroy();
+          this.waitingForConnectedRef = null;
+          this.createElement();
+        }
+      },
+    }, { injector: this._injector });
   }
 }
