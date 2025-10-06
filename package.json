@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "test": "ng test",
+    "test": "ng test --project ng-apexcharts",
     "test:schematics": "ts-node --project ./projects/ng-apexcharts/schematics/tsconfig.json node_modules/jasmine/bin/jasmine.js \"projects/ng-apexcharts/schematics/**/*[sS]pec.ts\"",
     "lint": "ng lint",
     "build:pkg": "ng build ng-apexcharts --configuration production",
