@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/apexcharts/ng-apexcharts/compare/v2.0.2...v2.0.3) (2025-10-06)
+
+
+### Bug Fixes
+
+* @angular/platform-server version revert to 20.0.2 ([a72c6ce](https://github.com/apexcharts/ng-apexcharts/commit/a72c6ced2ea0fa63cf4fc2de745f818ffa3e99dd))
+
 ## [2.0.2](https://github.com/apexcharts/ng-apexcharts/compare/v2.0.1...v2.0.2) (2025-10-06)
 
 ## [2.0.1](https://github.com/apexcharts/ng-apexcharts/compare/v2.0.0...v2.0.1) (2025-08-21)
