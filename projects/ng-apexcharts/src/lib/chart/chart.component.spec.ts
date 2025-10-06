@@ -99,7 +99,7 @@ class MockConditionalWrapperComponent {
   selector: 'mock-conditional-parent',
   template: `
     <mock-conditional-wrapper [show]="show()">
-      <apx-chart [chart]="config" [series]="chartSeries" [xaxis]="xAxisDetails"></apx-chart>
+      <apx-chart [chart]="config" [series]="chartSeries"></apx-chart>
     </mock-conditional-wrapper>
   `,
   imports: [ChartComponent, MockConditionalWrapperComponent],
