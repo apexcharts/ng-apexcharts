@@ -32,6 +32,29 @@ describe('ChartComponent', () => {
       await firstValueFrom(outputToObservable(component.chartReady));
       expect(fixture.debugElement.query(By.css('svg'))).toBeTruthy();
     });
+
+    it('update series does not re-create the chart', async () => {
+      fixture.componentRef.setInput('chart', { type: 'line' });
+      fixture.componentRef.setInput('series', [{ name: 'series1', data: [10, 20, 27] }]);
+      fixture.componentRef.setInput('xaxis', { categories: ['Jan', 'Feb', 'Mar'] });
+      await firstValueFrom(outputToObservable(component.chartReady));
+      const chart1 = component.chartInstance();
+      expect(chart1).toBeTruthy();
+      expect(fixture.debugElement.queryAll(By.css('.apexcharts-series')).length).toBe(1);
+
+      const createElementSpy = spyOn(component as any, 'createElement').and.callThrough();
+
+      // Update the series
+      fixture.componentRef.setInput('series', [{ name: 'series1', data: [10, 20, 30] }, { name: 'series2', data: [15, 25, 47] }]);
+      await fixture.whenStable();
+
+      expect(createElementSpy).not.toHaveBeenCalled();
+      const chart2 = component.chartInstance();
+      expect(chart2).toBeTruthy();
+      expect(chart1).withContext('Chart instances should be the same').toBe(chart2);
+
+      expect(fixture.debugElement.queryAll(By.css('.apexcharts-series')).length).toBe(2);
+    });
   });
 
   describe('when used inside conditional content projection component', () => {
@@ -99,7 +122,7 @@ class MockConditionalWrapperComponent {
   selector: 'mock-conditional-parent',
   template: `
     <mock-conditional-wrapper [show]="show()">
-      <apx-chart [chart]="config" [series]="chartSeries" [xaxis]="xAxisDetails"></apx-chart>
+      <apx-chart [chart]="config" [series]="chartSeries"></apx-chart>
     </mock-conditional-wrapper>
   `,
   imports: [ChartComponent, MockConditionalWrapperComponent],
