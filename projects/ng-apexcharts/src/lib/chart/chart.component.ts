@@ -1,8 +1,8 @@
 import { isPlatformBrowser } from "@angular/common";
 import {
   afterEveryRender,
+  afterNextRender,
   AfterRenderRef,
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -56,7 +56,7 @@ declare global {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class ChartComponent implements OnChanges, OnDestroy {
   readonly chart = input<ApexChart>();
   readonly annotations = input<ApexAnnotations>();
   readonly colors = input<any[]>();
@@ -105,14 +105,7 @@ export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.isBrowser) return;
 
-    if (this.chartElement().nativeElement) {
-      this.hydrate(changes);
-    }
-  }
-
-  ngAfterViewInit() {
-    if (!this.isBrowser) return;
-    this.createElement();
+    this.hydrate(changes);
   }
 
   ngOnDestroy() {
@@ -124,7 +117,12 @@ export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   private get isConnected() {
     return this.chartElement()?.nativeElement.isConnected;
   }
+
   private hydrate(changes: SimpleChanges): void {
+    if (this.waitingForConnectedRef) {
+      return;
+    }
+
     const shouldUpdateSeries =
       this.chartInstance() &&
       this.autoUpdateSeries() &&
@@ -135,7 +133,10 @@ export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.createElement();
+    // Create the chart after the layout is finalized and ready to be measured.
+    afterNextRender({
+      read: () => this.createElement(),
+    }, { injector: this._injector });
   }
 
   private async createElement() {
