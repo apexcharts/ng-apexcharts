@@ -139,7 +139,8 @@ export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private async createElement() {
-    window.ApexCharts ||= (await import("apexcharts")).default;
+    const { default: ApexCharts } = await import("apexcharts");
+    window.ApexCharts ||= ApexCharts;
 
     if (this._destroyed) return;
     if (!this.isConnected) {
