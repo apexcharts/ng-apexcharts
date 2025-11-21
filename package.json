@@ -36,11 +36,11 @@
     "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@angular-eslint/builder": "20.0.0",
-    "@angular-eslint/eslint-plugin": "20.0.0",
-    "@angular-eslint/eslint-plugin-template": "20.0.0",
-    "@angular-eslint/schematics": "20.0.0",
-    "@angular-eslint/template-parser": "20.0.0",
+    "@angular-eslint/builder": "20.6.0",
+    "@angular-eslint/eslint-plugin": "20.6.0",
+    "@angular-eslint/eslint-plugin-template": "20.6.0",
+    "@angular-eslint/schematics": "20.6.0",
+    "@angular-eslint/template-parser": "20.6.0",
     "@angular/build": "^21.0.0",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
