@@ -14,6 +14,19 @@
 
 <p align="center"><a href="https://apexcharts.com/angular-chart-demos/"><img src="https://apexcharts.com/media/apexcharts-banner.png"></a></p>
 
+## Angular Version Compatibility
+
+| ng-apexcharts Version | Angular Version | ApexCharts Version |
+|-----------------------|-----------------|-------------------|
+| 2.0.x                 | 20.x            | ^5.3.2            |
+| 1.15.x - 1.17.x       | 19.x            | ^4.0.0 - ^5.3.2   |
+| 1.13.x - 1.14.x       | 18.x            | ^4.0.0            |
+| 1.10.x - 1.12.x       | 17.x            | ^3.45.2 - ^4.0.0  |
+| 1.7.x - 1.9.x         | 13.x - 16.x     | ^3.31.0 - ^3.45.2 |
+| 1.6.x                 | 9.x - 12.x      | ^3.31.0           |
+
+**Note:** For projects using older Angular versions (7-8), please use ng-apexcharts version 1.5.x or earlier.
+
 ## Examples
 
 More than 80+ examples of all the chart types with sample codes can be found on the <a href="https://apexcharts.com/angular-chart-demos/">Angular Demos</a> page of the website. Here's a basic <a href="https://codesandbox.io/s/apx-line-basic-o2mwb">line chart</a> example built in codesandbox.
