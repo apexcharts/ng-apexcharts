@@ -21,7 +21,7 @@
   "license": "See License in LICENSE",
   "dependencies": {
     "@angular/animations": "^20.0.2",
-    "@angular/common": "^20.0.2",
+    "@angular/common": "^20.3.14",
     "@angular/compiler": "^20.0.2",
     "@angular/core": "^20.0.2",
     "@angular/forms": "^20.0.2",
