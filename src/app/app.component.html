@@ -41,10 +41,8 @@
     <div style="width: 80%; display: inline-block" formArrayName="series">
       <h4>Data</h4>
 
-      <div
-        *ngFor="let series of series.controls; let i = index"
-        style="width: 20%; display: inline-block"
-      >
+      @for (series of series.controls; track series; let i = $index) {
+      <div style="width: 20%; display: inline-block">
         <div [formGroupName]="i">
           Name: <input type="text" formControlName="name" /><br />
           Type:
@@ -53,32 +51,31 @@
             <option value="area">Area</option>
             <option value="bar">Bar</option>
           </select>
-
           <div formArrayName="data">
-            <div
-              *ngFor="
-                let alias of form.get('series').controls[i].get('data')
-                  .controls;
-                let y = index
-              "
-            >
+            @for ( alias of form.get('series').controls[i].get('data')
+            .controls; track alias; let y = $index) {
+            <div>
               <label>
                 Value: <input type="number" [formControlName]="y" />
               </label>
             </div>
+            }
           </div>
         </div>
       </div>
+      }
     </div>
 
     <div formArrayName="xaxis" style="width: 20%; display: inline-block">
       <h4>XAxis</h4>
-      <div *ngFor="let alias of xaxis.controls; let i = index">
+      @for (alias of xaxis.controls; track alias; let i = $index) {
+      <div>
         <label>
           Value:
           <input type="text" [formControlName]="i" />
         </label>
       </div>
+      }
     </div>
   </div>
 </form>
