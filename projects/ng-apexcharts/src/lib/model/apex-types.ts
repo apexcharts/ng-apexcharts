@@ -118,8 +118,8 @@ export interface ApexChart {
         columnDelimiter?: string;
         headerCategory?: string;
         headerValue?: string;
-        categoryFormatter?(value?: number): any;
-        valueFormatter?(value?: number): any;
+        categoryFormatter?(value?: string | number): any;
+        valueFormatter?(value?: string | number): any;
       };
       svg?: {
         filename?: undefined | string;
@@ -604,7 +604,7 @@ export interface ApexPlotOptions {
           fontWeight?: string | number;
           color?: string;
           offsetY?: number;
-          formatter?(val: string): string;
+          formatter?(val: string | number): string;
         };
         total?: {
           show?: boolean;
@@ -867,7 +867,7 @@ export interface ApexTooltip {
   x?: {
     show?: boolean;
     format?: string;
-    formatter?(val: number, opts?: any): string;
+    formatter?(val: string | number, opts?: any): string;
   };
   y?: ApexTooltipY | ApexTooltipY[];
   z?: {
@@ -929,7 +929,7 @@ export interface ApexXAxis {
       second?: string;
     };
     formatter?(
-      value: string,
+      value: string | number,
       timestamp?: number,
       opts?: any
     ): string | string[];
@@ -1010,7 +1010,7 @@ export interface ApexXAxis {
       fontSize?: string;
       fontFamily?: string;
     };
-    formatter?(value: string, opts?: object): string;
+    formatter?(value: string | number, opts?: object): string;
   };
 }
 
