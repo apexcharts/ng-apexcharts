@@ -70,6 +70,8 @@ export interface ApexChart {
     zoomed?(chart: any, options?: any): void;
     scrolled?(chart: any, options?: any): void;
     brushScrolled?(chart: any, options?: any): void;
+    keyDown?(e: KeyboardEvent, chart?: any, options?: any): void;
+    keyUp?(e: KeyboardEvent, chart?: any, options?: any): void;
   };
   brush?: {
     enabled?: boolean;
@@ -183,6 +185,16 @@ export interface ApexChart {
       speed?: number;
     };
   };
+  accessibility?: {
+    enabled?: boolean;
+    description?: string;
+    announcements?: {
+      enabled?: boolean;
+    };
+    keyboard?: {
+      enabled?: boolean;
+    };
+  };
 }
 
 export interface ApexStates {
@@ -290,7 +302,7 @@ export interface AnnotationLabel {
   borderColor?: string;
   borderWidth?: number;
   borderRadius?: number;
-  text?: string;
+  text?: string | string[];
   textAnchor?: string;
   offsetX?: number;
   offsetY?: number;
@@ -768,11 +780,14 @@ export interface ApexLegend {
   offsetX?: number;
   offsetY?: number;
   customLegendItems?: string[];
+  clusterGroupedSeries?: boolean;
+  clusterGroupedSeriesOrientation?: string;
   labels?: {
     colors?: string | string[];
     useSeriesColors?: boolean;
   };
   markers?: {
+    size?: number;
     strokeWidth?: number;
     fillColors?: string[];
     shape?: ApexMarkerShape;
@@ -826,7 +841,7 @@ export interface ApexDataLabels {
   dropShadow?: ApexDropShadow;
   formatter?(
     val: string | number | number[],
-    opts?: any
+    opts?: any,
   ): string | number | (string | number)[];
 }
 
@@ -931,7 +946,7 @@ export interface ApexXAxis {
     formatter?(
       value: string | number,
       timestamp?: number,
-      opts?: any
+      opts?: any,
     ): string | string[];
   };
   group?: {
@@ -947,6 +962,7 @@ export interface ApexXAxis {
   axisBorder?: {
     show?: boolean;
     color?: string;
+    height?: number;
     offsetX?: number;
     offsetY?: number;
     strokeWidth?: number;
@@ -1177,7 +1193,7 @@ interface ApexDiscretePoint {
 
 export interface ApexMarkers {
   size?: number | number[];
-  colors?: string[];
+  colors?: string | string[];
   strokeColors?: string | string[];
   strokeWidth?: number | number[];
   strokeOpacity?: number | number[];
