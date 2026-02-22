@@ -41,14 +41,7 @@ import {
   ApexXAxis,
   ApexYAxis,
 } from "../model/apex-types";
-
-type ApexCharts = import("apexcharts");
-
-declare global {
-  interface Window {
-    ApexCharts: typeof ApexCharts;
-  }
-}
+import type ApexChartsType from "apexcharts";
 
 @Component({
   selector: "apx-chart",
@@ -83,13 +76,13 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
   readonly autoUpdateSeries = input(true);
 
-  readonly chartReady = output<{ chartObj: ApexCharts }>();
+  readonly chartReady = output<{ chartObj: ApexChartsType }>();
 
   // If consumers need to capture the `chartInstance` for use, consumers
   // can access the component instance through `viewChild` and use `computed`
   // or `effect` on `component.chartInstance()` to monitor its changes and
   // recompute effects or computations whenever `chartInstance` is updated.
-  readonly chartInstance = signal<ApexCharts | null>(null);
+  readonly chartInstance = signal<ApexChartsType | null>(null);
 
   private readonly chartElement =
     viewChild.required<ElementRef<HTMLElement>>("chart");
@@ -141,7 +134,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
 
   private async createElement() {
     const { default: ApexCharts } = await import("apexcharts");
-    window.ApexCharts ||= ApexCharts;
+    (window as any).ApexCharts ||= ApexCharts;
 
     if (this._destroyed) return;
     if (!this.isConnected) {
