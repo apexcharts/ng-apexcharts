@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/apexcharts/ng-apexcharts/compare/v2.0.3...v2.1.0) (2026-02-22)
+
+
+### Bug Fixes
+
+* resolve TS2686 ApexCharts UMD global error with TypeScript 5.9 ([23b383b](https://github.com/apexcharts/ng-apexcharts/commit/23b383bafff7b045a1d588e80a20a995aaab87e7))
+
+
+### Features
+
+* update to angular 21 ([86980da](https://github.com/apexcharts/ng-apexcharts/commit/86980da4ff28f9527b8917570ff69e21bad148ee))
+* upgrade to angular 21 ([fb199f8](https://github.com/apexcharts/ng-apexcharts/commit/fb199f8c55665dcf02ee4d9a48eaecca8219765d))
+
 ## [2.0.3](https://github.com/apexcharts/ng-apexcharts/compare/v2.0.2...v2.0.3) (2025-10-06)
 
 
