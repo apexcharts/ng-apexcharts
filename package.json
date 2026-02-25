@@ -29,7 +29,7 @@
     "@angular/platform-browser-dynamic": "~21.1.0",
     "@angular/platform-server": "~21.1.0",
     "@angular/router": "~21.1.0",
-    "@angular/ssr": "~21.1.0",
+    "@angular/ssr": "~21.1.5",
     "@schematics/angular": "~21.1.0",
     "apexcharts": "^5.3.2",
     "rxjs": "~7.8.2",
