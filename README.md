@@ -18,6 +18,7 @@
 
 | ng-apexcharts Version | Angular Version | ApexCharts Version |
 | --------------------- | --------------- | ------------------ |
+| 2.3.x                 | 20+             | ^5.10.3            |
 | 2.2.x                 | 20+             | ^5.10.3            |
 | 2.0.x - 2.1.x         | 20+             | ^5.3.2             |
 | 1.16.x - 1.17.x       | 20.x            | >=4.0.0            |
@@ -49,15 +50,7 @@ if you don't like the above way, the following is also supported.
 npm install apexcharts ng-apexcharts --save
 ```
 
-2. Open angular.json and under scripts add:
-
-```ts
-"scripts": [
-  "node_modules/apexcharts/dist/apexcharts.min.js"
-]
-```
-
-3. Add ng-apexcharts-module to imports
+2. Add ng-apexcharts-module to imports
 
 ```ts
 import { NgApexchartsModule } from "ng-apexcharts";
