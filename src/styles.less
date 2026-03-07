@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global demo app styles */
+@import "apexcharts/dist/apexcharts.css";
+
+/* Prevent Pico from styling ApexCharts toolbar buttons and role="button" icons */
+.apexcharts-toolbar button,
+.apexcharts-toolbar [role="button"],
+.apexcharts-legend [role="button"],
+.apexcharts-menu-item {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: inherit !important;
+  cursor: pointer;
+}
+
+body {
+  padding-bottom: 4rem;
+}
+
+:root {
+  --pico-font-size: 15px;
+}
+
+/* Tab nav strip */
+nav > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+}
+
+nav > ul > li {
+  margin: 0;
+  padding: 0;
+}
+
+nav > ul > li > button {
+  min-width: 130px;
+}
+
+/* Article header inside demos */
+article > header {
+  font-weight: 600;
+  padding: 0.5rem 0;
+}

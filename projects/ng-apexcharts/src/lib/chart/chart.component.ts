@@ -132,8 +132,13 @@ export class ChartComponent implements OnChanges, OnDestroy {
     }, { injector: this._injector });
   }
 
+  /** @internal Extracted to allow subclasses and tests to swap the ApexCharts bundle. */
+  protected importApexCharts() {
+    return import("apexcharts/client");
+  }
+
   private async createElement() {
-    const { default: ApexCharts } = await import("apexcharts");
+    const { default: ApexCharts } = await this.importApexCharts();
     (window as any).ApexCharts ||= ApexCharts;
 
     if (this._destroyed) return;
@@ -293,7 +298,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
   }
 
   public paper() {
-    this.ngZone.runOutsideAngular(() => this.chartInstance()?.paper());
+    this.ngZone.runOutsideAngular(() => (this.chartInstance() as any)?.paper());
   }
 
   public addXaxisAnnotation(

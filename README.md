@@ -18,7 +18,8 @@
 
 | ng-apexcharts Version | Angular Version | ApexCharts Version |
 | --------------------- | --------------- | ------------------ |
-| 2.0.x                 | 20+             | ^5.3.2             |
+| 2.2.x                 | 20+             | ^5.10.3            |
+| 2.0.x - 2.1.x         | 20+             | ^5.3.2             |
 | 1.16.x - 1.17.x       | 20.x            | >=4.0.0            |
 | 1.14.x - 1.15.x       | 19.x            | >=4.0.0            |
 | 1.11.x - 1.13.x       | 18.x            | ^3.49.1 - ^4.0.0   |
@@ -177,3 +178,54 @@ All other methods of ApexCharts can be called the same way.
 #### Turning off auto update of the series
 
 With the attribute `autoUpdateSeries` you can control if the chart component should call the `updateSeries` function automatically if the series attribute is changed. It is set to true by default, but in a mixed/combo chart, set this attribute to false if you are using and changing the type property in your series. This only has the effect that the whole chart rerenders even if only the series changes.
+
+## Tree-Shaking (reduced bundle size)
+
+Use `<apx-chart-core>` instead of `<apx-chart>` to load the ApexCharts core bundle (~611 KB gzipped) instead of the full bundle (~942 KB). You must register the chart types you need via side-effect imports:
+
+```ts
+import "apexcharts/line";            // line, area, scatter, bubble
+import "apexcharts/bar";             // bar, column, rangeBar
+import "apexcharts/features/legend"; // opt-in legend
+import "apexcharts/features/toolbar"; // opt-in toolbar
+```
+
+```html
+<apx-chart-core [chart]="chart" [series]="series"></apx-chart-core>
+```
+
+All inputs, outputs, and methods are identical to `<apx-chart>`.
+
+## Server-Side Rendering (SSR)
+
+ng-apexcharts supports Angular SSR out of the box via two companion components.
+
+### `<apx-chart-ssr>` — renders the chart on the server
+
+```html
+<apx-chart-ssr [options]="chartOptions" [width]="800" [height]="400" />
+```
+
+The `options` input accepts a single `ApexOptions` object (all chart config combined).
+
+### `<apx-chart-hydrate>` — attaches interactivity on the client
+
+Place it immediately after `<apx-chart-ssr>` in the same container:
+
+```html
+<apx-chart-ssr [options]="chartOptions" />
+<apx-chart-hydrate [clientOptions]="{ chart: { animations: { enabled: true } } }" />
+```
+
+`clientOptions` is merged by ApexCharts during hydration and can be used to override options that only make sense in the browser (animations, tooltips, etc.).
+
+### `ChartSSRService` — server-side rendering service
+
+Injectable service for generating chart HTML or SVG strings on the server:
+
+```ts
+import { ChartSSRService } from 'ng-apexcharts';
+
+const html = await chartSSRService.renderToHTML(options, { width: 800, height: 400 });
+const svg  = await chartSSRService.renderToString(options, { width: 800, height: 400 });
+```
