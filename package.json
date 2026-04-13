@@ -75,6 +75,8 @@
   "overrides": {
     "karma-jasmine": {
       "jasmine-core": "^5.0.0"
-    }
+    },
+    "@angular-devkit/schematics": "21.1.4",
+    "@angular-devkit/core": "21.1.4"
   }
 }
