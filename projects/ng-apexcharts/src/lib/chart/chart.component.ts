@@ -133,7 +133,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
   }
 
   /** @internal Extracted to allow subclasses and tests to swap the ApexCharts bundle. */
-  protected importApexCharts() {
+  protected importApexCharts(): Promise<{ default: typeof ApexChartsType }> {
     return import("apexcharts/client");
   }
 
