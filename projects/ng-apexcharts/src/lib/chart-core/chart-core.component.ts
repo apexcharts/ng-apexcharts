@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ChartComponent } from "../chart/chart.component";
+import type ApexChartsType from "apexcharts";
 
 /**
  * Tree-shakeable variant of `<apx-chart>`.
@@ -25,7 +26,7 @@ import { ChartComponent } from "../chart/chart.component";
   standalone: true,
 })
 export class ChartCoreComponent extends ChartComponent {
-  protected override importApexCharts() {
+  protected override importApexCharts(): Promise<{ default: typeof ApexChartsType }> {
     return import("apexcharts/core");
   }
 }
