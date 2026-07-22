@@ -77,7 +77,7 @@ export class ChartHydrateComponent implements OnInit, OnDestroy {
   }
 
   /** @internal Extracted to allow spying in unit tests without importing actual SSR/hydrate bundle. */
-  protected importClientModule() {
+  protected importClientModule(): Promise<{ default: typeof ApexChartsType }> {
     return import("apexcharts/ssr");
   }
 

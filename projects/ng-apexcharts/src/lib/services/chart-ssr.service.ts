@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import type ApexChartsType from "apexcharts";
 import { ApexOptions } from "../model/apex-types";
 
 export interface ApexSSROptions {
@@ -17,7 +18,7 @@ export class ChartSSRService {
     return this.instanceCounter++;
   }
   /** @internal Extracted to allow spying in unit tests without importing actual SSR bundle. */
-  protected importSSRModule() {
+  protected importSSRModule(): Promise<{ default: typeof ApexChartsType }> {
     return import("apexcharts/ssr");
   }
 
