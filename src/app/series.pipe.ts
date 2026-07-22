@@ -6,6 +6,6 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class SeriesPipe implements PipeTransform {
   transform(value: any, args: any): any {
-    return value.map((c) => ({ name: c.name, data: c.data }));
+    return value.map((c: any) => ({ name: c.name, data: c.data }));
   }
 }

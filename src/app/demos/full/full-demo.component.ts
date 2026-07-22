@@ -34,7 +34,7 @@ import { SeriesPipe } from "../../series.pipe";
               height: form.value.height,
               type: form.value.type,
               zoom: { enabled: true },
-              shadow: { enabled: true, color: '#000', top: 18, left: 7, blur: 10, opacity: 1 }
+              dropShadow: { enabled: true, color: '#000', top: 18, left: 7, blur: 10, opacity: 1 }
             }"
             [title]="{ text: form.value.title }"
             [autoUpdateSeries]="false"
@@ -124,7 +124,7 @@ import { SeriesPipe } from "../../series.pipe";
   `],
 })
 export class FullDemoComponent {
-  @ViewChild("chart", { static: true }) chart: ChartComponent;
+  @ViewChild("chart", { static: true }) chart!: ChartComponent;
 
   form: UntypedFormGroup;
 

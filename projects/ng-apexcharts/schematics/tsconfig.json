@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "tsconfig",
+    "ignoreDeprecations": "6.0",
     "lib": [
       "es2018",
       "dom"

@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -17,7 +16,7 @@
     ],
     "paths": {
       "ng-apexcharts": [
-        "projects/ng-apexcharts/src/public_api.ts"
+        "./projects/ng-apexcharts/src/public_api.ts"
       ]
     },
     "useDefineForClassFields": false

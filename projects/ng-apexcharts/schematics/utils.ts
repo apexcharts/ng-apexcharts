@@ -12,9 +12,9 @@ import {
 } from "@schematics/angular/utility/workspace";
 import { addImportToModule } from "@schematics/angular/utility/ast-utils";
 import { getAppModulePath } from "@schematics/angular/utility/ng-ast-utils";
-import * as stripJsonComments from "strip-json-comments";
+import stripJsonComments = require("strip-json-comments");
 
-import * as ts from "@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript";
+import * as ts from "typescript";
 
 export function readJsonInTree<T = unknown>(host: Tree, path: string): T {
   if (!host.exists(path)) {
@@ -102,10 +102,12 @@ export function addPackageToPackageJson(
 function sortObjectByKeys<T extends object>(obj: T): T {
   return Object.keys(obj)
     .sort()
-    .reduce(
-      (result: T, key: string & keyof T) => (result[key] = obj[key]) && result,
-      {} as T,
-    );
+    .reduce((result, key) => {
+      (result as Record<string, unknown>)[key] = (
+        obj as Record<string, unknown>
+      )[key];
+      return result;
+    }, {} as T);
 }
 
 export function getProjectTargetOptions(

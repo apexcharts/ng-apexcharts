@@ -122,7 +122,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
       Object.keys(changes).filter((c) => c !== "series").length === 0;
 
     if (shouldUpdateSeries) {
-      this.updateSeries(this.series(), true);
+      this.updateSeries(this.series()!, true);
       return;
     }
 
@@ -355,7 +355,7 @@ export class ChartComponent implements OnChanges, OnDestroy {
     this.waitingForConnectedRef = afterEveryRender({
       read: () => {
         if (this.isConnected) {
-          this.waitingForConnectedRef.destroy();
+          this.waitingForConnectedRef?.destroy();
           this.waitingForConnectedRef = null;
           this.createElement();
         }

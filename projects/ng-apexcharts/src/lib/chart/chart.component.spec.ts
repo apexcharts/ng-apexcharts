@@ -99,7 +99,7 @@ describe('ChartComponent', () => {
       expect(parentComponent.chart()).toBeTruthy();
 
       fixture.componentRef.setInput('show', true);
-      await firstValueFrom(outputToObservable(parentComponent.chart().chartReady));
+      await firstValueFrom(outputToObservable(parentComponent.chart()!.chartReady));
 
       expect(fixture.debugElement.query(By.css('svg'))).toBeTruthy();
     });
