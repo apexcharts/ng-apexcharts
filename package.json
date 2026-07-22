@@ -8,6 +8,8 @@
     "test:schematics": "ts-node --project ./projects/ng-apexcharts/schematics/tsconfig.json node_modules/jasmine/bin/jasmine.js \"projects/ng-apexcharts/schematics/**/*[sS]pec.ts\"",
     "lint": "ng lint",
     "build:pkg": "ng build ng-apexcharts --configuration production",
+    "postbuild:pkg": "npm run check:dts",
+    "check:dts": "node scripts/check-dts-leaks.js",
     "build:schematics": "tsc -p ./projects/ng-apexcharts/schematics/tsconfig.json --outDir dist/ng-apexcharts/schematics",
     "copyfile:license": "copyfiles ./LICENSE ./dist/ng-apexcharts",
     "copyfile:schema": "copyfiles -f ./projects/ng-apexcharts/schematics/ng-add/schema.json ./dist/ng-apexcharts/schematics/ng-add",
