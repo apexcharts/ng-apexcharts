@@ -21,6 +21,9 @@
     "release:dry": "semantic-release --dry-run"
   },
   "license": "See License in LICENSE",
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  },
   "dependencies": {
     "@angular/animations": "~22.0.1",
     "@angular/common": "~22.0.1",
