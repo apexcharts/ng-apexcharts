@@ -1,3 +1,20 @@
+# [3.0.0](https://github.com/apexcharts/ng-apexcharts/compare/v2.5.0...v3.0.0) (2026-08-07)
+
+### Features
+
+* **types:** all option types (`ApexChart`, `ApexPlotOptions`, `ApexOptions`, and the rest) are re-exported directly from the installed `apexcharts` package instead of a hand-maintained copy, so they always match the actual ApexCharts API. Fixes missing v6 typings such as `plotOptions.pie.dataLabels.external` ([#504](https://github.com/apexcharts/ng-apexcharts/issues/504))
+
+### BREAKING CHANGES
+
+* the `apexcharts` peer dependency is now `^6.0.0`. ApexCharts 5.x exports no types at module scope, so it cannot supply the re-exported types. Projects that must stay on ApexCharts 5.x should remain on ng-apexcharts 2.5.x.
+* option types now match the installed ApexCharts exactly. Configs that only compiled because the old vendored types were out of date may surface new type errors; the errors point at real API mismatches.
+
+### Migration
+
+1. `npm install apexcharts@^6.0.0 ng-apexcharts@^3.0.0`
+2. Fix any new type errors; they reflect the real ApexCharts 6 option shapes documented at https://apexcharts.com/docs/options/
+3. No runtime or template changes are required. All 31 exported type names remain importable from `ng-apexcharts`.
+
 # [2.5.0](https://github.com/apexcharts/ng-apexcharts/compare/v2.4.0...v2.5.0) (2026-08-07)
 
 ### Features
