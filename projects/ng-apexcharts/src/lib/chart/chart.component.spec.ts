@@ -25,6 +25,18 @@ describe('ChartComponent', () => {
       component = fixture.componentInstance;
     });
 
+    it('stays inert when no inputs are provided', async () => {
+      const createElementSpy = spyOn(component as any, 'createElement').and.callThrough();
+
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(createElementSpy)
+        .withContext('No bound inputs must not construct an empty-config chart')
+        .not.toHaveBeenCalled();
+      expect(component.chartInstance()).toBeNull();
+    });
+
     it('should create and render', async () => {
       fixture.componentRef.setInput('chart', { type: 'line' });
       fixture.componentRef.setInput('series', [{ name: 'series1', data: [10, 20, 30] }]);
@@ -52,6 +64,65 @@ describe('ChartComponent', () => {
       const chart2 = component.chartInstance();
       expect(chart2).toBeTruthy();
       expect(chart1).withContext('Chart instances should be the same').toBe(chart2);
+
+      expect(fixture.debugElement.queryAll(By.css('.apexcharts-series')).length).toBe(2);
+    });
+
+    it('re-creates the chart when a non-series option changes', async () => {
+      fixture.componentRef.setInput('chart', { type: 'line' });
+      fixture.componentRef.setInput('series', [{ name: 'series1', data: [10, 20, 30] }]);
+      await firstValueFrom(outputToObservable(component.chartReady));
+      const chart1 = component.chartInstance();
+
+      fixture.componentRef.setInput('title', { text: 'Updated title' });
+      await firstValueFrom(outputToObservable(component.chartReady));
+
+      expect(component.chartInstance())
+        .withContext('A structural option change must rebuild the chart')
+        .not.toBe(chart1);
+    });
+
+    it('re-creates the chart on a series change when autoUpdateSeries is false', async () => {
+      fixture.componentRef.setInput('chart', { type: 'line' });
+      fixture.componentRef.setInput('autoUpdateSeries', false);
+      fixture.componentRef.setInput('series', [{ name: 'series1', data: [10, 20, 30] }]);
+      await firstValueFrom(outputToObservable(component.chartReady));
+      const chart1 = component.chartInstance();
+
+      fixture.componentRef.setInput('series', [{ name: 'series1', data: [1, 2, 3] }]);
+      await firstValueFrom(outputToObservable(component.chartReady));
+
+      expect(component.chartInstance())
+        .withContext('autoUpdateSeries=false opts out of the updateSeries fast path')
+        .not.toBe(chart1);
+    });
+
+    it('creates the chart only once when series and options change in the same tick', async () => {
+      const createElementSpy = spyOn(component as any, 'createElement').and.callThrough();
+
+      fixture.componentRef.setInput('chart', { type: 'line' });
+      fixture.componentRef.setInput('series', [{ name: 'series1', data: [10, 20, 30] }]);
+      await firstValueFrom(outputToObservable(component.chartReady));
+      expect(createElementSpy).toHaveBeenCalledTimes(1);
+
+      // Both a structural option and the series change together. The series
+      // fast path must collapse into the pending create instead of running too.
+      fixture.componentRef.setInput('chart', { type: 'bar' });
+      fixture.componentRef.setInput('series', [{ name: 'series1', data: [4, 5, 6] }]);
+      await firstValueFrom(outputToObservable(component.chartReady));
+
+      expect(createElementSpy).toHaveBeenCalledTimes(2);
+    });
+
+    it('picks up the latest inputs when a create is already queued', async () => {
+      fixture.componentRef.setInput('chart', { type: 'line' });
+      fixture.componentRef.setInput('series', [{ name: 'series1', data: [10, 20, 30] }]);
+      // Changed again before the queued afterNextRender create has run.
+      fixture.componentRef.setInput('series', [
+        { name: 'series1', data: [10, 20, 30] },
+        { name: 'series2', data: [15, 25, 47] },
+      ]);
+      await firstValueFrom(outputToObservable(component.chartReady));
 
       expect(fixture.debugElement.queryAll(By.css('.apexcharts-series')).length).toBe(2);
     });
@@ -107,7 +178,7 @@ describe('ChartComponent', () => {
 });
 
 @Component({
-  selector: 'mock-conditional-wrapper',
+  selector: 'apx-mock-conditional-wrapper',
   template: `
   @if (show()) {
     <ng-content></ng-content>
@@ -119,11 +190,11 @@ class MockConditionalWrapperComponent {
 }
 
 @Component({
-  selector: 'mock-conditional-parent',
+  selector: 'apx-mock-conditional-parent',
   template: `
-    <mock-conditional-wrapper [show]="show()">
+    <apx-mock-conditional-wrapper [show]="show()">
       <apx-chart [chart]="config" [series]="chartSeries"></apx-chart>
-    </mock-conditional-wrapper>
+    </apx-mock-conditional-wrapper>
   `,
   imports: [ChartComponent, MockConditionalWrapperComponent],
 })

@@ -5,17 +5,17 @@ import {
   AfterRenderRef,
   ChangeDetectionStrategy,
   Component,
+  effect,
   ElementRef,
   inject,
   Injector,
   input,
   NgZone,
-  OnChanges,
   OnDestroy,
   output,
   PLATFORM_ID,
   signal,
-  SimpleChanges,
+  untracked,
   viewChild,
 } from "@angular/core";
 import {
@@ -43,13 +43,58 @@ import {
 } from "../model/apex-types";
 import type ApexChartsType from "apexcharts";
 
+/**
+ * Option inputs that are copied straight onto the ApexCharts config object.
+ *
+ * A reference change in any of these requires tearing the chart down and
+ * re-creating it. `series` is deliberately excluded: it has a cheap
+ * `updateSeries()` fast path, see {@link ChartComponent.autoUpdateSeries}.
+ */
+const STRUCTURAL_INPUTS = [
+  "annotations",
+  "chart",
+  "colors",
+  "dataLabels",
+  "stroke",
+  "labels",
+  "legend",
+  "fill",
+  "tooltip",
+  "plotOptions",
+  "responsive",
+  "markers",
+  "noData",
+  "parsing",
+  "xaxis",
+  "yaxis",
+  "forecastDataPoints",
+  "grid",
+  "states",
+  "title",
+  "subtitle",
+  "theme",
+] as const;
+
+type StructuralInput = (typeof STRUCTURAL_INPUTS)[number];
+
+/** Reference snapshot of every structural input, as last applied to the chart. */
+type StructuralSnapshot = Readonly<Record<StructuralInput, unknown>>;
+
+/**
+ * Compare two snapshots by reference, which is the same identity check Angular
+ * itself used to decide whether to report an input in `SimpleChanges`.
+ */
+function structuralEquals(a: StructuralSnapshot, b: StructuralSnapshot): boolean {
+  return STRUCTURAL_INPUTS.every((key) => a[key] === b[key]);
+}
+
 @Component({
   selector: "apx-chart",
   template: `<div #chart></div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class ChartComponent implements OnChanges, OnDestroy {
+export class ChartComponent implements OnDestroy {
   readonly chart = input<ApexChart>();
   readonly annotations = input<ApexAnnotations>();
   readonly colors = input<any[]>();
@@ -94,11 +139,25 @@ export class ChartComponent implements OnChanges, OnDestroy {
   private readonly _injector = inject(Injector);
   private waitingForConnectedRef: AfterRenderRef | null = null;
 
+  /** Structural inputs as of the last completed `createElement()`. */
+  private appliedStructural: StructuralSnapshot | null = null;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!this.isBrowser) return;
+  /** True while a `createElement()` pass is queued or in flight. */
+  private createScheduled = false;
 
-    this.hydrate(changes);
+  constructor() {
+    // ApexCharts touches the DOM on construction, so it never runs on the server.
+    if (this.isBrowser) {
+      effect(() => {
+        // Read every option input so the effect re-runs on any of them. The
+        // reads must happen inside the reactive context; applying the change
+        // must not, or writing `chartInstance` would re-trigger this effect.
+        const structural = this.readStructuralInputs();
+        const series = this.series();
+
+        untracked(() => this.applyChanges(structural, series));
+      });
+    }
   }
 
   ngOnDestroy() {
@@ -111,20 +170,54 @@ export class ChartComponent implements OnChanges, OnDestroy {
     return this.chartElement()?.nativeElement.isConnected;
   }
 
-  private hydrate(changes: SimpleChanges): void {
-    if (this.waitingForConnectedRef) {
+  /** Tracked read of every structural input. Must run inside a reactive context. */
+  private readStructuralInputs(): StructuralSnapshot {
+    const snapshot = {} as Record<StructuralInput, unknown>;
+
+    for (const key of STRUCTURAL_INPUTS) {
+      snapshot[key] = this[key]();
+    }
+
+    return snapshot;
+  }
+
+  /**
+   * Route an input change to either the cheap `updateSeries()` path or a full
+   * re-create, mirroring what the chart currently has applied.
+   */
+  private applyChanges(
+    structural: StructuralSnapshot,
+    series: ApexAxisChartSeries | ApexNonAxisChartSeries | undefined
+  ): void {
+    // Nothing is bound yet: stay inert instead of constructing ApexCharts
+    // with an empty config. Mirrors the old behaviour where ngOnChanges never
+    // fired without a bound input. The effect re-runs once a value arrives.
+    const hasAnyOption =
+      !!series || STRUCTURAL_INPUTS.some((key) => structural[key]);
+
+    if (!hasAnyOption) {
       return;
     }
 
-    const shouldUpdateSeries =
-      this.chartInstance() &&
+    // A queued create reads the latest inputs when it runs, so collapse any
+    // change that lands before then into it rather than doing duplicate work.
+    if (this.createScheduled || this.waitingForConnectedRef) {
+      return;
+    }
+
+    const seriesOnlyChange =
+      this.chartInstance() !== null &&
       this.autoUpdateSeries() &&
-      Object.keys(changes).filter((c) => c !== "series").length === 0;
+      this.appliedStructural !== null &&
+      structuralEquals(this.appliedStructural, structural) &&
+      !!series;
 
-    if (shouldUpdateSeries) {
-      this.updateSeries(this.series()!, true);
+    if (seriesOnlyChange) {
+      this.updateSeries(series, true);
       return;
     }
+
+    this.createScheduled = true;
 
     // Create the chart after the layout is finalized and ready to be measured.
     afterNextRender({
@@ -147,40 +240,23 @@ export class ChartComponent implements OnChanges, OnDestroy {
       return;
     }
 
+    // Read the inputs as late as possible: changes that landed while the
+    // bundle was loading are picked up here instead of queueing another create.
+    const structural = untracked(() => this.readStructuralInputs());
+    const series = untracked(this.series);
+
     const options: any = {};
-
-    const properties = [
-      "annotations",
-      "chart",
-      "colors",
-      "dataLabels",
-      "series",
-      "stroke",
-      "labels",
-      "legend",
-      "fill",
-      "tooltip",
-      "plotOptions",
-      "responsive",
-      "markers",
-      "noData",
-      "parsing",
-      "xaxis",
-      "yaxis",
-      "forecastDataPoints",
-      "grid",
-      "states",
-      "title",
-      "subtitle",
-      "theme",
-    ] as const;
-
-    properties.forEach((property) => {
-      const value = this[property]();
-      if (value) {
-        options[property] = value;
+    for (const key of STRUCTURAL_INPUTS) {
+      if (structural[key]) {
+        options[key] = structural[key];
       }
-    });
+    }
+    if (series) {
+      options.series = series;
+    }
+
+    this.appliedStructural = structural;
+    this.createScheduled = false;
 
     this.destroy();
 
