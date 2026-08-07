@@ -1,0 +1,9 @@
+{
+  "//": "Compiles the schematics *with* their specs for `npm run test:schematics`. The base config excludes specs so they never reach the published package.",
+  "extends": "./tsconfig.json",
+  "include": [
+    "./**/*",
+    "**.json"
+  ],
+  "exclude": []
+}

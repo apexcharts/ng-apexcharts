@@ -29,5 +29,9 @@
   "include": [
     "./**/*",
     "**.json"
+  ],
+  "//": "Specs are excluded so they are not emitted into the published package. `npm run test:schematics` compiles them via tsconfig.spec.json instead.",
+  "exclude": [
+    "**/*.spec.ts"
   ]
 }

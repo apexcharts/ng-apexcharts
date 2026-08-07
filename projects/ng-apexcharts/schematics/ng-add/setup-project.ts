@@ -1,4 +1,4 @@
-import { JsonValue } from '@angular-devkit/core';
+import { JsonArray } from "@angular-devkit/core";
 import {
   chain,
   Rule,
@@ -7,17 +7,33 @@ import {
 } from "@angular-devkit/schematics";
 import {
   getWorkspace,
+  ProjectDefinition,
   updateWorkspace,
 } from "@schematics/angular/utility/workspace";
 import { ProjectType } from "@schematics/angular/utility/workspace-models";
-import { addRootImport } from "@schematics/angular/utility/standalone/rules";
-import { addImportToModule } from "@schematics/angular/utility/ast-utils";
-import { InsertChange } from "@schematics/angular/utility/change";
-import { getProjectFromWorkspace, getProjectTargetOptions } from "../utils";
+import {
+  getAppModulePath,
+  isStandaloneApp,
+} from "@schematics/angular/utility/ng-ast-utils";
+import {
+  addModuleImportToRootModule,
+  getProjectFromWorkspace,
+  getProjectMainFile,
+  hasNgModuleImport,
+} from "../utils";
 import { NgApexchartNgAddSchema } from "./schema";
-import * as ts from 'typescript';
 
-const scriptPath = `/node_modules/apexcharts/dist/apexcharts.min.js`;
+const MODULE_NAME = "NgApexchartsModule";
+const LIBRARY_NAME = "ng-apexcharts";
+
+/**
+ * Older versions of this schematic pushed the pre-bundled ApexCharts UMD build
+ * into the `scripts` array of `angular.json`. That is now actively harmful:
+ * the chart components load their own bundle through a dynamic `import()`, so
+ * the global script is dead weight (~940 KB) that also defeats the
+ * tree-shaking `<apx-chart-core>` entry point. Re-running `ng add` cleans it up.
+ */
+const LEGACY_GLOBAL_SCRIPT = "apexcharts/dist/apexcharts.min.js";
 
 export default function (options: NgApexchartNgAddSchema): Rule {
   return async (host: Tree, context: SchematicContext) => {
@@ -26,176 +42,116 @@ export default function (options: NgApexchartNgAddSchema): Rule {
 
     if (project.extensions["projectType"] !== ProjectType.Application) {
       context.logger.warn(
-        `project '${options.project}' is not an angular application. it look like angular library`,
+        `Project "${options.project}" is not an Angular application (it looks ` +
+          `like a library), so there is no application config to set up. ` +
+          `Import the chart components directly where you use them.`,
       );
       return;
     }
 
-    return chain([addNgApexchartsModule(options), addApexchartsToScripts(options)]);
+    return chain([
+      removeLegacyGlobalScript(options.project!, context),
+      registerComponents(project, context),
+    ]);
   };
 }
 
-function addNgApexchartsModule(options: NgApexchartNgAddSchema) {
-  return async (host: Tree, _context: SchematicContext) => {
-    const workspace = await getWorkspace(host);
-    const project = getProjectFromWorkspace(workspace, options.project);
-    const ngxApexchartModuleName = "NgApexchartsModule";
-    const libraryName = "ng-apexcharts";
-    
-    // Check if this is a standalone application
-    const isStandaloneApp = await isStandaloneApplication(host, project);
-    
-    if (isStandaloneApp) {
-      // Use addRootImport for standalone applications
-      return addRootImport(
-        options.project!,
-        ({ code, external }) =>
-          code`${external(ngxApexchartModuleName, libraryName)}`,
-      );
-    } else {
-      // Use traditional module import for module-based applications
-      return (tree: Tree) => {
-        try {
-          // Find the app module file - it could be app.module.ts or app-module.ts
-          const possibleModulePaths = [
-            `/projects/${options.project}/src/app/app.module.ts`,
-            `/projects/${options.project}/src/app/app-module.ts`
-          ];
-          
-          let modulePath: string | null = null;
-          for (const path of possibleModulePaths) {
-            if (tree.exists(path)) {
-              modulePath = path;
-              break;
-            }
-          }
-          
-          if (!modulePath) {
-            throw new Error(`Could not find app module file for project ${options.project}`);
-          }
-          
-          // Manually add the import to the module
-          addModuleImportToModule(tree, modulePath, ngxApexchartModuleName, libraryName);
-          
-        } catch (error) {
-          throw error;
-        }
-        return tree;
-      };
+/**
+ * Makes the chart components reachable from templates.
+ *
+ * Standalone applications intentionally get no code change. The components are
+ * standalone, so they are imported by whichever component renders them. Adding
+ * `NgApexchartsModule` to the application config would be dead code: the module
+ * only re-exports standalone components and declares no providers, so
+ * `importProvidersFrom(NgApexchartsModule)` contributes nothing and still
+ * leaves `<apx-chart>` unresolved in templates.
+ */
+function registerComponents(
+  project: ProjectDefinition,
+  context: SchematicContext,
+): Rule {
+  return (host: Tree) => {
+    const mainFile = getProjectMainFile(project);
+
+    if (isStandaloneApp(host, mainFile)) {
+      logStandaloneUsage(context);
+      return host;
     }
+
+    const modulePath = getAppModulePath(host, mainFile);
+
+    if (hasNgModuleImport(host, modulePath, MODULE_NAME)) {
+      context.logger.info(
+        `  ↳ ${MODULE_NAME} is already imported in ${modulePath}, skipping.`,
+      );
+      return host;
+    }
+
+    addModuleImportToRootModule(host, MODULE_NAME, LIBRARY_NAME, project);
+    context.logger.info(`  ↳ Added ${MODULE_NAME} to ${modulePath}.`);
+
+    return host;
   };
 }
 
-// Custom function to add module import directly to a specific module file
-function addModuleImportToModule(host: Tree, modulePath: string, moduleName: string, src: string) {
-  const moduleSource = parseSourceFile(host, modulePath);
+function logStandaloneUsage(context: SchematicContext): void {
+  context.logger.info(
+    [
+      "",
+      "  ng-apexcharts ships standalone components, so there is nothing to",
+      "  register globally. Import the one you need where you use it:",
+      "",
+      '    import { ChartComponent } from "ng-apexcharts";',
+      "",
+      "    @Component({",
+      "      imports: [ChartComponent],",
+      "      template: `<apx-chart [series]=\"series\" [chart]=\"chart\" />`,",
+      "    })",
+      "",
+      "  Other entry points: ChartCoreComponent (<apx-chart-core>, smaller",
+      "  bundle), ChartSSRComponent + ChartHydrateComponent (server rendering).",
+      "",
+    ].join("\n"),
+  );
+}
 
-  if (!moduleSource) {
-    throw new Error(`Module not found: ${modulePath}`);
-  }
+/** Drops the redundant global ApexCharts script left behind by older versions. */
+function removeLegacyGlobalScript(
+  projectName: string,
+  context: SchematicContext,
+): Rule {
+  return updateWorkspace((workspace) => {
+    const project = workspace.projects.get(projectName);
 
-  const changes = addImportToModule(moduleSource, modulePath, moduleName, src);
-  const recorder = host.beginUpdate(modulePath);
+    if (!project) {
+      return;
+    }
 
-  changes.forEach((change: any) => {
-    if (change instanceof InsertChange) {
-      recorder.insertLeft(change.pos, change.toAdd);
+    for (const targetName of ["build", "test"]) {
+      const targetOptions = project.targets.get(targetName)?.options;
+      const scripts = targetOptions?.["scripts"];
+
+      if (!targetOptions || !Array.isArray(scripts)) {
+        continue;
+      }
+
+      const remaining = scripts.filter((script) => {
+        const input =
+          typeof script === "string"
+            ? script
+            : (script as { input?: string } | null)?.input;
+
+        return !input?.endsWith(LEGACY_GLOBAL_SCRIPT);
+      });
+
+      if (remaining.length !== scripts.length) {
+        targetOptions["scripts"] = remaining as JsonArray;
+        context.logger.info(
+          `  ↳ Removed the redundant ${LEGACY_GLOBAL_SCRIPT} global script ` +
+            `from the "${targetName}" target. The chart components load ` +
+            `ApexCharts on demand.`,
+        );
+      }
     }
   });
-
-  host.commitUpdate(recorder);
 }
-
-function parseSourceFile(host: Tree, path: string) {
-  const buffer = host.read(path);
-  if (!buffer) {
-    throw new Error(`Could not read file: ${path}`);
-  }
-  
-  const content = buffer.toString();
-  return ts.createSourceFile(path, content, ts.ScriptTarget.Latest, true);
-}
-
-async function isStandaloneApplication(host: Tree, project: any): Promise<boolean> {
-  try {
-    // Get the main file path
-    const buildOptions = project.targets?.get('build')?.options;
-    if (!buildOptions) {
-      return false;
-    }
-    
-    const mainPath = (buildOptions['browser'] || buildOptions['main']) as string;
-    if (!mainPath || !host.exists(mainPath)) {
-      return false;
-    }
-    
-    // Read the main.ts file to check if it uses bootstrapApplication (standalone) or bootstrapModule (traditional)
-    const mainContent = host.read(mainPath)?.toString();
-    if (!mainContent) {
-      return false;
-    }
-    
-    // If it contains bootstrapApplication, it's a standalone app
-    if (mainContent.includes('bootstrapApplication')) {
-      return true;
-    }
-    
-    // If it contains bootstrapModule, it's a traditional module-based app
-    if (mainContent.includes('bootstrapModule')) {
-      return false;
-    }
-    
-    // Default to false (module-based) if we can't determine
-    return false;
-  } catch (error) {
-    // Default to false (module-based) if there's any error
-    return false;
-  }
-}
-
-function addApexchartsToScripts(options: NgApexchartNgAddSchema) {
-  return async (host: Tree, _context: SchematicContext): Promise<Rule> => {;
-    const scriptPath = `/node_modules/apexcharts/dist/apexcharts.min.js`;
-    return chain([addScripts(options.project!, 'build', host, scriptPath), addScripts(options.project!, 'test', host, scriptPath)]);;
-  };
-}
-
-function addScripts(projectName: string, targetName: string, host: Tree, assetPath: string): Rule {
-  return updateWorkspace(workspace => {
-    const project = getProjectFromWorkspace(workspace, projectName);
-    const targetOptions = getProjectTargetOptions(project, targetName);
-    if (!targetOptions) {
-      return;
-    };
-    
-    // Initialize scripts as empty array if it doesn't exist
-    if (!targetOptions['scripts']) {
-      targetOptions['scripts'] = [];
-    }
-    
-    const scripts = targetOptions['scripts'] as (string | { input: string })[];
-    const existingScripts = scripts.map(s => (typeof s === 'string' ? s : s.input));
-    for (let [, scriptPath] of existingScripts.entries()) {
-      if (scriptPath === assetPath)
-        return;
-    }
-    scripts.unshift(assetPath);
-    setUpdatedTargetOptions(host, targetOptions, targetName, projectName)
-  })
-
-}
-
-function setUpdatedTargetOptions(host: Tree, targetOptions: Record<string, JsonValue | undefined>, targetName: string, projectName: string) {
-  if (host.exists('angular.json')) {
-    const currentAngular = JSON.parse(host.read('angular.json')!.toString('utf-8'));
-    if (currentAngular['projects'][projectName].targets) {
-      currentAngular['projects'][projectName].targets[targetName]['options'] = targetOptions;
-    }
-
-    if (currentAngular['projects'][projectName].architect) {
-      currentAngular['projects'][projectName].architect[targetName]['options'] = targetOptions;
-    }
-    host.overwrite('angular.json', JSON.stringify(currentAngular, null, 2));
-  }
-}
-
