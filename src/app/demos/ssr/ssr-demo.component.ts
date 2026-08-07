@@ -3,19 +3,19 @@
  *
  * Demonstrates two SSR patterns provided by ng-apexcharts:
  *
- * Pattern A — `<apx-chart-ssr>`:
+ * Pattern A: `<apx-chart-ssr>`:
  *   Renders a static chart SVG on the server (Angular Universal / SSR).
- *   On the client the slot is empty — no interactivity is attached.
+ *   On the client the slot is empty; no interactivity is attached.
  *   Use this for purely decorative / read-only charts where SEO matters.
  *
- * Pattern B — `<apx-chart-ssr>` + `<apx-chart-hydrate>`:
+ * Pattern B: `<apx-chart-ssr>` + `<apx-chart-hydrate>`:
  *   Renders a static snapshot on the server and then hydrates it with full
  *   interactivity (tooltips, zoom, animations) on the client using
  *   `ApexCharts.hydrate()`.
  *
  * The existing `<apx-chart>` (client-only) is still used for interactive
  * charts that do not need SSR. It now imports from `apexcharts/client`
- * internally so it is safe to import in Universal apps — it simply skips
+ * internally so it is safe to import in Universal apps: it simply skips
  * rendering on the server.
  *
  * IMPORTANT: This demo requires the SSR dev server (`npm start` with SSR
@@ -36,7 +36,7 @@ import { ApexOptions } from "ng-apexcharts";
         <h2>SSR + Hydration demo</h2>
         <p>
           Requires <strong>Angular SSR</strong> to observe server-side rendering.
-          Run <code>npm start</code> — the Angular CLI dev-server renders the initial HTML on the Node.js
+          Run <code>npm start</code>: the Angular CLI dev-server renders the initial HTML on the Node.js
           server, then the client takes over.
         </p>
       </hgroup>

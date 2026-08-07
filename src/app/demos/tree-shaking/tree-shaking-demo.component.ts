@@ -7,7 +7,7 @@
  *
  * Savings vs full bundle: ~35% (~331 KB raw, more when minzipped).
  *
- * Side-effect imports MUST occur before `<apx-chart-core>` renders — here they
+ * Side-effect imports MUST occur before `<apx-chart-core>` renders. Here they
  * are at module level, which runs at component load time. In a real app, put
  * them in app.config.ts or the root bootstrap file.
  */
@@ -34,7 +34,7 @@ import { ApexAxisChartSeries, ApexChart, ApexLegend } from "ng-apexcharts";
         <p>
           Uses <code>&lt;apx-chart-core&gt;</code> which loads <code>apexcharts/core</code>
           (~611 KB) instead of the full bundle (~942 KB). Only <strong>line</strong> and
-          <strong>bar</strong> chart types are registered here — legend and toolbar are
+          <strong>bar</strong> chart types are registered here; legend and toolbar are
           opted in. Everything else (exports, annotations, keyboard, pie, radar…) is
           excluded from the build.
         </p>

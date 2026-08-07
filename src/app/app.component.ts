@@ -13,7 +13,7 @@ type Tab = "full" | "tree-shaking" | "ssr";
     <header class="container">
       <hgroup>
         <h1>ng-apexcharts</h1>
-        <p>Angular wrapper for <a href="https://apexcharts.com" target="_blank">ApexCharts</a> — interactive demos</p>
+        <p>Angular wrapper for <a href="https://apexcharts.com" target="_blank">ApexCharts</a>: interactive demos</p>
       </hgroup>
     </header>
 
