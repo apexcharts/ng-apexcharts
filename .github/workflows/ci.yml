@@ -23,8 +23,14 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Lint
+        run: npm run lint
+
       - name: Run tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
 
-      - name: Build library
-        run: npm run build:pkg
+      - name: Run schematics tests
+        run: npm run test:schematics
+
+      - name: Build package (library + schematics, mirrors publish)
+        run: npm run package
