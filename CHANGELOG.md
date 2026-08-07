@@ -1,3 +1,25 @@
+# [2.5.0](https://github.com/apexcharts/ng-apexcharts/compare/v2.4.0...v2.5.0) (2026-08-07)
+
+### Features
+
+* **chart:** replace `ngOnChanges` with signal-based reactive change handling. Series-only changes take the animated `updateSeries()` fast path, structural changes rebuild exactly once even when combined with a series change, and a chart with no bound inputs stays inert
+* **schematics:** `ng add` installs apexcharts `^6.7.0`
+
+### Bug Fixes
+
+* **schematics:** `ng add` failed to load on Angular 22 (imported a TypeScript re-export removed in v22)
+* **schematics:** `ng add` pinned apexcharts `4.0.0`, incompatible with the supported `^5.10.3 || ^6.0.0` peer range
+* **schematics:** standalone applications received a no-op `importProvidersFrom(NgApexchartsModule)`; they now get guidance to import the standalone components directly
+* **schematics:** the redundant ~940 KB `apexcharts.min.js` global script is no longer added to `angular.json` and is removed if a previous version left it behind
+* **build:** the published schematics were emitted as CommonJS inside a `"type": "module"` package and failed to load; a nested `{"type":"commonjs"}` marker fixes `ng add` for the package built by ng-packagr 22
+* **build:** `npm run package` built the library and schematics concurrently while ng-packagr wiped the output directory, so packages could ship without schematics; the pipeline is now sequential and verified
+* **build:** the npm package shipped a stale bundled README; the root README is now the single source and the package build fails if they differ
+* **lib:** SSR components use `inject()` instead of constructor parameter injection
+
+### Notes for subclass authors
+
+* `ChartComponent` no longer implements `OnChanges`. Code that overrode `ngOnChanges` or invoked `component.ngOnChanges(...)` manually (for example in tests) should set inputs instead; change handling is fully reactive now.
+
 # [2.1.0](https://github.com/apexcharts/ng-apexcharts/compare/v2.0.3...v2.1.0) (2026-02-22)
 
 
