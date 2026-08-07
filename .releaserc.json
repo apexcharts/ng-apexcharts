@@ -81,7 +81,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "echo 'Building ng-apexcharts...' && ng build ng-apexcharts"
+        "prepareCmd": "echo 'Building the full publishable package...' && npm run package"
       }
     ],
     [
