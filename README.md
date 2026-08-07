@@ -36,6 +36,7 @@ register and no decorators in the public API.
 
 | ng-apexcharts Version | Angular Version | ApexCharts Version   |
 | --------------------- | --------------- | -------------------- |
+| 3.0.x                 | 20+             | ^6.0.0               |
 | 2.5.x                 | 20+             | ^5.10.3 \|\| ^6.0.0  |
 | 2.4.x                 | 20+             | ^5.10.3 \|\| ^6.0.0  |
 | 2.3.x                 | 20+             | ^5.10.3              |
@@ -50,8 +51,13 @@ register and no decorators in the public API.
 
 **Note:** For projects using older Angular versions (7-8), please use ng-apexcharts version 1.5.x or earlier.
 
-New installs should prefer ApexCharts 6.x. Version 5.16.0 specifically ships
-broken drilldown type declarations ([#493](https://github.com/apexcharts/ng-apexcharts/issues/493)).
+ng-apexcharts 3.x requires ApexCharts 6. All option types (`ApexChart`,
+`ApexPlotOptions`, and the rest) are re-exported directly from the installed
+`apexcharts` package, so they always match its actual API
+([#504](https://github.com/apexcharts/ng-apexcharts/issues/504)). If you must
+stay on ApexCharts 5.x, use ng-apexcharts 2.5.x; note that apexcharts 5.16.0
+ships broken drilldown type declarations
+([#493](https://github.com/apexcharts/ng-apexcharts/issues/493)).
 
 ## Installation
 
