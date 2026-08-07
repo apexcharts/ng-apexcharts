@@ -1,7 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { ChartSSRService } from "./chart-ssr.service";
 
-// Shared stubs — reset between each test.
+// Shared stubs, reset between each test.
 const mockRenderToHTML = jasmine.createSpy("renderToHTML").and.returnValue(
   Promise.resolve("<div>chart-html</div>")
 );

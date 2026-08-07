@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   inject,
-  Inject,
   input,
   makeStateKey,
   OnInit,
@@ -44,11 +43,9 @@ export class ChartSSRComponent implements OnInit {
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly transferState = inject(TransferState);
   private readonly stateKey = makeStateKey<string>(`apx-chart-ssr-${this.chartSSRService.nextInstanceId()}`);
-  private readonly isServer: boolean;
+  private readonly isServer = isPlatformServer(inject(PLATFORM_ID));
 
-  constructor(@Inject(PLATFORM_ID) platformId: object) {
-    this.isServer = isPlatformServer(platformId);
-
+  constructor() {
     if (!this.isServer) {
       afterNextRender(() => {
         const host = this.el.nativeElement;

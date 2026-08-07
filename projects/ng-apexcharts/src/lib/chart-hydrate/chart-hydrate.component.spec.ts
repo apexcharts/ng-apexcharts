@@ -88,7 +88,7 @@ describe("ChartHydrateComponent", () => {
     });
 
     it("does not throw when destroyed before hydration completes", () => {
-      // ngOnDestroy called without detectChanges — chartObj is null
+      // ngOnDestroy called without detectChanges, chartObj is null
       expect(() => component.ngOnDestroy()).not.toThrow();
     });
 

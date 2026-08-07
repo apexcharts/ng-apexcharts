@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   inject,
-  Inject,
   Injector,
   input,
   NgZone,
@@ -44,12 +43,8 @@ export class ChartHydrateComponent implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly ngZone = inject(NgZone);
   private readonly injector = inject(Injector);
-  private readonly isBrowser: boolean;
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private chartObj: ApexChartsType | null = null;
-
-  constructor(@Inject(PLATFORM_ID) platformId: object) {
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
 
   ngOnInit(): void {
     if (!this.isBrowser) return;

@@ -7,7 +7,7 @@ import type ApexChartsType from "apexcharts";
  *
  * Loads `apexcharts/core` (~611 KB) instead of the full `apexcharts/client`
  * bundle (~942 KB). To register chart types and features, add side-effect
- * imports **before** this component is rendered — typically in `app.config.ts`
+ * imports **before** this component is rendered, typically in `app.config.ts`
  * or at the top of the component that bootstraps the charts:
  *
  * ```ts
