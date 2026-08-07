@@ -7,6 +7,7 @@ on:
 
 permissions:
   id-token: write
+  contents: write
 
 jobs:
   publish:
@@ -60,3 +61,30 @@ jobs:
       - run: npm publish --provenance --tag ${{ steps.check.outputs.tag }}
         if: steps.check.outputs.triggered == 'true'
         working-directory: dist/ng-apexcharts
+
+      - name: Create GitHub release with notes
+        if: steps.check.outputs.triggered == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ steps.check.outputs.version }}"
+          TAG="v$VERSION"
+
+          # Idempotent: skip if a release for this tag already exists.
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "Release $TAG already exists, skipping."
+            exit 0
+          fi
+
+          PRERELEASE_FLAG=""
+          if echo "$VERSION" | grep -q '[-]'; then
+            PRERELEASE_FLAG="--prerelease"
+          fi
+
+          # Notes come from the CHANGELOG entry for this version; fall back to
+          # GitHub's auto-generated notes when no entry exists.
+          if node scripts/extract-changelog.js "$VERSION" > /tmp/release-notes.md; then
+            gh release create "$TAG" --title "$TAG" --notes-file /tmp/release-notes.md $PRERELEASE_FLAG
+          else
+            gh release create "$TAG" --title "$TAG" --generate-notes $PRERELEASE_FLAG
+          fi
