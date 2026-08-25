@@ -1,3 +1,20 @@
+# [3.1.0](https://github.com/apexcharts/ng-apexcharts/compare/v3.0.0...v3.1.0) (2026-08-25)
+
+### Features
+
+* the `apexcharts` peer dependency is now `^6.0.0 || ^7.0.0`. ApexCharts 7 needs no code change in this library, but the previous `^6.0.0` caret excluded it, so upgrading ApexCharts would have produced a peer conflict. Built and tested against ApexCharts 7 before widening: the option types v3 re-exports from the installed `apexcharts` are unchanged
+* `ng add ng-apexcharts` now installs `^6.7.0 || ^7.0.0` rather than pinning the 6.x line. npm resolves it to the newest published version that satisfies, so a fresh project lands on 6.x today and on 7.x once ApexCharts 7 is released, with no further ng-apexcharts release needed
+
+### Notes for ApexCharts 7 users
+
+ApexCharts 7 moves nine optional features out of its default bundle: trellis, storyboard, perspectives, ink, renderer-canvas, link, measure, history and context-menu. If you use one, import it alongside ApexCharts:
+
+```ts
+import 'apexcharts/features/trellis'
+```
+
+Each warns in the console when its config is set but the feature is absent. This is an ApexCharts-level change; the ng-apexcharts API is unchanged, and charts that do not use those features need no action.
+
 # [3.0.0](https://github.com/apexcharts/ng-apexcharts/compare/v2.5.0...v3.0.0) (2026-08-07)
 
 ### Features
