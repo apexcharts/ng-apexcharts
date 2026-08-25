@@ -1,11 +1,14 @@
 /**
  * Tree-Shaking Demo
  *
- * Uses `<apx-chart-core>` which loads `apexcharts/core` (~611 KB) instead of
- * the full `apexcharts/client` bundle (~942 KB). Only the chart types and
- * features imported below are included in the final bundle.
+ * Uses `<apx-chart-core>` which loads `apexcharts/core` (~481 KB minified,
+ * 133 KB gzipped) instead of the full bundle (~875 KB minified, 246 KB
+ * gzipped). Only the chart types and features imported below are included in
+ * the final bundle.
  *
- * Savings vs full bundle: ~35% (~331 KB raw, more when minzipped).
+ * Savings vs the full bundle: ~45% minified, ~46% gzipped. Measured on
+ * apexcharts 7.0.0, whose full bundle is itself 13.6% smaller than 6.10.0's
+ * because nine features moved out of it and became opt-in imports.
  *
  * Side-effect imports MUST occur before `<apx-chart-core>` renders. Here they
  * are at module level, which runs at component load time. In a real app, put
@@ -33,7 +36,7 @@ import { ApexAxisChartSeries, ApexChart, ApexLegend } from "ng-apexcharts";
         <h2>Tree-shaking demo</h2>
         <p>
           Uses <code>&lt;apx-chart-core&gt;</code> which loads <code>apexcharts/core</code>
-          (~611 KB) instead of the full bundle (~942 KB). Only <strong>line</strong> and
+          (133 KB gzipped) instead of the full bundle (246 KB gzipped). Only <strong>line</strong> and
           <strong>bar</strong> chart types are registered here; legend and toolbar are
           opted in. Everything else (exports, annotations, keyboard, pie, radar…) is
           excluded from the build.
