@@ -36,6 +36,7 @@ register and no decorators in the public API.
 
 | ng-apexcharts Version | Angular Version | ApexCharts Version   |
 | --------------------- | --------------- | -------------------- |
+| 3.1.x                 | 20+             | ^6.0.0 \|\| ^7.0.0   |
 | 3.0.x                 | 20+             | ^6.0.0               |
 | 2.5.x                 | 20+             | ^5.10.3 \|\| ^6.0.0  |
 | 2.4.x                 | 20+             | ^5.10.3 \|\| ^6.0.0  |
@@ -51,10 +52,22 @@ register and no decorators in the public API.
 
 **Note:** For projects using older Angular versions (7-8), please use ng-apexcharts version 1.5.x or earlier.
 
-ng-apexcharts 3.x requires ApexCharts 6. All option types (`ApexChart`,
+ng-apexcharts 3.1+ works with ApexCharts 6 or 7. All option types (`ApexChart`,
 `ApexPlotOptions`, and the rest) are re-exported directly from the installed
 `apexcharts` package, so they always match its actual API
-([#504](https://github.com/apexcharts/ng-apexcharts/issues/504)). If you must
+([#504](https://github.com/apexcharts/ng-apexcharts/issues/504)).
+
+ApexCharts 7 moved nine optional features out of its default bundle, so if you
+use one, import it alongside ApexCharts (this is an ApexCharts-level change, not
+an ng-apexcharts API change):
+
+```ts
+import 'apexcharts/features/trellis'
+```
+
+The affected features are trellis, storyboard, perspectives, ink,
+renderer-canvas, link, measure, history and context-menu. Each warns in the
+console when its config is set but the feature is absent. If you must
 stay on ApexCharts 5.x, use ng-apexcharts 2.5.x; note that apexcharts 5.16.0
 ships broken drilldown type declarations
 ([#493](https://github.com/apexcharts/ng-apexcharts/issues/493)).
