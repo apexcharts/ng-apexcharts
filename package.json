@@ -36,7 +36,7 @@
     "@angular/forms": "~22.0.1",
     "@angular/platform-browser": "~22.0.1",
     "@angular/platform-browser-dynamic": "~22.0.1",
-    "@angular/platform-server": "~22.0.1",
+    "@angular/platform-server": "~22.1.6",
     "@angular/router": "~22.0.1",
     "@angular/ssr": "~22.0.1",
     "@schematics/angular": "~22.0.1",
