@@ -24,7 +24,7 @@
     "copyfile:readme": "copyfiles -f ./README.md ./dist/ng-apexcharts",
     "check:package": "node scripts/check-package.js"
   },
-  "license": "See License in LICENSE",
+  "license": "SEE LICENSE IN LICENSE",
   "engines": {
     "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
   },
