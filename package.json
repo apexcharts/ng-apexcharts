@@ -29,18 +29,19 @@
     "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
   },
   "dependencies": {
-    "@angular/animations": "~22.0.1",
-    "@angular/common": "~22.0.1",
-    "@angular/compiler": "~22.0.1",
-    "@angular/core": "~22.0.1",
-    "@angular/forms": "~22.0.1",
-    "@angular/platform-browser": "~22.0.1",
-    "@angular/platform-browser-dynamic": "~22.0.1",
-    "@angular/platform-server": "~22.0.1",
-    "@angular/router": "~22.0.1",
-    "@angular/ssr": "~22.0.1",
-    "@schematics/angular": "~22.0.1",
+    "@angular/animations": "~22.2.1",
+    "@angular/common": "~22.2.1",
+    "@angular/compiler": "~22.2.1",
+    "@angular/core": "~22.2.1",
+    "@angular/forms": "~22.2.1",
+    "@angular/platform-browser": "~22.2.1",
+    "@angular/platform-browser-dynamic": "~22.2.1",
+    "@angular/platform-server": "~22.2.1",
+    "@angular/router": "~22.2.1",
+    "@angular/ssr": "~22.2.1",
+    "@schematics/angular": "~22.2.1",
     "apexcharts": "^6.7.0",
+    "express": "^5.2.1",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1"
   },
@@ -50,10 +51,10 @@
     "@angular-eslint/eslint-plugin-template": "20.6.0",
     "@angular-eslint/schematics": "20.6.0",
     "@angular-eslint/template-parser": "20.6.0",
-    "@angular/build": "~22.0.1",
-    "@angular/cli": "~22.0.1",
-    "@angular/compiler-cli": "~22.0.1",
-    "@angular/language-service": "~22.0.1",
+    "@angular/build": "~22.2.1",
+    "@angular/cli": "~22.2.1",
+    "@angular/compiler-cli": "~22.2.1",
+    "@angular/language-service": "~22.2.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/exec": "^6.0.3",
@@ -78,7 +79,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "less": "^4.2.0",
-    "ng-packagr": "~22.0.1",
+    "ng-packagr": "~22.2.4",
     "semantic-release": "^25.0.2",
     "semver": "^7.7.3",
     "ts-node": "~10.9.2",
@@ -88,7 +89,7 @@
     "karma-jasmine": {
       "jasmine-core": "^5.0.0"
     },
-    "@angular-devkit/schematics": "22.0.7",
-    "@angular-devkit/core": "22.0.7"
+    "@angular-devkit/schematics": "22.2.1",
+    "@angular-devkit/core": "22.2.1"
   }
 }
