@@ -19,6 +19,10 @@ const path = require("path");
  * 4. The schematics directory must exist at all. `npm run package` used to
  *    build the library and the schematics concurrently while ng-packagr wipes
  *    the output directory, so whether `ng add` shipped was a race.
+ * 5. The licence file the manifest names must ship. `license` reads
+ *    "SEE LICENSE IN LICENSE.md"; when LICENSE was renamed to LICENSE.md the
+ *    copy step still named the old file, copyfiles copied nothing without
+ *    complaint, and the package pointed at a file it did not contain.
  */
 function checkPackage() {
   const distDir = path.join(__dirname, "../dist/ng-apexcharts");
@@ -61,6 +65,15 @@ function checkPackage() {
     }
   }
 
+  // 5. The licence file the manifest points at is in the package.
+  const manifest = JSON.parse(fs.readFileSync(path.join(distDir, "package.json"), "utf8"));
+  const licenceFile = /^SEE LICENSE IN (.+)$/.exec(manifest.license || "")?.[1];
+  if (!licenceFile) {
+    failures.push(`package.json license is "${manifest.license}"; expected "SEE LICENSE IN <file>".`);
+  } else if (!fs.existsSync(path.join(distDir, licenceFile))) {
+    failures.push(`package.json says "SEE LICENSE IN ${licenceFile}" but ${licenceFile} is not in the package (check copyfile:license).`);
+  }
+
   // 3. No spec files in the published package.
   const specs = [];
   const walk = (dir) => {
@@ -83,7 +96,7 @@ function checkPackage() {
     process.exit(1);
   }
 
-  console.log("✅ Package verified: README in sync, ng-add loads, no spec files.");
+  console.log("✅ Package verified: README in sync, licence file present, ng-add loads, no spec files.");
 }
 
 checkPackage();
