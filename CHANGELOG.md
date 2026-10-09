@@ -1,3 +1,15 @@
+# [3.2.0](https://github.com/apexcharts/ng-apexcharts/compare/v3.1.0...v3.2.0) (2026-10-09)
+
+### Features
+
+* the `apexcharts` peer dependency is now `^6.0.0 || ^7.0.0 || ^8.0.0`, so installing ApexCharts 8 next to this package does not produce a peer conflict once 8 is released
+* `ng add ng-apexcharts` installs `^6.7.0 || ^7.0.0 || ^8.0.0`. npm resolves it to the newest published version that satisfies, so a fresh project lands on 7.x today and on 8.x once ApexCharts 8 is released, with no further ng-apexcharts release needed
+
+### Bug Fixes
+
+* the published package declares its licence. Its `package.json` had no `license` field, so npm and licence scanners showed this commercial package as unlicensed. It now reads `SEE LICENSE IN LICENSE.md`, and the package ships that file
+* the licence text is corrected: the Community threshold counts revenue, budget, funding or equivalent resources, whichever is highest, and the file is renamed `LICENSE.md` so GitHub renders it
+
 # [3.1.0](https://github.com/apexcharts/ng-apexcharts/compare/v3.0.0...v3.1.0) (2026-08-25)
 
 ### Features
