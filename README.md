@@ -36,6 +36,7 @@ register and no decorators in the public API.
 
 | ng-apexcharts Version | Angular Version | ApexCharts Version   |
 | --------------------- | --------------- | -------------------- |
+| 3.2.x                 | 20+             | ^6.0.0 \|\| ^7.0.0 \|\| ^8.0.0 |
 | 3.1.x                 | 20+             | ^6.0.0 \|\| ^7.0.0   |
 | 3.0.x                 | 20+             | ^6.0.0               |
 | 2.5.x                 | 20+             | ^5.10.3 \|\| ^6.0.0  |
