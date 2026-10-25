@@ -3,7 +3,7 @@ const path = require("path");
 
 /**
  * Updates the version in the library's package.json
- * Called by semantic-release with the new version as argument
+ * Usage: npm run update-lib-version <version>
  */
 function updateLibraryVersion() {
   const newVersion = process.argv[2];
