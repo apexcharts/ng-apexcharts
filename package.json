@@ -80,6 +80,7 @@
       "jasmine-core": "^5.0.0"
     },
     "@angular-devkit/schematics": "22.2.1",
-    "@angular-devkit/core": "22.2.1"
+    "@angular-devkit/core": "22.2.1",
+    "vite": "8.3.4"
   }
 }
