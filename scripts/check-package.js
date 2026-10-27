@@ -67,6 +67,31 @@ function checkPackage() {
 
   // 5. The licence file the manifest points at is in the package.
   const manifest = JSON.parse(fs.readFileSync(path.join(distDir, "package.json"), "utf8"));
+
+  // 6. The client-only subpath must not pull the core or SSR ApexCharts bundles.
+  const clientExport = manifest.exports?.["./client"];
+  const clientEntry = clientExport?.default;
+  if (!clientEntry) {
+    failures.push("The client-only ./client package export is missing.");
+  } else {
+    const clientBundlePath = path.resolve(distDir, clientEntry);
+    if (!fs.existsSync(clientBundlePath)) {
+      failures.push(`The client-only package entry is missing: ${clientEntry}.`);
+    } else {
+      const clientBundle = fs.readFileSync(clientBundlePath, "utf8");
+      if (!clientBundle.includes('import("apexcharts/client")')) {
+        failures.push("The client-only entry does not load apexcharts/client.");
+      }
+      if (
+        clientBundle.includes('import("apexcharts/core")') ||
+        clientBundle.includes('import("apexcharts/dist/core.esm.js")') ||
+        clientBundle.includes('import("apexcharts/ssr")')
+      ) {
+        failures.push("The client-only entry must not load the core or SSR ApexCharts bundles.");
+      }
+    }
+  }
+
   const licenceFile = /^SEE LICENSE IN (.+)$/.exec(manifest.license || "")?.[1];
   if (!licenceFile) {
     failures.push(`package.json license is "${manifest.license}"; expected "SEE LICENSE IN <file>".`);
