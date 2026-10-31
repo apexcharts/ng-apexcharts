@@ -96,6 +96,14 @@ through a dynamic `import()`, so no global script tag is needed.
 > build, and prevents `<apx-chart-core>` from shrinking your bundle. Re-running
 > `ng add ng-apexcharts` cleans it up for you.
 
+## Client-only entry point
+
+The `ng-apexcharts` entry point keeps the complete API for backward compatibility, including the core and SSR components. If your application uses only the browser `ChartComponent`, import it (and its option types) from `ng-apexcharts/client` instead. This keeps the core and SSR ApexCharts chunks out of the client-only bundle:
+
+```ts
+import { ChartComponent, ApexAxisChartSeries, ApexChart } from "ng-apexcharts/client";
+```
+
 ## Usage
 
 Import the component and use it in your template:
@@ -108,7 +116,7 @@ import {
   ApexChart,
   ApexXAxis,
   ApexTitleSubtitle,
-} from "ng-apexcharts";
+} from "ng-apexcharts/client";
 
 @Component({
   selector: "app-revenue-chart",
@@ -203,7 +211,7 @@ Because `chartInstance` is a signal, you can react to it declaratively:
 
 ```ts
 import { Component, computed, viewChild } from "@angular/core";
-import { ChartComponent } from "ng-apexcharts";
+import { ChartComponent } from "ng-apexcharts/client";
 
 @Component({
   imports: [ChartComponent],
@@ -223,7 +231,7 @@ DOM. Grab the component with `viewChild` and call it:
 
 ```ts
 import { Component, viewChild } from "@angular/core";
-import { ChartComponent } from "ng-apexcharts";
+import { ChartComponent } from "ng-apexcharts/client";
 
 @Component({
   imports: [ChartComponent],
