@@ -290,6 +290,63 @@ export class LeanChartComponent {}
 
 All inputs, outputs, and methods are identical to `<apx-chart>`.
 
+## Using with Ignite UI
+
+From ApexCharts 8.8.0, charts can follow the Ignite UI theme on the page: its
+palette, text, gridlines, tooltips, font and light or dark variant. Import the
+add-on once, before the first chart renders, in the component or lazy route
+file that renders the charts. It is free and needs no license key.
+
+```ts
+import "apexcharts/features/ignite-ui";
+```
+
+The add-on imports `apexcharts/core`, so importing it in `main.ts` also works
+but moves the ApexCharts core into the initial bundle, while the chart
+components otherwise load it lazily.
+
+It works with `<apx-chart>` and `<apx-chart-core>` alike. On a page that loads
+ApexCharts with a script tag, load `dist/features/ignite-ui.js` after
+`apexcharts.js` instead. Without the add-on the `--ig-*` tokens are ignored,
+with no error.
+
+To turn it off for one chart, pass it in the `theme` input:
+
+```ts
+theme: ApexTheme = { designSystem: false }; // ignore the Ignite UI theme, keep the --apx-* tokens
+// theme: ApexTheme = { tokens: false };    // ignore the --apx-* tokens and the Ignite UI theme
+```
+
+The Ignite UI theme ranks below everything you set:
+
+```
+explicit options  >  the chart's own CSS variables  >  --apx-* tokens  >  a named theme or palette  >  --ig-* tokens  >  defaults
+```
+
+Tokens are read on every render. After swapping the theme stylesheet at
+runtime, call `refreshTokens()` on the chart instance once the new stylesheet
+has loaded:
+
+```ts
+private readonly chart = viewChild.required(ChartComponent);
+
+// call from the new stylesheet's load handler
+onThemeLoaded() {
+  this.chart().chartInstance()?.refreshTokens();
+}
+```
+
+`ApexCharts.exec("<chart id>", "refreshTokens")` reaches it by chart id as
+well.
+
+The theme names its font but does not load it, so include the font's
+stylesheet on the page, as the Ignite UI setup already asks; the chart
+re-measures once the font has loaded.
+
+With `chart.injectStyleSheet: false` in the light DOM (for example under a
+strict CSP), link `apexcharts/dist/apexcharts-ignite-ui.css` after
+`apexcharts.css`, or tooltips and menus keep their default colors.
+
 ## Server-Side Rendering (SSR)
 
 ng-apexcharts supports Angular SSR out of the box via two companion components.
